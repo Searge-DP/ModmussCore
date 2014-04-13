@@ -1,0 +1,80 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+// define the properties file
+ext.configFile = file "build.properties"
+
+configFile.withReader {
+    // read config.  it shall from now on be referenced as simply config or as project.config
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+
+
+
+minecraft {
+    version = config.minecraft_version + "-" + config.forge_version
+}
+
+group = 'ModmussCore'
+version = config.mod_version + "_" + config.build_number
+
+
+task incrementBuildNumber() {
+    doLast {
+        // increment
+        config.build_number = (config.build_number.toString().toInteger()) + 1
+
+        // write back to the file
+        configFile.withWriter {
+            config.toProperties().store(it, "")
+        }
+    }
+
+
+}
+
+jar {
+    appendix = 'config.build_type'
+}
+
+task deleteOldArtifacts(type: Delete) {
+    delete 'build/libs'
+}
+
+classes.dependsOn deleteOldArtifacts
+
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    appendix = 'src'
+}
+
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = 'dev'
+}
+
+artifacts {
+    archives sourceJar
+    archives deobfJar
+}

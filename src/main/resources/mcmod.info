@@ -1,0 +1,13 @@
+[
+{
+  "modid": "modmusscore",
+  "name": "ModmussCore",
+  "version": "0.01",
+  "mcversion": "1.7.2",
+  "authors": ["Modmuss50"],
+  "credits": "Made by Modmuss50",
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
