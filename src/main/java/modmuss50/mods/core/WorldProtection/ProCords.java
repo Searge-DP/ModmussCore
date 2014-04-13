@@ -6,6 +6,14 @@ public class ProCords {
   public String Owner;
   public String cordsName;
 
+    public ProCords(int x, int y, int z, String owner, String cordsName) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        Owner = owner;
+        this.cordsName = cordsName;
+    }
+
     public int getX() {
         return x;
     }
@@ -22,7 +30,9 @@ public class ProCords {
         return Owner;
     }
 
-
+    public String getCordsName() {
+        return cordsName;
+    }
 
     public void setX(int x) {
         this.x = x;
