@@ -113,46 +113,46 @@ public class WorldProtectionEventHandler {
         return this.getSaveFilePath()+this.getSaveFileName();
     }
 
-    @SubscribeEvent
-    public void save(WorldEvent.Unload evt) {
-
-        cords = new ArrayList<ProCords>();
-        if (!evt.world.isRemote) {
-            System.out.println("Saving protections map for world "+evt.world.provider.dimensionId+".");
-
-            String name = this.getSaveFileName();
-            try {
-                File dir = new File(this.getSaveFilePath());
-
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                File f = new File(this.getFullSavePath());
-                if (f.exists())
-                    f.delete();
-                f.createNewFile();
-                PrintWriter p = new PrintWriter(f);
-
-                for (ProCords entry : cords)
-                {
-                    String line = entry.getOwner() + ":" + entry.getCordsName();
-                    System.out.println(line);
-                    p.append(line+"\n");
-                }
-
-
-//                for (int i = 0; i < cords.size(); i++) {
-//                    ProCords entry = cords.get(i);
+//    @SubscribeEvent
+//    public void save(WorldEvent.Unload evt) {
 //
+//
+//        if (!evt.world.isRemote) {
+//            System.out.println("Saving protections map for world "+evt.world.provider.dimensionId+".");
+//
+//            String name = this.getSaveFileName();
+//            try {
+//                File dir = new File(this.getSaveFilePath());
+//
+//                if (!dir.exists()) {
+//                    dir.mkdirs();
 //                }
-                p.close();
-            }
-            catch (Exception e) {
-                System.out.println(e.getMessage()+", and it caused the save to fail!");
-                e.printStackTrace();
-            }
-        }
-    }
+//                File f = new File(this.getFullSavePath());
+//                if (f.exists())
+//                    f.delete();
+//                f.createNewFile();
+//                PrintWriter p = new PrintWriter(f);
+//
+//                for (ProCords entry : cords)
+//                {
+//                    String line = entry.getOwner() + ":" + entry.getCordsName();
+//                    System.out.println(line);
+//                    p.append(line+"\n");
+//                }
+//
+//      //          p.append("hello");
+////                for (int i = 0; i < cords.size(); i++) {
+////                    ProCords entry = cords.get(i);
+////
+////                }
+//                p.close();
+//            }
+//            catch (Exception e) {
+//                System.out.println(e.getMessage()+", and it caused the save to fail!");
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     public void decompileDataFromFile(String text)
     {
@@ -167,7 +167,7 @@ public class WorldProtectionEventHandler {
 
     @SubscribeEvent
     public void read(WorldEvent.Load evt) {
-        cords = new ArrayList<ProCords>();
+
         if (!evt.world.isRemote) {
             System.out.println("Loading protections map for world "+evt.world.provider.dimensionId+".");
 
@@ -179,7 +179,6 @@ public class WorldProtectionEventHandler {
                     line = p.readLine();
                     if (line != null) {
                         decompileDataFromFile(line);
-                        System.out.println(line);
                     }
                 }
                 p.close();
@@ -194,8 +193,6 @@ public class WorldProtectionEventHandler {
 
     @SubscribeEvent
     public void save(WorldEvent.Save evt) {
-
-
         if (!evt.world.isRemote) {
             System.out.println("Saving protections map for world "+evt.world.provider.dimensionId+".");
 
@@ -230,6 +227,8 @@ public class WorldProtectionEventHandler {
             }
         }
     }
+
+
 
 
 }
