@@ -16,6 +16,11 @@ public class WorldProtectionEventHandler {
     static boolean hasinted = false;
     public static ArrayList<ProCords> cords = new ArrayList();
 
+
+    public WorldProtectionEventHandler() {
+        ArrayList<ProCords> cords = new ArrayList();
+    }
+
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public void playerDoStuff(PlayerInteractEvent event) {
         EntityPlayer ep = event.entityPlayer;
@@ -27,6 +32,7 @@ public class WorldProtectionEventHandler {
             if (!this.doesPlayerHavePermissions(world, x, y, z, ep))
                 event.setCanceled(true);
         }
+        System.out.println(cords);
     }
 
     public boolean  doesPlayerHavePermissions(World world, int x, int y, int z, EntityPlayer ep)
@@ -54,29 +60,29 @@ public class WorldProtectionEventHandler {
 
 
     public static void addBlock(int x, int y, int z, String owner, String cordsName) {
-//        if (!hasinted) {
-//            cords = new ArrayList<ProCords>();
-//            hasinted = true;
-//        }
-        for (int i = 0; i < cords.size(); i++) {
-            ProCords entry = cords.get(i);
-            if(entry.getCordsName().contains(cordsName))
-            {
-
-            }
-            else
-            {
+        if (!hasinted) {
+            cords = new ArrayList<ProCords>();
+            hasinted = true;
+        }
+//        for (int i = 0; i < cords.size(); i++) {
+//            ProCords entry = cords.get(i);
+//            if(entry.getCordsName().contains(cordsName))
+//            {
+//
+//            }
+//            else
+//            {
                 cords.add(new ProCords(x, y, z, owner, cordsName));
                 return;
-            }
-        }
+//            }
+//        }
     }
 
     public static void removeBlock(int x, int y, int z, String owner, String cordsName) {
-//        if (!hasinted) {
-//            cords = new ArrayList<ProCords>();
-//            hasinted = true;
-//        }
+        if (!hasinted) {
+            cords = new ArrayList<ProCords>();
+            hasinted = true;
+        }
         for (int i = 0; i < cords.size(); i++) {
             ProCords entry = cords.get(i);
             if(entry.getCordsName().contains(cordsName))
@@ -109,6 +115,8 @@ public class WorldProtectionEventHandler {
 
     @SubscribeEvent
     public void save(WorldEvent.Unload evt) {
+
+        cords = new ArrayList<ProCords>();
         if (!evt.world.isRemote) {
             System.out.println("Saving protections map for world "+evt.world.provider.dimensionId+".");
 
@@ -124,12 +132,19 @@ public class WorldProtectionEventHandler {
                     f.delete();
                 f.createNewFile();
                 PrintWriter p = new PrintWriter(f);
-                for (int i = 0; i < cords.size(); i++) {
-                    String line = cords.get(i).getOwner() + ":" + cords.get(i).getCordsName();
+
+                for (ProCords entry : cords)
+                {
+                    String line = entry.getOwner() + ":" + entry.getCordsName();
                     System.out.println(line);
                     p.append(line+"\n");
                 }
-                //zones.clear();
+
+
+//                for (int i = 0; i < cords.size(); i++) {
+//                    ProCords entry = cords.get(i);
+//
+//                }
                 p.close();
             }
             catch (Exception e) {
@@ -152,6 +167,7 @@ public class WorldProtectionEventHandler {
 
     @SubscribeEvent
     public void read(WorldEvent.Load evt) {
+        cords = new ArrayList<ProCords>();
         if (!evt.world.isRemote) {
             System.out.println("Loading protections map for world "+evt.world.provider.dimensionId+".");
 
@@ -163,12 +179,53 @@ public class WorldProtectionEventHandler {
                     line = p.readLine();
                     if (line != null) {
                         decompileDataFromFile(line);
+                        System.out.println(line);
                     }
                 }
                 p.close();
             }
             catch (Exception e) {
                 System.out.println(e.getMessage()+", and it caused the read to fail!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    @SubscribeEvent
+    public void save(WorldEvent.Save evt) {
+
+
+        if (!evt.world.isRemote) {
+            System.out.println("Saving protections map for world "+evt.world.provider.dimensionId+".");
+
+            String name = this.getSaveFileName();
+            try {
+                File dir = new File(this.getSaveFilePath());
+
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File f = new File(this.getFullSavePath());
+                if (f.exists())
+                    f.delete();
+                f.createNewFile();
+                PrintWriter p = new PrintWriter(f);
+
+                for (ProCords entry : cords)
+                {
+                    String line = entry.getOwner() + ":" + entry.getCordsName();
+                    System.out.println(line);
+                    p.append(line+"\n");
+                }
+//                for (int i = 0; i < cords.size(); i++) {
+//                    ProCords entry = cords.get(i);
+//
+//                }
+                p.close();
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage()+", and it caused the save to fail!");
                 e.printStackTrace();
             }
         }
