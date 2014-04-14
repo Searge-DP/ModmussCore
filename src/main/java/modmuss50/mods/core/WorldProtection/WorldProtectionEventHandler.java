@@ -36,7 +36,7 @@ public class WorldProtectionEventHandler {
                 ep.addChatComponentMessage(new ChatComponentTranslation(
                         "You do not have permission to break this block."));
             }
-            else
+            if(this.doesPlayerHavePermissions(world, x, y, z, ep))
             {
                 if(this.isBlockProtected(world, x, y, z, ep))
                 {
@@ -48,7 +48,6 @@ public class WorldProtectionEventHandler {
 
                     }
                 }
-
             }
         }
         System.out.println(cords);
@@ -64,15 +63,20 @@ public class WorldProtectionEventHandler {
 
         for (int i = 0; i < cords.size(); i++) {
             ProCords entry = cords.get(i);
-            if(entry.getCordsName().contains(Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName()))
+            if(entry.getCordsName() ==(Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName()))
             {
               if(entry.getOwner() == name)
               {
                   return true;
               }
+                else
+              {
+                  return false;
+              }
             }
 
         }
+
 
         return false;
     }
@@ -81,17 +85,15 @@ public class WorldProtectionEventHandler {
     public boolean  isBlockProtected(World world, int x, int y, int z, EntityPlayer ep)
     {
 
-        for (int i = 0; i < cords.size(); i++) {
-            ProCords entry = cords.get(i);
-            if(entry.getCordsName().contains(Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName()))
+        for (ProCords entry : cords)
+        {
+            String line = Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName();
+            if(entry.cordsName == line)
             {
-
-                    return true;
-
+                return true;
             }
 
         }
-
         return false;
     }
 
