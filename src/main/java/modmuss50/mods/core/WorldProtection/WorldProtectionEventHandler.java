@@ -3,6 +3,7 @@ package modmuss50.mods.core.WorldProtection;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -30,7 +31,25 @@ public class WorldProtectionEventHandler {
         int z = event.z;
         if (!world.isRemote) {
             if (!this.doesPlayerHavePermissions(world, x, y, z, ep))
+            {
                 event.setCanceled(true);
+                ep.addChatComponentMessage(new ChatComponentTranslation(
+                        "You do not have permission to break this block."));
+            }
+            else
+            {
+                if(this.isBlockProtected(world, x, y, z, ep))
+                {
+                    if(event.action == event.action.LEFT_CLICK_BLOCK)
+                    {
+                        ep.addChatComponentMessage(new ChatComponentTranslation(
+                                "Please unlock the block to break it."));
+                        event.setCanceled(true);
+
+                    }
+                }
+
+            }
         }
         System.out.println(cords);
     }
@@ -47,15 +66,33 @@ public class WorldProtectionEventHandler {
             ProCords entry = cords.get(i);
             if(entry.getCordsName().contains(Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName()))
             {
-              if(entry.getOwner() != name)
+              if(entry.getOwner() == name)
               {
-                  return false;
+                  return true;
               }
             }
 
         }
 
-        return true;
+        return false;
+    }
+
+
+    public boolean  isBlockProtected(World world, int x, int y, int z, EntityPlayer ep)
+    {
+
+        for (int i = 0; i < cords.size(); i++) {
+            ProCords entry = cords.get(i);
+            if(entry.getCordsName().contains(Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName()))
+            {
+
+                    return true;
+
+            }
+
+        }
+
+        return false;
     }
 
 
@@ -64,18 +101,18 @@ public class WorldProtectionEventHandler {
             cords = new ArrayList<ProCords>();
             hasinted = true;
         }
-//        for (int i = 0; i < cords.size(); i++) {
-//            ProCords entry = cords.get(i);
-//            if(entry.getCordsName().contains(cordsName))
-//            {
-//
-//            }
-//            else
-//            {
+        for (int i = 0; i < cords.size(); i++) {
+            ProCords entry = cords.get(i);
+            if(entry.getCordsName().contains(cordsName))
+            {
+
+            }
+            else
+            {
                 cords.add(new ProCords(x, y, z, owner, cordsName));
                 return;
-//            }
-//        }
+            }
+        }
     }
 
     public static void removeBlock(int x, int y, int z, String owner, String cordsName) {
@@ -95,7 +132,7 @@ public class WorldProtectionEventHandler {
 
 
     public boolean canPlayerOverrideProtections(EntityPlayer ep) {
-        if ("mark123mark1".equals(ep.getDisplayName()))
+        if ("mark123mark".equals(ep.getDisplayName()))
             return true;
         return false;
     }
@@ -112,47 +149,6 @@ public class WorldProtectionEventHandler {
     public final String getFullSavePath() {
         return this.getSaveFilePath()+this.getSaveFileName();
     }
-
-//    @SubscribeEvent
-//    public void save(WorldEvent.Unload evt) {
-//
-//
-//        if (!evt.world.isRemote) {
-//            System.out.println("Saving protections map for world "+evt.world.provider.dimensionId+".");
-//
-//            String name = this.getSaveFileName();
-//            try {
-//                File dir = new File(this.getSaveFilePath());
-//
-//                if (!dir.exists()) {
-//                    dir.mkdirs();
-//                }
-//                File f = new File(this.getFullSavePath());
-//                if (f.exists())
-//                    f.delete();
-//                f.createNewFile();
-//                PrintWriter p = new PrintWriter(f);
-//
-//                for (ProCords entry : cords)
-//                {
-//                    String line = entry.getOwner() + ":" + entry.getCordsName();
-//                    System.out.println(line);
-//                    p.append(line+"\n");
-//                }
-//
-//      //          p.append("hello");
-////                for (int i = 0; i < cords.size(); i++) {
-////                    ProCords entry = cords.get(i);
-////
-////                }
-//                p.close();
-//            }
-//            catch (Exception e) {
-//                System.out.println(e.getMessage()+", and it caused the save to fail!");
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     public void decompileDataFromFile(String text)
     {
@@ -212,7 +208,7 @@ public class WorldProtectionEventHandler {
                 for (ProCords entry : cords)
                 {
                     String line = entry.getOwner() + ":" + entry.getCordsName();
-                    System.out.println(line);
+          //          System.out.println(line);
                     p.append(line+"\n");
                 }
 //                for (int i = 0; i < cords.size(); i++) {

@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
 public class ItemBP extends Item {
@@ -18,17 +19,24 @@ public class ItemBP extends Item {
     @Override
     public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffSet){
 
-        if(!player.isSneaking())
+        if(!world.isRemote)
         {
-            WorldProtectionEventHandler.addBlock(x, y, z,player.getDisplayName(),(Integer.toString(x) + ":" + Integer.toString(y) +  ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName()) );
-            return true;
+            if(!player.isSneaking())
+            {
+                WorldProtectionEventHandler.addBlock(x, y, z,player.getDisplayName(),(Integer.toString(x) + ":" + Integer.toString(y) +  ":" + Integer.toString(z) +  ":" + world.provider.getDimensionName()) );
+                player.addChatComponentMessage(new ChatComponentTranslation(
+                        "This Block has been protected!"));
+                return true;
+            }
+            else
+            {
+                WorldProtectionEventHandler.removeBlock(x, y, z,player.getDisplayName(),(Integer.toString(x) + ":" + Integer.toString(y) +  ":" +Integer.toString(z) +  ":" + world.provider.getDimensionName()  ) );
+                player.addChatComponentMessage(new ChatComponentTranslation(
+                        "Removed block from the protection list"));
+                return true;
+            }
         }
-        else
-        {
-            WorldProtectionEventHandler.removeBlock(x, y, z,player.getDisplayName(),(Integer.toString(x) + ":" + Integer.toString(y) +  ":" +Integer.toString(z) +  ":" + world.provider.getDimensionName()  ) );
-            return true;
-        }
-
+      return false;
     }
 
 
