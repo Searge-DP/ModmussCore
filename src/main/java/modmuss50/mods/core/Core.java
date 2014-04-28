@@ -16,21 +16,32 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(modid = "Mod50-Core", name = "Modmuss50 Core", version = "000", useMetadata = false)
 public class Core {
 
+
+    public static boolean WorldProctection = false;
+
     public static Item BlockPlacer;
+
+
+
 
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new WorldProtectionEventHandler());
-        BlockPlacer = new ItemBP()
-                .setUnlocalizedName("Mod50-Core:BlockProtector")
-                .setTextureName("Mod50-Core:BlockProtector");
-        GameRegistry.registerItem(BlockPlacer, "Mod50-Core:BlockProtector");
+       if(WorldProctection)
+       {
+           MinecraftForge.EVENT_BUS.register(new WorldProtectionEventHandler());
+           BlockPlacer = new ItemBP()
+                   .setUnlocalizedName("Mod50-Core:BlockProtector")
+                   .setTextureName("Mod50-Core:BlockProtector");
+           GameRegistry.registerItem(BlockPlacer, "Mod50-Core:BlockProtector");
+       }
+
+
+
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        FMLCommonHandler.instance().bus().register(new WorldProtectionEventHandler());
 
     }
 

@@ -14,7 +14,7 @@ import net.minecraft.client.settings.GameSettings;
  * Date: 04/04/14
  * Time: 13:14
  */
-public class GuiNewSettings extends GuiScreen
+public class GuiNewSettings extends GuiOptions
 {
     private static final GameSettings.Options[] field_146440_f = new GameSettings.Options[] {GameSettings.Options.FOV, GameSettings.Options.DIFFICULTY};
     private final GuiScreen field_146441_g;
@@ -24,6 +24,7 @@ public class GuiNewSettings extends GuiScreen
 
     public GuiNewSettings(GuiScreen par1GuiScreen, GameSettings par2GameSettings)
     {
+        super(par1GuiScreen, par2GameSettings);
         this.field_146441_g = par1GuiScreen;
         this.field_146443_h = par2GameSettings;
     }
