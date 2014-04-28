@@ -1,4 +1,4 @@
-package modmuss50.lib.util;
+package modmuss50.mods.lib.util;
 
 public class Math {
 
