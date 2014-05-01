@@ -4,9 +4,7 @@ import cpw.mods.fml.common.Loader;
 
 public class ModUtil {
 
-
-    public boolean isModLoaded(String modid)
-    {
-      return Loader.isModLoaded(modid);
-    }
+	public boolean isModLoaded(String modid) {
+		return Loader.isModLoaded(modid);
+	}
 }

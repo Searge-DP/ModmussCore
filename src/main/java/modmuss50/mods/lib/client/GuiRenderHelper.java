@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiRenderHelper {
@@ -93,7 +94,7 @@ public class GuiRenderHelper {
 		gui.drawTexturedModalRect(x, y, 0, 182, 100, 16);
 		if (modmuss50.mods.lib.util.Math.percentage(Max, current) != 0) {
 			gui.drawTexturedModalRect(x, y, 0, 166,
-                    modmuss50.mods.lib.util.Math.percentage(Max, current), 16);
+					modmuss50.mods.lib.util.Math.percentage(Max, current), 16);
 		}
 	}
 
