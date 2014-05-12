@@ -93,9 +93,9 @@ public class GuiRenderHelper {
 			GuiContainer gui) {
 		gui.drawTexturedModalRect(x, y, 0, 182, 100, 16);
 		if (modmuss50.mods.lib.util.Math.percentage(Max, current) != 0) {
-			gui.drawTexturedModalRect(x, y, 0, 166,
-					modmuss50.mods.lib.util.Math.percentage(Max, current), 16);
-		}
+            gui.drawTexturedModalRect(x, y, 0, 166,
+                    modmuss50.mods.lib.util.Math.percentage(Max, current), 16);
+        }
 	}
 
 }
