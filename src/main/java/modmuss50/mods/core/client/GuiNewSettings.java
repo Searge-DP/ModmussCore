@@ -172,7 +172,7 @@ public class GuiNewSettings extends GuiOptions {
 
 			if (p_146284_1_.id == 9990) {
 				this.mc.gameSettings.saveOptions();
-				this.mc.displayGuiScreen(new GuiModmuss50Settings(this));
+				this.mc.displayGuiScreen(new GuiModmuss50List(this));
 			}
 		}
 	}

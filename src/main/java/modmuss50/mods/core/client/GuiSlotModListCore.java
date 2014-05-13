@@ -1,21 +1,21 @@
 package modmuss50.mods.core.client;
 
-import java.util.ArrayList;
-
-import net.minecraft.client.renderer.Tessellator;
 import cpw.mods.fml.client.GuiScrollingList;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.LoaderState;
 import cpw.mods.fml.common.ModContainer;
+import net.minecraft.client.renderer.Tessellator;
+
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA. User: Mark Date: 05/04/14 Time: 11:47
  */
 public class GuiSlotModListCore extends GuiScrollingList {
-	private GuiModmuss50Settings parent;
+	private GuiModmuss50List parent;
 	private ArrayList<ModContainer> mods;
 
-	public GuiSlotModListCore(GuiModmuss50Settings parent,
+	public GuiSlotModListCore(GuiModmuss50List parent,
 			ArrayList<ModContainer> mods, int listWidth) {
 		super(parent.getMinecraftInstance(), listWidth, parent.height, 32,
 				parent.height - 66 + 4, 10, 35);

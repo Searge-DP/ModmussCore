@@ -1,30 +1,28 @@
 package modmuss50.mods.core.client;
 
-import java.awt.*;
-import java.util.ArrayList;
-
+import com.google.common.base.Strings;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.IModGuiFactory;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
+import modmuss50.mods.core.mod.ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
-import com.google.common.base.Strings;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.IModGuiFactory;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA. User: Mark Date: 05/04/14 Time: 08:54
  */
-public class GuiModmuss50Settings extends GuiScreen {
+public class GuiModmuss50List extends GuiScreen {
 	private GuiScreen mainMenu;
 	private GuiSlotModListCore modList;
 	private int selected = -1;
@@ -40,11 +38,16 @@ public class GuiModmuss50Settings extends GuiScreen {
 	/**
 	 * @param mainMenu
 	 */
-	public GuiModmuss50Settings(GuiScreen mainMenu) {
+	public GuiModmuss50List(GuiScreen mainMenu) {
 
-		addMod("transcraft");
-		addMod("Mod50-Core");
-		addMod("network");
+        for (int i = 0; i < ModRegistry.mods.size(); i++) {
+          addMod(ModRegistry.mods.get(i).modId());
+        }
+
+
+//		addMod("transcraft");
+//		addMod("Mod50-Core");
+//		addMod("network");
 
 		this.mainMenu = mainMenu;
 		this.mods = new ArrayList<ModContainer>();
@@ -71,7 +74,7 @@ public class GuiModmuss50Settings extends GuiScreen {
 
 			String packageName = mod.getClass().getClass().getPackage()
 					.getName();
-			System.out.println(mod.getMetadata().modId);
+
 
 			// this.modToAdd=new ArrayList<String>();
 			if (modToAdd.contains(mod.getMetadata().modId)) {
@@ -117,12 +120,20 @@ public class GuiModmuss50Settings extends GuiScreen {
 					return;
 				case 20 :
 					try {
-						IModGuiFactory guiFactory = FMLClientHandler.instance()
-								.getGuiFactoryFor(selectedMod);
-						GuiScreen newScreen = guiFactory.mainConfigGuiClass()
-								.getConstructor(GuiScreen.class)
-								.newInstance(this);
-						this.mc.displayGuiScreen(newScreen);
+
+
+                        for (int i = 0; i < ModRegistry.mods.size(); i++) {
+                            if(ModRegistry.mods.get(i).modId().contains(selectedMod.getModId()))
+                            {
+                                if(ModRegistry.mods.get(i).settingsScreen() != null)
+                                {
+                                    BaseModGui newScreen = (ModRegistry.mods.get(i).settingsScreen());
+                                    newScreen.setParent(this);
+                                    this.mc.displayGuiScreen(newScreen);
+                                }
+                            }
+                        }
+
 					} catch (Exception e) {
 						FMLLog.log(
 								Level.ERROR,
@@ -175,8 +186,29 @@ public class GuiModmuss50Settings extends GuiScreen {
 			IModGuiFactory guiFactory = FMLClientHandler.instance()
 					.getGuiFactoryFor(selectedMod);
 
-			configModButton.visible = false;
-			configModButton.enabled = false;
+
+
+            configModButton.visible = false;
+            disableModButton.visible = false;
+
+            for (int i = 0; i < ModRegistry.mods.size(); i++) {
+
+                if(ModRegistry.mods.get(i).modId().contains(selectedMod.getModId()))
+                {
+                    if(ModRegistry.mods.get(i).settingsScreen() != null)
+                    {
+                        configModButton.visible = true;
+                        configModButton.enabled = true;
+                    }
+                    else
+                    {
+                        configModButton.visible = false;
+                        disableModButton.visible = false;
+                    }
+                }
+            }
+
+
 
 			GL11.glDisable(GL11.GL_BLEND);
 		} else {
