@@ -54,8 +54,8 @@ task incrementBuildNumber() {
 }
 
 jar {
-    appendix = 'config.build_type'
-	from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	appendix = 'config.build_type'
 }
 
 task deleteOldArtifacts(type: Delete) {
@@ -68,14 +68,12 @@ classes.dependsOn deleteOldArtifacts
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     appendix = 'src'
-	from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
-	from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
 artifacts {
