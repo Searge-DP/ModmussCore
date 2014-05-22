@@ -9,16 +9,24 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import modmuss50.mods.core.client.BaseModGui;
 import modmuss50.mods.core.client.GuiTicker;
 import modmuss50.mods.core.client.Modmuss50CoreSettings;
+import modmuss50.mods.core.mod.ForgeIMod;
 import modmuss50.mods.core.mod.ModRegistry;
 import modmuss50.mods.lib.mod.IModmussMod;
 
-@Mod(modid = "Mod50-Core", name = "Modmuss50 Core", version = "000", useMetadata = false)
+@Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION, useMetadata = false)
 public class Core implements IModmussMod {
+
+
+    public static final String MODID = "modmuss50core";
+    public static final String NAME = "Modmuss50 Core";
+    public static final String VERSION = "1.0";
+
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
         ModRegistry.registerMod(this);
-        System.out.println(this.getClass().getInterfaces());
+        ModRegistry.registerMod(new ForgeIMod());
+
     }
 
 	@Mod.EventHandler
@@ -50,20 +58,16 @@ public class Core implements IModmussMod {
 
     @Override
     public String modId() {
-        return "Mod50-Core";
-
+        return MODID;
     }
 
     @Override
     public String modName() {
-        return "Modmuss50 Core";
+        return NAME;
     }
-
 
     @Override
     public String modVersion() {
-        return "000";
+        return VERSION;
     }
 }
-
-

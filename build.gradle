@@ -12,6 +12,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
+		files('libs/lombok.jar')
     }
 }
 
