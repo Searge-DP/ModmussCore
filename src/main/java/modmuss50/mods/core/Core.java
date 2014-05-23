@@ -1,17 +1,19 @@
 package modmuss50.mods.core;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import modmuss50.mods.core.client.BaseModGui;
 import modmuss50.mods.core.client.GuiTicker;
 import modmuss50.mods.core.client.Modmuss50CoreSettings;
 import modmuss50.mods.core.mod.ForgeIMod;
 import modmuss50.mods.core.mod.ModRegistry;
 import modmuss50.mods.lib.mod.IModmussMod;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION, useMetadata = false)
 public class Core implements IModmussMod {
@@ -51,6 +53,7 @@ public class Core implements IModmussMod {
 		}
 	}
 
+    @SideOnly(Side.CLIENT)
 	@Override
 	public BaseModGui settingsScreen() {
 		return new Modmuss50CoreSettings();
