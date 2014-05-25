@@ -12,7 +12,6 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-		files('libs/lombok.jar')
     }
 }
 
@@ -54,7 +53,6 @@ task incrementBuildNumber() {
 }
 
 jar {
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 	appendix = 'config.build_type'
 }
 
