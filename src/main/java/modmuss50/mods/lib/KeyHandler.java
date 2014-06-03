@@ -16,8 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class KeyHandler {
 
-	public KeyBinding key = new KeyBinding("Transcraft Flight", Keyboard.KEY_F,
-			"key.categories.inventory");
+	public KeyBinding	key	= new KeyBinding("Transcraft Flight", Keyboard.KEY_F, "key.categories.inventory");
 
 	public KeyHandler() {
 		ClientRegistry.registerKeyBinding(key);
@@ -29,8 +28,7 @@ public class KeyHandler {
 		if (event.side == Side.SERVER)
 			return;
 		if (event.phase == TickEvent.Phase.START) {
-			if (key.getIsKeyPressed()
-					&& FMLClientHandler.instance().getClient().inGameHasFocus) {
+			if (key.getIsKeyPressed() && FMLClientHandler.instance().getClient().inGameHasFocus) {
 
 			}
 		}

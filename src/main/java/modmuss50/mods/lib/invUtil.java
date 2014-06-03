@@ -1,5 +1,10 @@
 package modmuss50.mods.lib;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
@@ -8,15 +13,9 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class invUtil {
 
-	private static final List<ForgeDirection> directions = new ArrayList<ForgeDirection>(
-			Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
+	private static final List<ForgeDirection>	directions	= new ArrayList<ForgeDirection>(Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
 
 	/* IINVENTORY HELPERS */
 	/**
@@ -31,18 +30,15 @@ public class invUtil {
 	 * @param stack
 	 * @return amount used
 	 */
-	public static int addToRandomInventoryAround(World world, int x, int y,
-			int z, ItemStack stack) {
+	public static int addToRandomInventoryAround(World world, int x, int y, int z, ItemStack stack) {
 		Collections.shuffle(directions);
 		for (ForgeDirection orientation : directions) {
 			Position pos = new Position(x, y, z, orientation);
 			pos.moveForwards(1.0);
 
-			TileEntity tileInventory = world.getTileEntity((int) pos.x,
-					(int) pos.y, (int) pos.z);
+			TileEntity tileInventory = world.getTileEntity((int) pos.x, (int) pos.y, (int) pos.z);
 			ITransactor transactor = Transactor.getTransactorFor(tileInventory);
-			if (transactor != null
-					&& transactor.add(stack, orientation.getOpposite(), false).stackSize > 0) {
+			if (transactor != null && transactor.add(stack, orientation.getOpposite(), false).stackSize > 0) {
 				return transactor.add(stack, orientation.getOpposite(), true).stackSize;
 			}
 		}

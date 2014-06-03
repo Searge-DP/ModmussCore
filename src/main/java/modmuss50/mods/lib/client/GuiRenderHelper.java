@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiRenderHelper {
@@ -21,11 +22,9 @@ public class GuiRenderHelper {
 		gui.drawTexturedModalRect(x, y, texlocx, texlocy, 18, 18);
 	}
 
-	public static final ResourceLocation GuiTextures = new ResourceLocation(
-			"network", "textures/gui/BasePoweredGui.png");
+	public static final ResourceLocation	GuiTextures	= new ResourceLocation("network", "textures/gui/BasePoweredGui.png");
 
-	public static void drawTankGui(int x, int y, IFluidHandler tile,
-			GuiContainer gui) {
+	public static void drawTankGui(int x, int y, IFluidHandler tile, GuiContainer gui) {
 		gui.drawTexturedModalRect(x, y, 176, 0, 16, 60);
 		int _tankSizeMax = 60;
 
@@ -36,10 +35,8 @@ public class GuiRenderHelper {
 			for (int i = 0; i < n; ++i) {
 				if (tanks[i].fluid == null)
 					continue;
-				int tankSize = tanks[i].fluid.amount * _tankSizeMax
-						/ tanks[i].capacity;
-				drawTank(x - (i * 20), y + _tankSizeMax, tanks[i].fluid,
-						tankSize, gui);
+				int tankSize = tanks[i].fluid.amount * _tankSizeMax / tanks[i].capacity;
+				drawTank(x - (i * 20), y + _tankSizeMax, tanks[i].fluid, tankSize, gui);
 			}
 		}
 		gui.mc.getTextureManager().bindTexture(GuiTextures);
@@ -47,8 +44,7 @@ public class GuiRenderHelper {
 		gui.drawTexturedModalRect(x, y, 194, 0, 16, 60);
 	}
 
-	public static void drawTank(int xOffset, int yOffset, FluidStack stack,
-			int level, GuiContainer gui) {
+	public static void drawTank(int xOffset, int yOffset, FluidStack stack, int level, GuiContainer gui) {
 		if (stack == null)
 			return;
 		Fluid fluid = stack.getFluid();
@@ -67,15 +63,15 @@ public class GuiRenderHelper {
 			if (level > 16) {
 				texHeight = 16;
 				level -= 16;
-			} else {
+			}
+			else {
 				texHeight = level;
 				level = 0;
 			}
 
 			bindTexture(fluid, gui);
 
-			gui.drawTexturedModelRectFromIcon(xOffset, yOffset - texHeight
-					- vertOffset, icon, 16, texHeight);
+			gui.drawTexturedModelRectFromIcon(xOffset, yOffset - texHeight - vertOffset, icon, 16, texHeight);
 			vertOffset = vertOffset + 16;
 		}
 
@@ -88,16 +84,12 @@ public class GuiRenderHelper {
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, fluid.getSpriteNumber());
 	}
 
-	public static void drawPowerBar(int x, int y, int Max, int current,
-			GuiContainer gui) {
+	public static void drawPowerBar(int x, int y, int Max, int current, GuiContainer gui) {
 		gui.drawTexturedModalRect(x, y, 0, 182, 100, 16);
 
 		if (modmuss50.mods.lib.util.Math.percentage(Max, current) != 0) {
-            gui.drawTexturedModalRect(x, y, 0, 166,
-                    modmuss50.mods.lib.util.Math.percentage(Max, current), 16);
-        }
+			gui.drawTexturedModalRect(x, y, 0, 166, modmuss50.mods.lib.util.Math.percentage(Max, current), 16);
+		}
 	}
-
-
 
 }

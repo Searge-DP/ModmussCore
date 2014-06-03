@@ -11,7 +11,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
  */
 public class GuiTicker {
 
-	public boolean hasSet = false;
+	public boolean	hasSet	= false;
 
 	@SubscribeEvent
 	public void GuiTick(TickEvent.ClientTickEvent event) {
@@ -20,7 +20,8 @@ public class GuiTicker {
 
 		if (mc.currentScreen instanceof GuiOptions) {
 
-		} else {
+		}
+		else {
 			tempscreen = mc.currentScreen;
 		}
 
@@ -28,8 +29,7 @@ public class GuiTicker {
 		if (mc.currentScreen instanceof GuiOptions) {
 			// if(tempscreen != null)
 			{
-				mc.displayGuiScreen(new GuiNewSettings(tempscreen,
-						mc.gameSettings));
+				mc.displayGuiScreen(new GuiNewSettings(tempscreen, mc.gameSettings));
 			}
 		}
 

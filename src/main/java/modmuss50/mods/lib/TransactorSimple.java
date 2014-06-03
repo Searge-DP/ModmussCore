@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TransactorSimple extends Transactor {
 
-	protected IInventory inventory;
+	protected IInventory	inventory;
 
 	public TransactorSimple(IInventory inventory) {
 		this.inventory = inventory;
@@ -17,16 +17,14 @@ public class TransactorSimple extends Transactor {
 
 	@Override
 	public int inject(ItemStack stack, ForgeDirection orientation, boolean doAdd) {
-		List<InventoryIterator.IInvSlot> filledSlots = new ArrayList<InventoryIterator.IInvSlot>(
-				inventory.getSizeInventory());
-		List<InventoryIterator.IInvSlot> emptySlots = new ArrayList<InventoryIterator.IInvSlot>(
-				inventory.getSizeInventory());
-		for (InventoryIterator.IInvSlot slot : InventoryIterator.getIterable(
-				inventory, orientation)) {
+		List<InventoryIterator.IInvSlot> filledSlots = new ArrayList<InventoryIterator.IInvSlot>(inventory.getSizeInventory());
+		List<InventoryIterator.IInvSlot> emptySlots = new ArrayList<InventoryIterator.IInvSlot>(inventory.getSizeInventory());
+		for (InventoryIterator.IInvSlot slot : InventoryIterator.getIterable(inventory, orientation)) {
 			if (slot.canPutStackInSlot(stack)) {
 				if (slot.getStackInSlot() == null) {
 					emptySlots.add(slot);
-				} else {
+				}
+				else {
 					filledSlots.add(slot);
 				}
 			}
@@ -40,16 +38,13 @@ public class TransactorSimple extends Transactor {
 		return injected;
 	}
 
-	private int tryPut(ItemStack stack, List<InventoryIterator.IInvSlot> slots,
-			int injected, boolean doAdd) {
+	private int tryPut(ItemStack stack, List<InventoryIterator.IInvSlot> slots, int injected, boolean doAdd) {
 		if (injected >= stack.stackSize) {
 			return injected;
 		}
 		for (InventoryIterator.IInvSlot slot : slots) {
 			ItemStack stackInSlot = slot.getStackInSlot();
-			if (stackInSlot == null
-					|| StackHelper.instance()
-							.canStacksMerge(stackInSlot, stack)) {
+			if (stackInSlot == null || StackHelper.instance().canStacksMerge(stackInSlot, stack)) {
 				int used = addToSlot(slot, stack, injected, doAdd);
 				if (used > 0) {
 					injected += used;
@@ -71,11 +66,9 @@ public class TransactorSimple extends Transactor {
 	 * @param doAdd
 	 * @return Return the number of items moved.
 	 */
-	protected int addToSlot(InventoryIterator.IInvSlot slot, ItemStack stack,
-			int injected, boolean doAdd) {
+	protected int addToSlot(InventoryIterator.IInvSlot slot, ItemStack stack, int injected, boolean doAdd) {
 		int available = stack.stackSize - injected;
-		int max = Math.min(stack.getMaxStackSize(),
-				inventory.getInventoryStackLimit());
+		int max = Math.min(stack.getMaxStackSize(), inventory.getInventoryStackLimit());
 
 		ItemStack stackInSlot = slot.getStackInSlot();
 		if (stackInSlot == null) {
@@ -109,16 +102,14 @@ public class TransactorSimple extends Transactor {
 	}
 
 	@Override
-	public ItemStack remove(IStackFilter filter, ForgeDirection orientation,
-			boolean doRemove) {
-		for (InventoryIterator.IInvSlot slot : InventoryIterator.getIterable(
-				inventory, orientation)) {
+	public ItemStack remove(IStackFilter filter, ForgeDirection orientation, boolean doRemove) {
+		for (InventoryIterator.IInvSlot slot : InventoryIterator.getIterable(inventory, orientation)) {
 			ItemStack stack = slot.getStackInSlot();
-			if (stack != null && slot.canTakeStackFromSlot(stack)
-					&& filter.matches(stack)) {
+			if (stack != null && slot.canTakeStackFromSlot(stack) && filter.matches(stack)) {
 				if (doRemove) {
 					return slot.decreaseStackInSlot();
-				} else {
+				}
+				else {
 					ItemStack output = stack.copy();
 					output.stackSize = 1;
 					return output;

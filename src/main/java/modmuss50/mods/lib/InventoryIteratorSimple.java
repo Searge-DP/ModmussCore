@@ -2,16 +2,12 @@ package modmuss50.mods.lib;
 
 import java.util.Iterator;
 
-import modmuss50.mods.lib.InventoryIterator;
-import modmuss50.mods.lib.invUtil;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class InventoryIteratorSimple
-		implements
-			Iterable<InventoryIterator.IInvSlot> {
+public class InventoryIteratorSimple implements Iterable<InventoryIterator.IInvSlot> {
 
-	private final IInventory inv;
+	private final IInventory	inv;
 
 	InventoryIteratorSimple(IInventory inv) {
 		this.inv = invUtil.getInventory(inv);
@@ -20,7 +16,7 @@ public class InventoryIteratorSimple
 	@Override
 	public Iterator<InventoryIterator.IInvSlot> iterator() {
 		return new Iterator<InventoryIterator.IInvSlot>() {
-			int slot = 0;
+			int	slot	= 0;
 
 			@Override
 			public boolean hasNext() {
@@ -41,7 +37,7 @@ public class InventoryIteratorSimple
 
 	private class InvSlot implements InventoryIterator.IInvSlot {
 
-		private int slot;
+		private int	slot;
 
 		public InvSlot(int slot) {
 			this.slot = slot;

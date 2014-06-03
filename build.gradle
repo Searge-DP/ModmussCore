@@ -53,7 +53,7 @@ task incrementBuildNumber() {
 }
 
 jar {
-	appendix = 'config.build_type'
+    appendix = 'config.build_type'
 }
 
 task deleteOldArtifacts(type: Delete) {

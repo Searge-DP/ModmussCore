@@ -6,8 +6,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class Position {
 
-	public double x, y, z;
-	public ForgeDirection orientation;
+	public double			x, y, z;
+	public ForgeDirection	orientation;
 
 	public Position(double ci, double cj, double ck) {
 		x = ci;
@@ -46,19 +46,19 @@ public class Position {
 
 	public void moveRight(double step) {
 		switch (orientation) {
-			case SOUTH :
+			case SOUTH:
 				x = x - step;
 				break;
-			case NORTH :
+			case NORTH:
 				x = x + step;
 				break;
-			case EAST :
+			case EAST:
 				z = z + step;
 				break;
-			case WEST :
+			case WEST:
 				z = z - step;
 				break;
-			default :
+			default:
 		}
 	}
 
@@ -68,25 +68,25 @@ public class Position {
 
 	public void moveForwards(double step) {
 		switch (orientation) {
-			case UP :
+			case UP:
 				y = y + step;
 				break;
-			case DOWN :
+			case DOWN:
 				y = y - step;
 				break;
-			case SOUTH :
+			case SOUTH:
 				z = z + step;
 				break;
-			case NORTH :
+			case NORTH:
 				z = z - step;
 				break;
-			case EAST :
+			case EAST:
 				x = x + step;
 				break;
-			case WEST :
+			case WEST:
 				x = x - step;
 				break;
-			default :
+			default:
 		}
 	}
 
@@ -96,13 +96,13 @@ public class Position {
 
 	public void moveUp(double step) {
 		switch (orientation) {
-			case SOUTH :
-			case NORTH :
-			case EAST :
-			case WEST :
+			case SOUTH:
+			case NORTH:
+			case EAST:
+			case WEST:
 				y = y + step;
 				break;
-			default :
+			default:
 		}
 
 	}
@@ -123,15 +123,11 @@ public class Position {
 	}
 
 	public Position min(Position p) {
-		return new Position(p.x > x ? x : p.x, p.y > y ? y : p.y, p.z > z
-				? z
-				: p.z);
+		return new Position(p.x > x ? x : p.x, p.y > y ? y : p.y, p.z > z ? z : p.z);
 	}
 
 	public Position max(Position p) {
-		return new Position(p.x < x ? x : p.x, p.y < y ? y : p.y, p.z < z
-				? z
-				: p.z);
+		return new Position(p.x < x ? x : p.x, p.y < y ? y : p.y, p.z < z ? z : p.z);
 	}
 
 }

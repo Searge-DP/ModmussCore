@@ -5,7 +5,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class StackHelper {
 
-	private static StackHelper instance;
+	private static StackHelper	instance;
 
 	public static StackHelper instance() {
 		if (instance == null) {
@@ -18,8 +18,7 @@ public class StackHelper {
 		instance = inst;
 	}
 
-	protected StackHelper() {
-	}
+	protected StackHelper() {}
 
 	/* STACK MERGING */
 	/**
@@ -54,12 +53,10 @@ public class StackHelper {
 	 *            - To actually do the merge
 	 * @return The number of items that was successfully merged.
 	 */
-	public int mergeStacks(ItemStack mergeSource, ItemStack mergeTarget,
-			boolean doMerge) {
+	public int mergeStacks(ItemStack mergeSource, ItemStack mergeTarget, boolean doMerge) {
 		if (!canStacksMerge(mergeSource, mergeTarget))
 			return 0;
-		int mergeCount = Math.min(mergeTarget.getMaxStackSize()
-				- mergeTarget.stackSize, mergeSource.stackSize);
+		int mergeCount = Math.min(mergeTarget.getMaxStackSize() - mergeTarget.stackSize, mergeSource.stackSize);
 		if (mergeCount < 1)
 			return 0;
 		if (doMerge) {
@@ -82,8 +79,7 @@ public class StackHelper {
 	 * @return true if comparison should be considered a crafting equivalent for
 	 *         base.
 	 */
-	public boolean isCraftingEquivalent(ItemStack base, ItemStack comparison,
-			boolean oreDictionary) {
+	public boolean isCraftingEquivalent(ItemStack base, ItemStack comparison, boolean oreDictionary) {
 		if (isMatchingItem(base, comparison, true, false))
 			return true;
 
@@ -91,10 +87,7 @@ public class StackHelper {
 			int idBase = OreDictionary.getOreID(base);
 			if (idBase >= 0) {
 				for (ItemStack itemstack : OreDictionary.getOres(idBase)) {
-					if (comparison.getItem() == itemstack.getItem()
-							&& (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || comparison
-									.getItemDamage() == itemstack
-									.getItemDamage()))
+					if (comparison.getItem() == itemstack.getItem() && (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || comparison.getItemDamage() == itemstack.getItemDamage()))
 						return true;
 				}
 			}
@@ -106,9 +99,7 @@ public class StackHelper {
 	public boolean isCraftingEquivalent(int oreID, ItemStack comparison) {
 		if (oreID >= 0) {
 			for (ItemStack itemstack : OreDictionary.getOres(oreID)) {
-				if (comparison.getItem() == itemstack.getItem()
-						&& (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || comparison
-								.getItemDamage() == itemstack.getItemDamage()))
+				if (comparison.getItem() == itemstack.getItem() && (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || comparison.getItemDamage() == itemstack.getItemDamage()))
 					return true;
 			}
 		}
@@ -142,8 +133,7 @@ public class StackHelper {
 	 * @param matchNBT
 	 * @return true if matches
 	 */
-	public boolean isMatchingItem(final ItemStack a, final ItemStack b,
-			final boolean matchDamage, final boolean matchNBT) {
+	public boolean isMatchingItem(final ItemStack a, final ItemStack b, final boolean matchDamage, final boolean matchNBT) {
 		if (a == null || b == null) {
 			return false;
 		}
@@ -158,8 +148,7 @@ public class StackHelper {
 			}
 		}
 		if (matchNBT) {
-			if (a.stackTagCompound != null
-					&& !a.stackTagCompound.equals(b.stackTagCompound)) {
+			if (a.stackTagCompound != null && !a.stackTagCompound.equals(b.stackTagCompound)) {
 				return false;
 			}
 		}

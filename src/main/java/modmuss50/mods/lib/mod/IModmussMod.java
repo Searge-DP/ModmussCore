@@ -1,18 +1,18 @@
 package modmuss50.mods.lib.mod;
 
+import modmuss50.mods.core.client.BaseModGui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import modmuss50.mods.core.client.BaseModGui;
 
 public interface IModmussMod {
 
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public BaseModGui settingsScreen();
 
-    public String modId();
+	public String modId();
 
-    public String modName();
+	public String modName();
 
-    public String modVersion();
+	public String modVersion();
 
 }

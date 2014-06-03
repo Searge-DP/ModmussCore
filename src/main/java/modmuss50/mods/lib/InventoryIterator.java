@@ -14,8 +14,7 @@ public class InventoryIterator {
 	 * @param side
 	 * @return Iterable
 	 */
-	public static Iterable<IInvSlot> getIterable(IInventory inv,
-			ForgeDirection side) {
+	public static Iterable<IInvSlot> getIterable(IInventory inv, ForgeDirection side) {
 		if (inv instanceof ISidedInventory) {
 			return new InventoryIteratorSided((ISidedInventory) inv, side);
 		}

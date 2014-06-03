@@ -2,17 +2,14 @@ package modmuss50.mods.lib;
 
 import java.util.Iterator;
 
-import modmuss50.mods.lib.InventoryIterator;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class InventoryIteratorSided
-		implements
-			Iterable<InventoryIterator.IInvSlot> {
+public class InventoryIteratorSided implements Iterable<InventoryIterator.IInvSlot> {
 
-	private final ISidedInventory inv;
-	private final int side;
+	private final ISidedInventory	inv;
+	private final int				side;
 
 	InventoryIteratorSided(ISidedInventory inv, ForgeDirection side) {
 		this.inv = inv;
@@ -22,8 +19,8 @@ public class InventoryIteratorSided
 	@Override
 	public Iterator<InventoryIterator.IInvSlot> iterator() {
 		return new Iterator<InventoryIterator.IInvSlot>() {
-			int[] slots = inv.getAccessibleSlotsFromSide(side);
-			int index = 0;
+			int[]	slots	= inv.getAccessibleSlotsFromSide(side);
+			int		index	= 0;
 
 			@Override
 			public boolean hasNext() {
@@ -45,7 +42,7 @@ public class InventoryIteratorSided
 
 	private class InvSlot implements InventoryIterator.IInvSlot {
 
-		private int slot;
+		private int	slot;
 
 		public InvSlot(int slot) {
 			this.slot = slot;
