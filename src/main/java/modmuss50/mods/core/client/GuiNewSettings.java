@@ -1,5 +1,6 @@
 package modmuss50.mods.core.client;
 
+import modmuss50.mods.core.mod.ModRegistry;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.audio.SoundEventAccessorComposite;
@@ -72,7 +73,8 @@ public class GuiNewSettings extends GuiOptions {
 		this.buttonList.add(new GuiButton(105, this.width / 2 - 152, this.height / 6 + 144 - 6, 150, 20, I18n.format("options.resourcepack", new Object[0])));
 		this.buttonList.add(new GuiButton(104, this.width / 2 + 2, this.height / 6 + 144 - 6, 150, 20, I18n.format("options.snooper.view", new Object[0])));
 		this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
-		this.buttonList.add(new GuiButton(9990, this.width / 2 + 2, this.height / 6 + 50 - 6, 150, 20, "Modmuss50 Settings"));
+		this.buttonList.add(new GuiButton(9990, this.width / 2 + 2 -154, this.height / 6 + 50 - 6, 305, 20, "Modmuss50 Settings. Loaded Mods: " + Integer.toString(ModRegistry.mods.size() )));
+
 	}
 
 	protected void actionPerformed(GuiButton p_146284_1_) {

@@ -1,6 +1,7 @@
 package modmuss50.mods.lib.client;
 
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.init.Blocks;
@@ -84,8 +85,10 @@ public class GuiRenderHelper {
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, fluid.getSpriteNumber());
 	}
 
-	public static void drawPowerBar(int x, int y, int Max, int current, GuiContainer gui) {
-		gui.drawTexturedModalRect(x, y, 0, 182, 100, 16);
+	public static void drawPowerBar(int x, int y, int Max, int current, GuiScreen gui) {
+
+
+        gui.drawTexturedModalRect(x, y, 0, 182, 100, 16);
 
 		if (modmuss50.mods.lib.util.Math.percentage(Max, current) != 0) {
 			gui.drawTexturedModalRect(x, y, 0, 166, modmuss50.mods.lib.util.Math.percentage(Max, current), 16);
