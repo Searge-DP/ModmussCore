@@ -8,9 +8,6 @@ import sourceteam.mods.core.mod.ModRegistry;
 
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA. User: Mark Date: 05/04/14 Time: 11:47
- */
 public class GuiSlotModListCore extends GuiScrollingList {
 	private GuSourceList parent;
 	private ArrayList<ModContainer>	mods;

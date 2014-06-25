@@ -8,6 +8,6 @@ public class SourceCoreSettings extends BaseModGui {
 
 	@Override
 	public void drawScreen2(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
-		this.drawCenteredString(this.fontRendererObj, "Modmuss50 Settings Test", this.width / 2, 80, 0xFFFFFF);
+		this.drawCenteredString(this.fontRendererObj, "Modmuss50 Settings", this.width / 2, 80, 0xFFFFFF);
 	}
 }

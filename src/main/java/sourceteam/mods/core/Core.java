@@ -15,7 +15,7 @@ import sourceteam.mods.core.client.SourceCoreSettings;
 import sourceteam.mods.core.mod.ModRegistry;
 import sourceteam.mods.lib.mod.ISourceMod;
 
-@Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION, useMetadata = false)
+@Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION)
 public class Core implements ISourceMod {
 
 	public static final String	MODID	= "sourcecore";
@@ -73,6 +73,6 @@ public class Core implements ISourceMod {
 
     @Override
     public String recomenedMinecraftVeriosion() {
-        return "1.7.10";
+        return "1.7.2";
     }
 }
