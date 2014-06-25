@@ -14,6 +14,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import org.lwjgl.opengl.GL11;
+
 import sourceteam.mods.lib.util.Math;
 
 public class GuiRenderHelper {
@@ -88,15 +89,12 @@ public class GuiRenderHelper {
 
 	public static void drawPowerBar(int x, int y, int Max, int current, GuiScreen gui) {
 
+		gui.drawTexturedModalRect(x, y, 0, 182, 100, 16);
 
-        gui.drawTexturedModalRect(x, y, 0, 182, 100, 16);
-
-        if(Max == current)
-        {
-            gui.drawTexturedModalRect(x, y, 0, 166, 100, 16);
-            return;
-        }
-
+		if (Max == current) {
+			gui.drawTexturedModalRect(x, y, 0, 166, 100, 16);
+			return;
+		}
 
 		if (sourceteam.mods.lib.util.Math.percentage(Max, current) != 0) {
 			gui.drawTexturedModalRect(x, y, 0, 166, Math.percentage(Max, current), 16);

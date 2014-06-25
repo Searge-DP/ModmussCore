@@ -1,13 +1,13 @@
 package sourceteam.mods.core.mod;
 
-import sourceteam.mods.lib.mod.ISourceMod;
-
 import java.util.ArrayList;
+
+import sourceteam.mods.lib.mod.ISourceMod;
 
 public class ModRegistry {
 
 	public static ArrayList<ISourceMod>	mods;
-	public static boolean					hasInted	= false;
+	public static boolean				hasInted	= false;
 
 	public static void registerMod(ISourceMod classFile) {
 		if (!hasInted) {
@@ -16,6 +16,5 @@ public class ModRegistry {
 		}
 		mods.add(classFile);
 	}
-
 
 }

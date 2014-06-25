@@ -15,6 +15,6 @@ public interface ISourceMod {
 
 	public String modVersion();
 
-    public String recomenedMinecraftVeriosion();
+	public String recomenedMinecraftVeriosion();
 
 }

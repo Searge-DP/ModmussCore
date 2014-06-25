@@ -1,5 +1,11 @@
 package sourceteam.mods.core;
 
+import net.minecraftforge.common.MinecraftForge;
+import sourceteam.mods.core.client.BaseModGui;
+import sourceteam.mods.core.client.MainMenuRenderer;
+import sourceteam.mods.core.client.SourceCoreSettings;
+import sourceteam.mods.core.mod.ModRegistry;
+import sourceteam.mods.lib.mod.ISourceMod;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -8,12 +14,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraftforge.common.MinecraftForge;
-import sourceteam.mods.core.client.BaseModGui;
-import sourceteam.mods.core.client.MainMenuRenderer;
-import sourceteam.mods.core.client.SourceCoreSettings;
-import sourceteam.mods.core.mod.ModRegistry;
-import sourceteam.mods.lib.mod.ISourceMod;
 
 @Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION)
 public class Core implements ISourceMod {
@@ -46,7 +46,7 @@ public class Core implements ISourceMod {
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
 		if (FMLCommonHandler.instance().getSide().isClient()) {
-            MinecraftForge.EVENT_BUS.register(new MainMenuRenderer());
+			MinecraftForge.EVENT_BUS.register(new MainMenuRenderer());
 		}
 	}
 
@@ -71,8 +71,8 @@ public class Core implements ISourceMod {
 		return VERSION;
 	}
 
-    @Override
-    public String recomenedMinecraftVeriosion() {
-        return "1.7.2";
-    }
+	@Override
+	public String recomenedMinecraftVeriosion() {
+		return "1.7.2";
+	}
 }

@@ -1,21 +1,25 @@
 package sourceteam.mods.core.client;
 
-import com.google.common.base.Strings;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.IModGuiFactory;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
+import java.util.ArrayList;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
+
 import sourceteam.mods.core.mod.ModRegistry;
 
-import java.util.ArrayList;
+import com.google.common.base.Strings;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.IModGuiFactory;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
 
 /**
  * Created with IntelliJ IDEA. User: Mark Date: 05/04/14 Time: 08:54
@@ -28,7 +32,7 @@ public class GuSourceList extends GuiScreen {
 	private int						listWidth;
 	private ArrayList<ModContainer>	mods;
 	private GuiButton				configModButton;
-    private GuiButton               logModButton;
+	private GuiButton				logModButton;
 	private ArrayList<String>		modToAdd;
 	private boolean					hasInted	= false;
 
@@ -76,29 +80,25 @@ public class GuSourceList extends GuiScreen {
 		for (ModContainer mod : mods) {
 			listWidth = Math.max(listWidth, getFontRenderer().getStringWidth(mod.getName()) + 10);
 			listWidth = Math.max(listWidth, getFontRenderer().getStringWidth(mod.getVersion()) + 10);
-            listWidth = Math.max(listWidth, getFontRenderer().getStringWidth("MC Version: " + getModCompiledVersion(mod.getModId()) + 10));
+			listWidth = Math.max(listWidth, getFontRenderer().getStringWidth("MC Version: " + getModCompiledVersion(mod.getModId()) + 10));
 		}
 		listWidth = Math.min(listWidth, 150);
 		this.buttonList.add(new GuiButton(6, this.width / 2 - 75, this.height - 38, I18n.format("gui.done")));
 		configModButton = new GuiButton(20, 10, this.height - 60, this.listWidth, 20, "Config");
-
-
 
 		this.buttonList.add(configModButton);
 		this.modList = new GuiSlotModListCore(this, mods, listWidth);
 		this.modList.registerScrollButtons(this.buttonList, 7, 8);
 	}
 
-
-    public String getModCompiledVersion(String modid)
-    {
-        for (int i = 0; i < ModRegistry.mods.size(); i++) {
-            if(ModRegistry.mods.get(i).modId().equals(modid)){
-                return ModRegistry.mods.get(i).recomenedMinecraftVeriosion();
-            }
-        }
-        return "ERROR";
-    }
+	public String getModCompiledVersion(String modid) {
+		for (int i = 0; i < ModRegistry.mods.size(); i++) {
+			if (ModRegistry.mods.get(i).modId().equals(modid)) {
+				return ModRegistry.mods.get(i).recomenedMinecraftVeriosion();
+			}
+		}
+		return "ERROR";
+	}
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
@@ -135,27 +135,24 @@ public class GuSourceList extends GuiScreen {
 		return shifty + 10;
 	}
 
-    public int drawLine(String line, int offset, int shifty , int colour) {
-        this.fontRendererObj.drawString(line, offset, shifty, colour);
-        return shifty + 10;
-    }
+	public int drawLine(String line, int offset, int shifty, int colour) {
+		this.fontRendererObj.drawString(line, offset, shifty, colour);
+		return shifty + 10;
+	}
 
-    public int getModVersionColour(String modid)
-    {
-        for (int i = 0; i < ModRegistry.mods.size(); i++) {
-            if(ModRegistry.mods.get(i).modId().equals(modid)){
-                if(!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals("1.7.2"))
-                {
-                    return 0xf40000;
-                }
-                else
-                {
-                    return 0x3adf00;
-                }
-            }
-        }
-        return 0xCCCCCC;
-    }
+	public int getModVersionColour(String modid) {
+		for (int i = 0; i < ModRegistry.mods.size(); i++) {
+			if (ModRegistry.mods.get(i).modId().equals(modid)) {
+				if (!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals("1.7.2")) {
+					return 0xf40000;
+				}
+				else {
+					return 0x3adf00;
+				}
+			}
+		}
+		return 0xCCCCCC;
+	}
 
 	/**
 	 * Draws the screen and all the components in it.
@@ -171,7 +168,7 @@ public class GuSourceList extends GuiScreen {
 			this.fontRendererObj.drawStringWithShadow(selectedMod.getMetadata().name, offset, shifty, 0xFFFFFF);
 			shifty += 12;
 			shifty = drawLine(String.format("Version: %s", selectedMod.getDisplayVersion(), selectedMod.getVersion()), offset, shifty);
-            shifty = drawLine(String.format("Recomended Minecraft Version: %s", getModCompiledVersion(selectedMod.getModId()), selectedMod.getVersion()), offset, shifty, getModVersionColour(selectedMod.getModId()));
+			shifty = drawLine(String.format("Recomended Minecraft Version: %s", getModCompiledVersion(selectedMod.getModId()), selectedMod.getVersion()), offset, shifty, getModVersionColour(selectedMod.getModId()));
 
 			IModGuiFactory guiFactory = FMLClientHandler.instance().getGuiFactoryFor(selectedMod);
 			configModButton.visible = false;

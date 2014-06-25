@@ -1,15 +1,15 @@
 package sourceteam.mods.core.client;
 
-import cpw.mods.fml.client.GuiScrollingList;
-import cpw.mods.fml.common.ModContainer;
+import java.util.ArrayList;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraftforge.common.MinecraftForge;
 import sourceteam.mods.core.mod.ModRegistry;
-
-import java.util.ArrayList;
+import cpw.mods.fml.client.GuiScrollingList;
+import cpw.mods.fml.common.ModContainer;
 
 public class GuiSlotModListCore extends GuiScrollingList {
-	private GuSourceList parent;
+	private GuSourceList			parent;
 	private ArrayList<ModContainer>	mods;
 
 	public GuiSlotModListCore(GuSourceList parent, ArrayList<ModContainer> mods, int listWidth) {
@@ -51,27 +51,27 @@ public class GuiSlotModListCore extends GuiScrollingList {
 		this.parent.getFontRenderer().drawString(this.parent.getFontRenderer().trimStringToWidth("MC Version: " + getModCompiledVersion(mc.getModId()), listWidth - 10), this.left + 3, var3 + 22, getModVersionColour(mc.getModId()));
 	}
 
-    public String getModCompiledVersion(String modid){
-        for (int i = 0; i < ModRegistry.mods.size(); i++) {
-            if(ModRegistry.mods.get(i).modId().equals(modid)){
-              return ModRegistry.mods.get(i).recomenedMinecraftVeriosion();
-            }
-        }
-        return "ERROR";
-    }
+	public String getModCompiledVersion(String modid) {
+		for (int i = 0; i < ModRegistry.mods.size(); i++) {
+			if (ModRegistry.mods.get(i).modId().equals(modid)) {
+				return ModRegistry.mods.get(i).recomenedMinecraftVeriosion();
+			}
+		}
+		return "ERROR";
+	}
 
-    public int getModVersionColour(String modid)
-    {
-        for (int i = 0; i < ModRegistry.mods.size(); i++) {
-            if(ModRegistry.mods.get(i).modId().equals(modid)){
-              if(!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals(MinecraftForge.MC_VERSION)){
-                 return 0xf40000;
-              }else{
-                  return 0x3adf00;
-              }
-            }
-        }
-        return 0xCCCCCC;
-    }
+	public int getModVersionColour(String modid) {
+		for (int i = 0; i < ModRegistry.mods.size(); i++) {
+			if (ModRegistry.mods.get(i).modId().equals(modid)) {
+				if (!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals(MinecraftForge.MC_VERSION)) {
+					return 0xf40000;
+				}
+				else {
+					return 0x3adf00;
+				}
+			}
+		}
+		return 0xCCCCCC;
+	}
 
 }
