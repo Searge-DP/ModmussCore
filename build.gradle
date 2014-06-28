@@ -49,6 +49,16 @@ task sourceJar(type: Jar) {
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
+	
+	new File("build/versions/").mkdir();
+	
+	File verFile = new File("build/versions/" + version + ".ver");
+	verFile.createNewFile();
+	verFile.write("mcversion: " + config.minecraft_version + ",\n" +
+	"version: " + version + ",\n" +
+	"date: " + "Date" + ",\n" + 
+	"adfly-location:nowhere,\n" +
+	"location:nowhere,\n");
 }
 
 artifacts {
