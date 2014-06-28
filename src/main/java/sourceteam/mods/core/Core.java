@@ -25,7 +25,6 @@ public class Core implements ISourceMod {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModRegistry.registerMod(this);
-
 	}
 
 	@Mod.EventHandler
