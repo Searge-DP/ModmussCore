@@ -35,7 +35,6 @@ jar {
 
 task deleteOldArtifacts(type: Delete) {
     delete 'build/libs'
-	delete 'build/versions'
 }
 
 classes.dependsOn deleteOldArtifacts
