@@ -56,7 +56,7 @@ task deobfJar(type: Jar) {
 	verFile.createNewFile();
 	verFile.write("mcversion: " + "1.7.2" + ",\n" +
 	"version: " + version + ",\n" +
-	"date: " + Calendar.DATE + ",\n" + 
+	"date: " + Calendar.HOUR_OF_DAY + ",\n" + 
 	"build: ${System.getenv().BUILD_NUMBER}\n");
 }
 
