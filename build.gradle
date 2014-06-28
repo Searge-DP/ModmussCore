@@ -52,7 +52,7 @@ task deobfJar(type: Jar) {
 	
 	new File("build/versions/").mkdir();
 	
-	File verFile = new File("build/versions/" + version + ".ver");
+	File verFile = new File("build/versions/version.ver");
 	verFile.createNewFile();
 	verFile.write("mcversion: " + "1.7.2" + ",\n" +
 	"version: " + version + ",\n" +
