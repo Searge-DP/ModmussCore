@@ -50,6 +50,19 @@ task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
 	
+	int TIMEI = Calendar.getInstance().get(Calendar.AM_PM);
+
+	String TIME = "";
+
+	if(TIMEI == 0)
+	{
+		TIME = "AM";
+	}
+	else
+	{
+		TIME = "PM";
+	}
+	
 	new File("build/versions/").mkdir();
 	
 	File verFile = new File("build/versions/" + version + ".info");
