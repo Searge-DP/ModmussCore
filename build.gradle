@@ -24,8 +24,8 @@ minecraft {
 
 group = 'ModmussCore'
 def ENV = System.getenv()
-if (ENV.DRONE_BUILD_NUMBER) {
-    version = "0.0.1_" + "${System.getenv().BUILD_ID}"
+if (ENV.BUILD_NUMBER) {
+    version = "0.0.1_" + "${System.getenv().BUILD_NUMBER}"
 } else {
     version = "0.0.1_BUILD"
 }
