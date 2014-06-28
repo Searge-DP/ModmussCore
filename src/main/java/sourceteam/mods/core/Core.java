@@ -1,6 +1,7 @@
 package sourceteam.mods.core;
 
 import net.minecraftforge.common.MinecraftForge;
+import sourceteam.mods.core.Logger.SourceLogger;
 import sourceteam.mods.core.client.BaseModGui;
 import sourceteam.mods.core.client.MainMenuRenderer;
 import sourceteam.mods.core.client.SourceCoreSettings;
@@ -22,7 +23,9 @@ public class Core implements ISourceMod {
 	public static final String	NAME	= "Source Core";
 	public static final String	VERSION	= "1.0";
 
-	@Mod.EventHandler
+    public SourceLogger logger = SourceLogger.getLogger(NAME);
+
+    @Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModRegistry.registerMod(this);
 	}
@@ -45,6 +48,7 @@ public class Core implements ISourceMod {
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
 		if (FMLCommonHandler.instance().getSide().isClient()) {
+            logger.log("Starting MainMenu tweaker");
 			MinecraftForge.EVENT_BUS.register(new MainMenuRenderer());
 		}
 	}
