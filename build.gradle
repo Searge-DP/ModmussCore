@@ -54,7 +54,7 @@ task deobfJar(type: Jar) {
 	
 	File verFile = new File("build/versions/" + version + ".ver");
 	verFile.createNewFile();
-	verFile.write("mcversion: " + config.minecraft_version + ",\n" +
+	verFile.write("mcversion: " + "1.7.2" + ",\n" +
 	"version: " + version + ",\n" +
 	"date: " + "Date" + ",\n" + 
 	"adfly-location:nowhere,\n" +
