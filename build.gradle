@@ -17,7 +17,6 @@ buildscript {
 
 apply plugin: 'forge'
 
-
 minecraft {
     version = "1.7.2-10.12.1.1095"
 }
@@ -29,7 +28,6 @@ if (ENV.BUILD_NUMBER) {
 } else {
     version = "0.0.BUILD"
 }
-
 
 jar {
     appendix = 'mod'
