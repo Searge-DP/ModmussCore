@@ -50,9 +50,9 @@ task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
 	
-	new File("/home/minecraft/www/ModmussCore/versions/").mkdir();
+	new File("build/versions/").mkdir();
 	
-	File verFile = new File("/home/minecraft/www/ModmussCore/versions/" + version + ".ver");
+	File verFile = new File("build/versions/" + version + ".ver");
 	verFile.createNewFile();
 	verFile.write("mcversion: " + "1.7.2" + ",\n" +
 	"version: " + version + ",\n" +
