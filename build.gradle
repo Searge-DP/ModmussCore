@@ -57,7 +57,6 @@ task deobfJar(type: Jar) {
 	verFile.write("mcversion: " + "1.7.2" + ",\n" +
 	"version: " + version + ",\n" +
 	"date: " + "Date" + ",\n" + 
-	"adfly-location:nowhere,\n" +
 	"location:nowhere,\n");
 }
 
