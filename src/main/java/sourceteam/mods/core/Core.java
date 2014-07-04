@@ -1,20 +1,27 @@
 package sourceteam.mods.core;
 
-import net.minecraftforge.common.MinecraftForge;
-import sourceteam.mods.core.Logger.SourceLogger;
-import sourceteam.mods.core.client.BaseModGui;
-import sourceteam.mods.core.client.MainMenuRenderer;
-import sourceteam.mods.core.client.SourceCoreSettings;
-import sourceteam.mods.core.mod.ModRegistry;
-import sourceteam.mods.lib.mod.ISourceMod;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import sourceteam.mods.core.Logger.SourceLogger;
+import sourceteam.mods.core.client.BaseModGui;
+import sourceteam.mods.core.client.MainMenuRenderer;
+import sourceteam.mods.core.client.SourceCoreSettings;
+import sourceteam.mods.core.fluid.BlankFluid;
+import sourceteam.mods.core.fluid.BlockFluid;
+import sourceteam.mods.core.mod.ModRegistry;
+import sourceteam.mods.lib.mod.ISourceMod;
 
 @Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION)
 public class Core implements ISourceMod {
@@ -25,9 +32,24 @@ public class Core implements ISourceMod {
 
     public SourceLogger logger = SourceLogger.getLogger(NAME);
 
+    public Configuration configuration;
+
+    public  boolean mainMenuButton = true;
+
+    public static Fluid blankFluid;
+    public static Block blockFluid;
+
     @Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ModRegistry.registerMod(this);
+        ModRegistry.registerMod(this);
+        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+        FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+
+        blankFluid = new BlankFluid("sourcecore:fluid");
+        FluidRegistry.registerFluid(blankFluid);
+        FluidRegistry.registerFluid(new BlankFluid("BlankFluid"));
+        blockFluid = new BlockFluid("sourcecore:fluid").setBlockName("sourcecore:BlankFluid");
+        GameRegistry.registerBlock(blockFluid, "BlankFluid");
 	}
 
 	@Mod.EventHandler
