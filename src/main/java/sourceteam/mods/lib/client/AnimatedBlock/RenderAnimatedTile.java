@@ -2,6 +2,7 @@ package sourceteam.mods.lib.client.AnimatedBlock;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import sourceteam.mods.core.Core;
@@ -12,6 +13,7 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
         FluidStack liquid = new FluidStack(Core.blankFluid, 100);
+        liquid = new FluidStack(FluidRegistry.WATER, 100);
         int color = 0xFFFFFF;
         if (liquid == null || liquid.amount <= 0) {
             return;
