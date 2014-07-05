@@ -44,22 +44,21 @@ public class Core implements ISourceMod {
         ModRegistry.registerMod(this);
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+	}
 
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
         blankFluid = new BlankFluid("sourcecore:fluid");
         FluidRegistry.registerFluid(blankFluid);
         FluidRegistry.registerFluid(new BlankFluid("BlankFluid"));
         blockFluid = new BlockFluid("sourcecore:fluid").setBlockName("sourcecore:BlankFluid");
         GameRegistry.registerBlock(blockFluid, "BlankFluid");
-	}
-
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
 
 	}
 
 	@Mod.EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
-
+        blankFluid.setIcons(BlockFluid.StillIcon);
 	}
 
 	@Mod.EventHandler
@@ -72,6 +71,7 @@ public class Core implements ISourceMod {
 		if (FMLCommonHandler.instance().getSide().isClient()) {
             logger.log("Starting MainMenu tweaker");
 			MinecraftForge.EVENT_BUS.register(new MainMenuRenderer());
+
 		}
 	}
 

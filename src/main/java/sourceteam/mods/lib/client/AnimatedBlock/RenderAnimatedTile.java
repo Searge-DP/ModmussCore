@@ -33,38 +33,16 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
          bindTexture(FluidRenderer.getFluidSheet(liquid));
-      //  bindTexture(new ResourceLocation("sourcecore", "textures/blocks/fluid.png"));
-
         setGLColorFromInt(0x666666);
 
         if(tileentity instanceof IColour){
            setGLColorFromInt(((IColour) tileentity).colour());
         }
-
-    //   RenderUtils.renderFluidQuad(new Vector3(x + 2, 2 + y, 10), new Vector3(x + 2, 8 + y, 10), new Vector3(x + 2 + 16, 8 + y, 16), new Vector3(x + 2 + 16, 2 + y, 10), BlockFluid.StillIcon , 16D);
-
-//        RenderUtils.renderFluidCuboid(liquid,
-//                new Cuboid6(0.22, 0.12, 0.22, 0.78, 0.121+0.63, 0.78)
-//                        .add(new Vector3(x, y, z)),
-//                1000/(16D* FluidUtils.B), 0.75);
-
         GL11.glTranslatef((float) x + 0.001F, (float) y + 0.5F, (float) z + 0.001F);
         GL11.glScalef(0.999F, 0.999F, 0.999F);
         GL11.glTranslatef(0, -0.5F, 0);
 
         GL11.glCallList(displayList[(int) ((float) 100 / (float) (100) * (FluidRenderer.DISPLAY_STAGES - 1))]);
-
-
-//        CCRenderState.reset();
-//        CCRenderState.pullLightmap();
-//        //   CCRenderState.useNormals(true);
-//
-//        RenderUtils.renderFluidCuboid(liquid,
-//                new Cuboid6(0.01, 0.01, 0.01, 0.99, 0.121+0.63, 0.99)
-//                        .add(new Vector3(x, y, z)),
-//                1300/(1D* FluidUtils.B), 1);
-
-
         GL11.glPopAttrib();
         GL11.glPopMatrix();
 

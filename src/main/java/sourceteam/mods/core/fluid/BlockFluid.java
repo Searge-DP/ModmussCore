@@ -10,6 +10,7 @@ public class BlockFluid extends BlockFluidClassic {
 
     
     public static IIcon StillIcon;
+
     public BlockFluid(String fluidName) {
         super(new BlankFluid("BlankFluid"), Material.water);
 

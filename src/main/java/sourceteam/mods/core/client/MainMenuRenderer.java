@@ -1,13 +1,17 @@
 package sourceteam.mods.core.client;
 
-import java.util.List;
-
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import sourceteam.mods.core.Core;
 import sourceteam.mods.core.mod.ModRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.List;
 
 public class MainMenuRenderer {
 
@@ -48,4 +52,15 @@ public class MainMenuRenderer {
 
 		}
 	}
+    
+    
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void textureHook(TextureStitchEvent.Post event){
+        if(event.map.getTextureType() == 0){
+            Core.blankFluid.setIcons(Core.blockFluid.getBlockTextureFromSide(1));
+        }
+    }
+    
+    
 }
