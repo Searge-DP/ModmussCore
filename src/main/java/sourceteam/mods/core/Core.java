@@ -10,13 +10,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import sourceteam.mods.core.Logger.SourceLogger;
 import sourceteam.mods.core.client.BaseModGui;
-import sourceteam.mods.core.client.MainMenuRenderer;
+import sourceteam.mods.core.client.ClientInit;
 import sourceteam.mods.core.client.SourceCoreSettings;
 import sourceteam.mods.core.fluid.BlankFluid;
 import sourceteam.mods.core.fluid.BlankFluidH;
@@ -80,11 +79,8 @@ public class Core implements ISourceMod {
 
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
-		if (FMLCommonHandler.instance().getSide().isClient()) {
-            logger.log("Starting MainMenu tweaker");
-			MinecraftForge.EVENT_BUS.register(new MainMenuRenderer());
-
-		}
+        if (FMLCommonHandler.instance().getSide().isClient())
+        ClientInit.load();
 	}
 
 	@SideOnly(Side.CLIENT)
