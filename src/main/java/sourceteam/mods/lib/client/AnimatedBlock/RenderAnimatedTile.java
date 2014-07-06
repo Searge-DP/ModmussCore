@@ -2,6 +2,7 @@ package sourceteam.mods.lib.client.AnimatedBlock;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import sourceteam.mods.core.Core;
@@ -29,7 +30,13 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        bindTexture(FluidRenderer.getFluidSheet(liquid));
+        bindTexture(((IColour) tileentity).isAnimated() ? FluidRenderer.getFluidSheet(liquid) : new ResourceLocation("sourcecore", "textures/blocks/still_low.png"));
+
+        if(tileentity instanceof IHighRes && !((IColour) tileentity).isAnimated())
+        {
+            if(((IHighRes) tileentity).useHighRes()) bindTexture(new ResourceLocation("sourcecore", "textures/blocks/still.png"));
+        }
+
         setGLColorFromInt(0x666666);
         if(tileentity instanceof IColour){
            setGLColorFromInt(((IColour) tileentity).colour());

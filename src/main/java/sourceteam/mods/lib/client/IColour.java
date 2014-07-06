@@ -4,4 +4,5 @@ public interface IColour {
 
     public int colour();
 
+    public boolean isAnimated();
 }

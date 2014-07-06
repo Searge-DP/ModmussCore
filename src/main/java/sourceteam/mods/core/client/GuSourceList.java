@@ -143,7 +143,7 @@ public class GuSourceList extends GuiScreen {
 	public int getModVersionColour(String modid) {
 		for (int i = 0; i < ModRegistry.mods.size(); i++) {
 			if (ModRegistry.mods.get(i).modId().equals(modid)) {
-				if (!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals("1.7.2")) {
+				if (!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals(Loader.MC_VERSION)) {
 					return 0xf40000;
 				}
 				else {
