@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
@@ -143,7 +144,7 @@ public class GuSourceList extends GuiScreen {
 	public int getModVersionColour(String modid) {
 		for (int i = 0; i < ModRegistry.mods.size(); i++) {
 			if (ModRegistry.mods.get(i).modId().equals(modid)) {
-				if (!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals(Loader.MC_VERSION)) {
+				if (!ModRegistry.mods.get(i).recomenedMinecraftVeriosion().equals(MinecraftForge.MC_VERSION)) {
 					return 0xf40000;
 				}
 				else {
