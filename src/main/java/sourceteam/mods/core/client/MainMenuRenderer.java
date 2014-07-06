@@ -59,6 +59,7 @@ public class MainMenuRenderer {
     public void textureHook(TextureStitchEvent.Post event){
         if(event.map.getTextureType() == 0){
             Core.blankFluid.setIcons(Core.blockFluid.getBlockTextureFromSide(1));
+            Core.blankFluidH.setIcons(Core.blockFluidH.getBlockTextureFromSide(1));
         }
     }
     

@@ -14,7 +14,12 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
         FluidStack liquid = new FluidStack(Core.blankFluid, 100);
-      //  liquid = new FluidStack(FluidRegistry.LAVA, 100);
+
+        if(tileentity instanceof IHighRes && ((IHighRes) tileentity).useHighRes()){
+            liquid = new FluidStack(Core.blankFluidH, 100);
+        }
+
+
         int color = 0xFFFFFF;
         if (liquid == null || liquid.amount <= 0) {
             return;
@@ -38,8 +43,8 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         if(tileentity instanceof IColour){
            setGLColorFromInt(((IColour) tileentity).colour());
         }
-        GL11.glTranslatef((float) x + 0.001F, (float) y + 0.5F, (float) z + 0.001F);
-        GL11.glScalef(0.999F, 0.999F, 0.999F);
+        GL11.glTranslatef((float) x, (float) y + 0.51F, (float) z);
+        GL11.glScalef(1.001F, 0.9999F, 1.001F);
         GL11.glTranslatef(0, -0.5F, 0);
 
         GL11.glCallList(displayList[(int) ((float) 100 / (float) (100) * (FluidRenderer.DISPLAY_STAGES - 1))]);

@@ -13,7 +13,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module" module-name="forge-1.7.2-10.12.2.1124-src" />
+    <orderEntry type="module" module-name="forge-1.7.10-10.13.0.1160-src" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

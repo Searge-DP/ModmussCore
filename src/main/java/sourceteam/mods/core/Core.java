@@ -19,7 +19,9 @@ import sourceteam.mods.core.client.BaseModGui;
 import sourceteam.mods.core.client.MainMenuRenderer;
 import sourceteam.mods.core.client.SourceCoreSettings;
 import sourceteam.mods.core.fluid.BlankFluid;
+import sourceteam.mods.core.fluid.BlankFluidH;
 import sourceteam.mods.core.fluid.BlockFluid;
+import sourceteam.mods.core.fluid.BlockFluidH;
 import sourceteam.mods.core.mod.ModRegistry;
 import sourceteam.mods.lib.mod.ISourceMod;
 
@@ -38,6 +40,8 @@ public class Core implements ISourceMod {
 
     public static Fluid blankFluid;
     public static Block blockFluid;
+    public static Fluid blankFluidH;
+    public static Block blockFluidH;
 
     @Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -53,6 +57,14 @@ public class Core implements ISourceMod {
         FluidRegistry.registerFluid(new BlankFluid("BlankFluid"));
         blockFluid = new BlockFluid("sourcecore:fluid").setBlockName("sourcecore:BlankFluid");
         GameRegistry.registerBlock(blockFluid, "BlankFluid");
+
+
+        blankFluidH = new BlankFluidH("sourcecore:fluidH");
+        FluidRegistry.registerFluid(blankFluidH);
+        FluidRegistry.registerFluid(new BlankFluidH("BlankFluidH"));
+        blockFluidH = new BlockFluidH("sourcecore:fluidH").setBlockName("sourcecore:BlankFluidH");
+        GameRegistry.registerBlock(blockFluidH, "BlankFluidH");
+
 
 	}
 
@@ -98,6 +110,6 @@ public class Core implements ISourceMod {
 
 	@Override
 	public String recomenedMinecraftVeriosion() {
-		return "1.7.2";
+		return "1.7.10";
 	}
 }
