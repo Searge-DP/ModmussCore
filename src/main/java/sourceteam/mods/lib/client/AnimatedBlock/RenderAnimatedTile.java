@@ -7,6 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import sourceteam.mods.core.Core;
 import sourceteam.mods.lib.client.IColour;
+import sourceteam.mods.lib.client.IRGBColour;
 
 public class RenderAnimatedTile extends TileEntitySpecialRenderer {
 
@@ -37,10 +38,15 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
             if(((IHighRes) tileentity).useHighRes()) bindTexture(new ResourceLocation("sourcecore", "textures/blocks/still.png"));
         }
 
-        setGLColorFromInt(0x666666);
-        if(tileentity instanceof IColour){
+     //   setGLColorFromInt(0x666666);
+        if(tileentity instanceof IColour && ((IColour) tileentity).colour() != 0){
            setGLColorFromInt(((IColour) tileentity).colour());
         }
+
+        if(tileentity instanceof IRGBColour){
+            GL11.glColor4f(((IRGBColour) tileentity).Cred(), ((IRGBColour) tileentity).Cgreen(), ((IRGBColour) tileentity).Cblue(), 1.0F);
+        }
+
         GL11.glTranslatef((float) x, (float) y + 0.51F, (float) z);
         GL11.glScalef(1.001F, 0.9999F, 1.001F);
         GL11.glTranslatef(0, -0.5F, 0);
