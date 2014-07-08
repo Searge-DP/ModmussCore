@@ -44,7 +44,7 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         }
 
         if(tileentity instanceof IRGBColour){
-            GL11.glColor4f(((IRGBColour) tileentity).Cred(), ((IRGBColour) tileentity).Cgreen(), ((IRGBColour) tileentity).Cblue(), 1.0F);
+            GL11.glColor3f(((IRGBColour) tileentity).Cred(), ((IRGBColour) tileentity).Cgreen(), ((IRGBColour) tileentity).Cblue());
         }
 
         GL11.glTranslatef((float) x, (float) y + 0.51F, (float) z);
