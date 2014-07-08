@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import sourceteam.mods.lib.api.IRGB;
 
 /**
  * * @package com.tattyseal.zaet.api.client
@@ -71,7 +72,11 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler
             fluid = zb.liquid_low;
         }
 
+        boolean flag = world.getTileEntity(x, y, z) instanceof IRGB;
+
         float[] color = getRGBFromHex(Colors.itemColors[world.getBlockMetadata(x, y, z)]);
+
+        if(flag) color = ((IRGB) world.getTileEntity(x, y, z)).getRGB();
 
         renderer.setOverrideBlockTexture(fluid);
 
@@ -81,7 +86,7 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler
 
         renderer.setOverrideBlockTexture(zb.isHD() ? zb.icons[1] : zb.icons[0]);
 
-        renderer.renderStandardBlockWithColorMultiplier(Blocks.stone, x, y, z, color[0] - 2, color[1] - 2, color[2] - 2);
+        renderer.renderStandardBlockWithColorMultiplier(Blocks.stone, x, y, z, color[0] - 0.5f, color[1] - 0.5f, color[2] - 0.5f);
         renderer.clearOverrideBlockTexture();
 
         return true;
