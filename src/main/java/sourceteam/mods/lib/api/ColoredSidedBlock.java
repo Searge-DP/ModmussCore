@@ -36,6 +36,8 @@ public class ColoredSidedBlock extends ColoredBlock
     @Override
     public void registerBlockIcons(IIconRegister iconRegister)
     {
+        super.registerBlockIcons(iconRegister);
+
         for(int i = 0; i < 6; i++)
         {
             lowIcons[i] = iconRegister.registerIcon(lowTextures[i]);
