@@ -124,7 +124,14 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler
         }
         else
         {
-            renderer.setOverrideBlockTexture(zb.isHD() ? zb.icons[1] : zb.icons[0]);
+            if(zb instanceof ColoredNetworkBlock)
+            {
+                renderer.setOverrideBlockTexture(zb.isHD() ? zb.icons[0] : zb.icons[0]);
+            }
+            else
+            {
+                renderer.setOverrideBlockTexture(zb.isHD() ? zb.icons[1] : zb.icons[0]);
+            }
 
             renderer.renderStandardBlockWithColorMultiplier(Blocks.stone, x, y, z, color[0] - 0.5f, color[1] - 0.5f, color[2] - 0.5f);
             renderer.clearOverrideBlockTexture();
