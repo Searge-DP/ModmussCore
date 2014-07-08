@@ -48,8 +48,18 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler
 
         renderer.setOverrideBlockTexture(fluid);
 
-        if(zb instanceof ColoredInopaqueBlock);
-        else renderBlockAsItem(Blocks.stone, metadata, 1f, fluid, fluid, fluid, fluid, fluid, fluid);
+        if(zb instanceof ColoredInopaqueBlock)
+        {
+
+        }
+        else if(zb instanceof ColoredNetworkBlock)
+        {
+            renderBlockAsItem(Blocks.stone, metadata, 1f, fluid, fluid, fluid, fluid, fluid, fluid, true);
+        }
+        else
+        {
+            renderBlockAsItem(Blocks.stone, metadata, 1f, fluid, fluid, fluid, fluid, fluid, fluid, false);
+        }
 
         renderer.clearOverrideBlockTexture();
 
@@ -59,7 +69,16 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler
 
         if(blockIcon == null) fluid = Blocks.dirt.getIcon(0, 0);
 
-        renderBlockAsItem(Blocks.stone, metadata, 1f, blockIcon, blockIcon, blockIcon, blockIcon, blockIcon, blockIcon);
+        if(zb instanceof ColoredNetworkBlock)
+        {
+            blockIcon = zb.icons[0];
+            renderBlockAsItem(Blocks.stone, metadata, 1f, blockIcon, blockIcon, blockIcon, blockIcon, blockIcon, blockIcon, true);
+        }
+        else
+        {
+            renderBlockAsItem(Blocks.stone, metadata, 1f, blockIcon, blockIcon, blockIcon, blockIcon, blockIcon, blockIcon, false);
+        }
+
         renderer.clearOverrideBlockTexture();
     }
 
@@ -164,7 +183,7 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler
     /**
      * Is called to render the image of a block on an inventory, as a held item, or as a an item on the ground
      */
-    public void renderBlockAsItem(Block p_147800_1_, int p_147800_2_, float p_147800_3_, IIcon icon0, IIcon icon1, IIcon icon2, IIcon icon3, IIcon icon4, IIcon icon5)
+    public void renderBlockAsItem(Block p_147800_1_, int p_147800_2_, float p_147800_3_, IIcon icon0, IIcon icon1, IIcon icon2, IIcon icon3, IIcon icon4, IIcon icon5, boolean white)
     {
         Tessellator tessellator = Tessellator.instance;
         boolean flag = p_147800_1_ == Blocks.grass;
@@ -181,7 +200,8 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler
 
         if (true)//RenderBlocks.getInstance().useInventoryTint)
         {
-            j = Colors.itemColors[p_147800_2_];
+            if(!white) j = Colors.itemColors[p_147800_2_];
+            else j = Colors.itemColors[15];
 
             if (flag)
             {
