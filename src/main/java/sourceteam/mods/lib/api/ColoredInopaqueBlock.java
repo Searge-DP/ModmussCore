@@ -8,8 +8,7 @@ import net.minecraft.util.IIcon;
  * * This code was made by tattyseal on the 02/07/14 for Zaet
  * *
  */
-public class ColoredInopaqueBlock extends ColoredBlock
-{
+public class ColoredInopaqueBlock extends ColoredBlock {
     public String lowTexture;
     public String highTexture;
 
@@ -17,14 +16,12 @@ public class ColoredInopaqueBlock extends ColoredBlock
 
     public IIcon[] icons;
 
-    public ColoredInopaqueBlock(String name, Material material, String lowString, String highString)
-    {
+    public ColoredInopaqueBlock(String name, Material material, String lowString, String highString) {
         super(name, material, lowString, highString, false);
     }
 
     @Override
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 }

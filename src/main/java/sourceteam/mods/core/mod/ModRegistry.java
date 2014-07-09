@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class ModRegistry {
 
-	public static ArrayList<ISourceMod>	mods;
-	public static boolean				hasInted	= false;
+    public static ArrayList<ISourceMod> mods;
+    public static boolean hasInted = false;
 
-	public static void registerMod(ISourceMod classFile) {
+    public static void registerMod(ISourceMod classFile) {
         if (!hasInted) {
             mods = new ArrayList<ISourceMod>();
             hasInted = true;
@@ -23,7 +23,7 @@ public class ModRegistry {
             hasInted = true;
         }
         for (int i = 0; i < mods.size(); i++) {
-            if(mods.get(i).modId().equals(modid)){
+            if (mods.get(i).modId().equals(modid)) {
                 mods.remove(i);
             }
         }
@@ -31,14 +31,13 @@ public class ModRegistry {
 
 
     //If you use this MAKE SURE you have a null check!
-    public ISourceMod getMod(String modid)
-    {
+    public ISourceMod getMod(String modid) {
         if (!hasInted) {
             mods = new ArrayList<ISourceMod>();
             hasInted = true;
         }
         for (int i = 0; i < mods.size(); i++) {
-            if(mods.get(i).modId().equals(modid)){
+            if (mods.get(i).modId().equals(modid)) {
                 return mods.get(i);
             }
         }

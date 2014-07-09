@@ -15,50 +15,42 @@ import java.util.List;
 /**
  * * @package sourceteam.mods.lib.api
  * * @author tattyseal
- *
+ * <p/>
  * THIS IS INTERNAL DO NOT USE
  * *
  */
-public class ColoredNetworkBlock extends ColoredBlock
-{
-    public ColoredNetworkBlock(Material material, String texture)
-    {
+public class ColoredNetworkBlock extends ColoredBlock {
+    public ColoredNetworkBlock(Material material, String texture) {
         super("", material, texture, "", true);
     }
 
     @Override
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list)
-    {
+    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
         list.add(new ItemStack(item, 1));
     }
 
     @Override
-    public int colorMultiplier(IBlockAccess blockAccess, int x, int y, int z)
-    {
+    public int colorMultiplier(IBlockAccess blockAccess, int x, int y, int z) {
         return 0xFFFFFF;
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
+    public void registerBlockIcons(IIconRegister iconRegister) {
         super.registerBlockIcons(iconRegister);
     }
 
     @Override
-    public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side)
-    {
+    public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side) {
         return icons[0];
     }
 
     @Override
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
         return icons[0];
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float j, float k, float l)
-    {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float j, float k, float l) {
         return false;
     }
 }

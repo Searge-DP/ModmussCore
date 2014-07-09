@@ -14,7 +14,7 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
         FluidStack liquid = new FluidStack(Core.blankFluid, 100);
-        if(tileentity instanceof IHighRes && ((IHighRes) tileentity).useHighRes()){
+        if (tileentity instanceof IHighRes && ((IHighRes) tileentity).useHighRes()) {
             liquid = new FluidStack(Core.blankFluidH, 100);
         }
         int color = 0xFFFFFF;
@@ -33,17 +33,17 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         bindTexture(((IColour) tileentity).isAnimated() ? FluidRenderer.getFluidSheet(liquid) : new ResourceLocation("sourcecore", "textures/blocks/still_low.png"));
 
-        if(tileentity instanceof IHighRes && !((IColour) tileentity).isAnimated())
-        {
-            if(((IHighRes) tileentity).useHighRes()) bindTexture(new ResourceLocation("sourcecore", "textures/blocks/still.png"));
+        if (tileentity instanceof IHighRes && !((IColour) tileentity).isAnimated()) {
+            if (((IHighRes) tileentity).useHighRes())
+                bindTexture(new ResourceLocation("sourcecore", "textures/blocks/still.png"));
         }
 
-     //   setGLColorFromInt(0x666666);
-        if(tileentity instanceof IColour && ((IColour) tileentity).colour() != 0){
-           setGLColorFromInt(((IColour) tileentity).colour());
+        //   setGLColorFromInt(0x666666);
+        if (tileentity instanceof IColour && ((IColour) tileentity).colour() != 0) {
+            setGLColorFromInt(((IColour) tileentity).colour());
         }
 
-        if(tileentity instanceof IRGBColour){
+        if (tileentity instanceof IRGBColour) {
             GL11.glColor3f(((IRGBColour) tileentity).Cred(), ((IRGBColour) tileentity).Cgreen(), ((IRGBColour) tileentity).Cblue());
         }
 

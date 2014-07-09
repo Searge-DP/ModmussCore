@@ -14,8 +14,7 @@ import java.io.InputStream;
  * * @author tattyseal
  * *
  */
-public class Schematic
-{
+public class Schematic {
     public NBTTagList tileentities;
     public short width;
     public short height;
@@ -23,10 +22,8 @@ public class Schematic
     public byte[] blocks;
     public byte[] data;
 
-    public Schematic(String location)
-    {
-        try
-        {
+    public Schematic(String location) {
+        try {
             InputStream is = getClass().getResourceAsStream(location);
             NBTTagCompound nbtdata = CompressedStreamTools.readCompressed(is);
             width = nbtdata.getShort("Width");
@@ -38,39 +35,30 @@ public class Schematic
             tileentities = nbtdata.getTagList("TileEntities", 10);
 
             System.out.println("Loaded schematic from " + location + " with attributes: width - " + width + ", height - " + height + ", length - " + length);
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    public static boolean placeSchematic(World world, int x, int y, int z, Schematic schematic)
-    {
+    public static boolean placeSchematic(World world, int x, int y, int z, Schematic schematic) {
         int id = 0;
 
-        for(int sy = 0; sy < schematic.height; sy++)
-        {
-            for(int sz = 0; sz < schematic.length; sz++)
-            {
-                for(int sx = 0; sx < schematic.width; sx++)
-                {
+        for (int sy = 0; sy < schematic.height; sy++) {
+            for (int sz = 0; sz < schematic.length; sz++) {
+                for (int sx = 0; sx < schematic.width; sx++) {
                     Block block = Block.getBlockById(schematic.blocks[id]);
 
                     world.setBlockToAir(x + sx, y + sy, z + sz);
                     world.setBlock(x + sx, y + sy, z + sz, block, 0, 2);
 
-                    if(schematic.tileentities != null)
-                    {
-                        for(int il = 0; il < schematic.tileentities.tagCount(); ++il)
-                        {
+                    if (schematic.tileentities != null) {
+                        for (int il = 0; il < schematic.tileentities.tagCount(); ++il) {
                             NBTTagCompound tag = schematic.tileentities.getCompoundTagAt(il);
 
                             TileEntity tileEntity = TileEntity.createAndLoadEntity(tag);
 
-                            if(tileEntity != null)
-                            {
+                            if (tileEntity != null) {
                                 tileEntity.xCoord = x + sx;
                                 tileEntity.yCoord = y + sy;
                                 tileEntity.zCoord = z + sz;
@@ -79,7 +67,7 @@ public class Schematic
                         }
                         id = id + 1;
                     }
-              }
+                }
             }
 
         }

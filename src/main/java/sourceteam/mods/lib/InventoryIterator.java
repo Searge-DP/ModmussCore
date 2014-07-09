@@ -7,38 +7,38 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class InventoryIterator {
 
-	/**
-	 * Returns an Iterable object for the specified side of the inventory.
-	 * 
-	 * @param inv
-	 * @param side
-	 * @return Iterable
-	 */
-	public static Iterable<IInvSlot> getIterable(IInventory inv, ForgeDirection side) {
-		if (inv instanceof ISidedInventory) {
-			return new InventoryIteratorSided((ISidedInventory) inv, side);
-		}
+    /**
+     * Returns an Iterable object for the specified side of the inventory.
+     *
+     * @param inv
+     * @param side
+     * @return Iterable
+     */
+    public static Iterable<IInvSlot> getIterable(IInventory inv, ForgeDirection side) {
+        if (inv instanceof ISidedInventory) {
+            return new InventoryIteratorSided((ISidedInventory) inv, side);
+        }
 
-		return new InventoryIteratorSimple(inv);
-	}
+        return new InventoryIteratorSimple(inv);
+    }
 
-	public interface IInvSlot {
+    public interface IInvSlot {
 
-		/**
-		 * Returns the slot number of the underlying Inventory.
-		 * 
-		 * @return the slot number
-		 */
-		int getIndex();
+        /**
+         * Returns the slot number of the underlying Inventory.
+         *
+         * @return the slot number
+         */
+        int getIndex();
 
-		boolean canPutStackInSlot(ItemStack stack);
+        boolean canPutStackInSlot(ItemStack stack);
 
-		boolean canTakeStackFromSlot(ItemStack stack);
+        boolean canTakeStackFromSlot(ItemStack stack);
 
-		ItemStack decreaseStackInSlot();
+        ItemStack decreaseStackInSlot();
 
-		ItemStack getStackInSlot();
+        ItemStack getStackInSlot();
 
-		void setStackInSlot(ItemStack stack);
-	}
+        void setStackInSlot(ItemStack stack);
+    }
 }

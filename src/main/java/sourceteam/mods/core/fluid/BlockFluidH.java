@@ -8,7 +8,6 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class BlockFluidH extends BlockFluidClassic {
 
 
-
     public static IIcon StillIcon;
 
     public BlockFluidH(String fluidName) {

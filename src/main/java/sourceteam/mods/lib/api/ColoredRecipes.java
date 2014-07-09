@@ -10,20 +10,15 @@ import net.minecraft.item.ItemStack;
  * * @author tattyseal
  * *
  */
-public class ColoredRecipes
-{
-    public static void addZaetRecipe(Item item, ItemStack vanilla)
-    {
-        for(int i = 0; i < 16; i++)
-        {
+public class ColoredRecipes {
+    public static void addZaetRecipe(Item item, ItemStack vanilla) {
+        for (int i = 0; i < 16; i++) {
             GameRegistry.addShapedRecipe(new ItemStack(item, 8, i), "XXX", "XIX", "XXX", 'X', new ItemStack(vanilla.getItem(), 1, vanilla.getItemDamage()), 'I', new ItemStack(Items.dye, 1, i));
         }
     }
 
-    public static void addMetadataRecipe(Item item, Item meta, Item metadata)
-    {
-        for(int i = 0; i < 16; i++)
-        {
+    public static void addMetadataRecipe(Item item, Item meta, Item metadata) {
+        for (int i = 0; i < 16; i++) {
             GameRegistry.addShapedRecipe(new ItemStack(item, 8, i), "XXX", "XIX", "XXX", 'X', new ItemStack(meta, 1, i), 'I', new ItemStack(metadata, 1, i));
         }
     }

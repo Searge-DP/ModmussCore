@@ -9,46 +9,39 @@ public class SourceLogger {
 
     public String modName;
 
-    public String prefix = "[" + getTime() +  "] [" + getSide() +  "] [" + getModName() + "] ";
+    public String prefix = "[" + getTime() + "] [" + getSide() + "] [" + getModName() + "] ";
 
 
     public SourceLogger(String modName) {
         this.modName = modName;
     }
 
-    public void log(String message)
-    {
+    public void log(String message) {
         System.out.println(prefix + message);
     }
 
-    public static SourceLogger getLogger(String modName)
-    {
-      return new SourceLogger(modName);
+    public static SourceLogger getLogger(String modName) {
+        return new SourceLogger(modName);
     }
 
-    public String getSide()
-    {
-        if(FMLCommonHandler.instance().getSide().isClient())
-        {
+    public String getSide() {
+        if (FMLCommonHandler.instance().getSide().isClient()) {
             return "Client";
         }
 
-        if(FMLCommonHandler.instance().getSide().isServer())
-        {
+        if (FMLCommonHandler.instance().getSide().isServer()) {
             return "Server";
         }
 
         return "ERROR";
     }
 
-    public String getTime()
-    {
+    public String getTime() {
         return new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
     }
 
 
-    public String getModName()
-    {
+    public String getModName() {
         return modName;
     }
 

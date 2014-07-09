@@ -1,3 +1,4 @@
 package sourceteam.mods.lib;
 
-public class ISpecialInventory {}
+public class ISpecialInventory {
+}

@@ -10,8 +10,7 @@ import net.minecraft.world.IBlockAccess;
  * * This code was made by tattyseal on the 02/07/14 for Zaet
  * *
  */
-public class ColoredSidedBlock extends ColoredBlock
-{
+public class ColoredSidedBlock extends ColoredBlock {
     public String[] lowTextures;
     public String[] highTextures;
 
@@ -20,8 +19,7 @@ public class ColoredSidedBlock extends ColoredBlock
     public IIcon[] lowIcons;
     public IIcon[] highIcons;
 
-    public ColoredSidedBlock(String name, Material material, String[] highString, String[] lowString, boolean source)
-    {
+    public ColoredSidedBlock(String name, Material material, String[] highString, String[] lowString, boolean source) {
         super(name, material, "", "", source);
         lowTextures = lowString;
         highTextures = highString;
@@ -34,26 +32,21 @@ public class ColoredSidedBlock extends ColoredBlock
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
+    public void registerBlockIcons(IIconRegister iconRegister) {
         super.registerBlockIcons(iconRegister);
 
-        for(int i = 0; i < 6; i++)
-        {
+        for (int i = 0; i < 6; i++) {
             lowIcons[i] = iconRegister.registerIcon(lowTextures[i]);
         }
 
-        for(int i = 0; i < 6; i++)
-        {
+        for (int i = 0; i < 6; i++) {
             highIcons[i] = iconRegister.registerIcon(highTextures[i]);
         }
     }
 
     @Override
-    public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side)
-    {
-        if(isHD())
-        {
+    public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side) {
+        if (isHD()) {
             return highIcons[side];
         }
 
@@ -61,10 +54,8 @@ public class ColoredSidedBlock extends ColoredBlock
     }
 
     @Override
-    public IIcon getIcon(int side, int meta)
-    {
-        if(isHD())
-        {
+    public IIcon getIcon(int side, int meta) {
+        if (isHD()) {
             return highIcons[side];
         }
 
