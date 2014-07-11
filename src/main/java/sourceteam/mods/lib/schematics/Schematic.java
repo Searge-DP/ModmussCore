@@ -41,40 +41,67 @@ public class Schematic {
     }
 
 
-    public static boolean placeSchematic(World world, int x, int y, int z, Schematic schematic) {
-        int id = 0;
+    public boolean placeSchematic(World world, int x, int y, int z) {
+        new SchematicThread(world, x, y, z, this).run();
+        return true;
+    }
 
-        x = x - (schematic.width - schematic.length / 2);
-        z = z - (schematic.length - schematic.length / 2);
+    class SchematicThread extends Thread
+    {
+        public int x;
+        public int z;
+        public int y;
 
-        for (int sy = 0; sy < schematic.height; sy++) {
-            for (int sz = 0; sz < schematic.length; sz++) {
-                for (int sx = 0; sx < schematic.width; sx++) {
-                    Block block = Block.getBlockById(schematic.blocks[id]);
+        public World world;
+        public Schematic schematic;
 
-                    world.setBlockToAir(x + sx, y + sy, z + sz);
-                    world.setBlock(x + sx, y + sy, z + sz, block, schematic.data[id], 2);
+        public SchematicThread(World world, int x, int y, int z, Schematic schematic)
+        {
+            super("Schematic Placer");
 
-                    if (schematic.tileentities != null) {
-                        for (int il = 0; il < schematic.tileentities.tagCount(); ++il) {
-                            NBTTagCompound tag = schematic.tileentities.getCompoundTagAt(il);
+            this.world = world;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.schematic = schematic;
+        }
 
-                            TileEntity tileEntity = TileEntity.createAndLoadEntity(tag);
+        @Override
+        public void run()
+        {
+            int id = 0;
 
-                            if (tileEntity != null) {
-                                tileEntity.xCoord = x + sx;
-                                tileEntity.yCoord = y + sy;
-                                tileEntity.zCoord = z + sz;
-                                world.setTileEntity(x + sx, y + sy, z + sz, tileEntity);
+            x = x - (schematic.width - schematic.length / 2);
+            z = z - (schematic.length - schematic.length / 2);
+
+            for (int sy = 0; sy < schematic.height; sy++) {
+                for (int sz = 0; sz < schematic.length; sz++) {
+                    for (int sx = 0; sx < schematic.width; sx++) {
+                        Block block = Block.getBlockById(schematic.blocks[id]);
+
+                        world.setBlockToAir(x + sx, y + sy, z + sz);
+                        world.setBlock(x + sx, y + sy, z + sz, block, schematic.data[id], 2);
+
+                        if (schematic.tileentities != null) {
+                            for (int il = 0; il < schematic.tileentities.tagCount(); ++il) {
+                                NBTTagCompound tag = schematic.tileentities.getCompoundTagAt(il);
+
+                                TileEntity tileEntity = TileEntity.createAndLoadEntity(tag);
+
+                                if (tileEntity != null) {
+                                    tileEntity.xCoord = x + sx;
+                                    tileEntity.yCoord = y + sy;
+                                    tileEntity.zCoord = z + sz;
+                                    world.setTileEntity(x + sx, y + sy, z + sz, tileEntity);
+                                }
                             }
+                            id = id + 1;
                         }
-                        id = id + 1;
                     }
                 }
             }
 
-        }
-
-        return true;
+            this.stop();
+         }
     }
 }
