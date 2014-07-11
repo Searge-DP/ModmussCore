@@ -45,11 +45,17 @@ task sourceJar(type: Jar) {
     appendix = 'src'
 }
 
-
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
+}
 
+artifacts {
+    archives sourceJar
+    archives deobfJar
+}
+
+task makeVersion{
     int TIMEI = Calendar.getInstance().get(Calendar.AM_PM);
 
     String TIME = "";
@@ -68,9 +74,4 @@ task deobfJar(type: Jar) {
             "version: " + version + ",\n" +
             "date: " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" + Calendar.getInstance().get(Calendar.MONTH + 1) + "/" + Calendar.getInstance().get(Calendar.YEAR) + " " + Calendar.getInstance().get(Calendar.HOUR) + ":" + Calendar.getInstance().get(Calendar.MINUTE) + TIME + ",\n" +
             "build: ${System.getenv().BUILD_NUMBER}\n");
-}
-
-artifacts {
-    archives sourceJar
-    archives deobfJar
 }
