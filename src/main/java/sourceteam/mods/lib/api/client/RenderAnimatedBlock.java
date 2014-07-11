@@ -29,7 +29,7 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler {
 
         IIcon fluid;
 
-        if (!zb.isHD()) {
+        if (zb.isHD()) {
             fluid = zb.liquid;
         } else {
             fluid = zb.liquid_low;
@@ -51,7 +51,7 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler {
 
         renderer.clearOverrideBlockTexture();
 
-        IIcon blockIcon = (zb.isHD() ? zb.icons[1] : zb.icons[0]);
+        IIcon blockIcon = (!zb.isHD() ? zb.icons[1] : zb.icons[0]);
 
         if (zb instanceof ColoredSidedBlock)
             blockIcon = !zb.isHD() ? ((ColoredSidedBlock) zb).lowIcons[0] : ((ColoredSidedBlock) zb).highIcons[0];
@@ -74,7 +74,7 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler {
 
         IIcon fluid;
 
-        if (!zb.isHD()) {
+        if (zb.isHD()) {
             fluid = zb.liquid;
         } else {
             fluid = zb.liquid_low;
@@ -125,7 +125,7 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler {
             if (zb instanceof ColoredNetworkBlock) {
                 renderer.setOverrideBlockTexture(zb.isHD() ? zb.icons[0] : zb.icons[0]);
             } else {
-                renderer.setOverrideBlockTexture(zb.isHD() ? zb.icons[1] : zb.icons[0]);
+                renderer.setOverrideBlockTexture(!zb.isHD() ? zb.icons[1] : zb.icons[0]);
             }
 
             renderer.renderStandardBlockWithColorMultiplier(Blocks.stone, x, y, z, color[0] - 0.5f, color[1] - 0.5f, color[2] - 0.5f);
@@ -156,7 +156,8 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler {
     /**
      * Is called to render the image of a block on an inventory, as a held item, or as a an item on the ground
      */
-    public void renderBlockAsItem(Block p_147800_1_, int p_147800_2_, float p_147800_3_, IIcon icon0, IIcon icon1, IIcon icon2, IIcon icon3, IIcon icon4, IIcon icon5, boolean white) {
+    public void renderBlockAsItem(Block p_147800_1_, int p_147800_2_, float p_147800_3_, IIcon icon0,
+                                  IIcon icon1, IIcon icon2, IIcon icon3, IIcon icon4, IIcon icon5, boolean white) {
         Tessellator tessellator = Tessellator.instance;
         boolean flag = p_147800_1_ == Blocks.grass;
 

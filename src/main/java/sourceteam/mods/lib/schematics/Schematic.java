@@ -44,13 +44,16 @@ public class Schematic {
     public static boolean placeSchematic(World world, int x, int y, int z, Schematic schematic) {
         int id = 0;
 
+        x = x - (schematic.width - schematic.length / 2);
+        z = z - (schematic.length - schematic.length / 2);
+
         for (int sy = 0; sy < schematic.height; sy++) {
             for (int sz = 0; sz < schematic.length; sz++) {
                 for (int sx = 0; sx < schematic.width; sx++) {
                     Block block = Block.getBlockById(schematic.blocks[id]);
 
                     world.setBlockToAir(x + sx, y + sy, z + sz);
-                    world.setBlock(x + sx, y + sy, z + sz, block, 0, 2);
+                    world.setBlock(x + sx, y + sy, z + sz, block, schematic.data[id], 2);
 
                     if (schematic.tileentities != null) {
                         for (int il = 0; il < schematic.tileentities.tagCount(); ++il) {

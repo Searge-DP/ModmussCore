@@ -61,4 +61,10 @@ public class ColoredSidedBlock extends ColoredBlock {
 
         return lowIcons[side];
     }
+
+    @Override
+    public boolean isHD()
+    {
+        return super.isHD();
+    }
 }
