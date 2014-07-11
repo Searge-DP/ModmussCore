@@ -1,6 +1,7 @@
 package sourceteam.mods.lib.schematics;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -41,10 +42,12 @@ public class Schematic {
     }
 
 
-    public boolean placeSchematic(World world, int x, int y, int z) {
-        new SchematicThread(world, x, y, z, this).run();
+    public boolean placeSchematic(World world, int x, int y, int z, boolean placeair) {
+        new SchematicThread(world, x, y, z, this, placeair).run();
         return true;
     }
+
+
 
     class SchematicThread extends Thread
     {
@@ -55,7 +58,9 @@ public class Schematic {
         public World world;
         public Schematic schematic;
 
-        public SchematicThread(World world, int x, int y, int z, Schematic schematic)
+        public boolean placeair;
+
+        public SchematicThread(World world, int x, int y, int z, Schematic schematic, boolean placeair)
         {
             super("Schematic Placer");
 
@@ -64,6 +69,7 @@ public class Schematic {
             this.y = y;
             this.z = z;
             this.schematic = schematic;
+            this.placeair = placeair;
         }
 
         @Override
@@ -78,9 +84,14 @@ public class Schematic {
                 for (int sz = 0; sz < schematic.length; sz++) {
                     for (int sx = 0; sx < schematic.width; sx++) {
                         Block block = Block.getBlockById(schematic.blocks[id]);
+                        System.out.println(block.getLocalizedName());
+                            if(block == Blocks.air && !placeair){
+                                return;
+                            }
 
-                        world.setBlockToAir(x + sx, y + sy, z + sz);
                         world.setBlock(x + sx, y + sy, z + sz, block, schematic.data[id], 2);
+
+
 
                         if (schematic.tileentities != null) {
                             for (int il = 0; il < schematic.tileentities.tagCount(); ++il) {
