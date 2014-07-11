@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import javax.management.remote.rmi._RMIConnection_Stub;
 import java.io.InputStream;
 
 /**
@@ -72,6 +73,7 @@ public class Schematic {
         @Override
         public void run() {
             int id = 0;
+            int placedBlocks = 0;
 
             x = x - (schematic.width - schematic.length / 2);
             z = z - (schematic.length - schematic.length / 2);
@@ -80,27 +82,42 @@ public class Schematic {
                 for (int sz = 0; sz < schematic.length; sz++) {
                     for (int sx = 0; sx < schematic.width; sx++) {
                         Block block = Block.getBlockById(schematic.blocks[id]);
-                        if (block == Blocks.air && !placeair) {
+                        if (canplaceBlock(placeair, block)) {
                             world.setBlock(x + sx, y + sy, z + sz, block, schematic.data[id], 2);
-                            if (schematic.tileentities != null) {
-                                for (int il = 0; il < schematic.tileentities.tagCount(); ++il) {
-                                    NBTTagCompound tag = schematic.tileentities.getCompoundTagAt(il);
-                                    TileEntity tileEntity = TileEntity.createAndLoadEntity(tag);
-                                    if (tileEntity != null) {
-                                        tileEntity.xCoord = x + sx;
-                                        tileEntity.yCoord = y + sy;
-                                        tileEntity.zCoord = z + sz;
-                                        world.setTileEntity(x + sx, y + sy, z + sz, tileEntity);
-                                    }
+                            placedBlocks += 1;
+                        }
+                        if (schematic.tileentities != null) {
+                            for (int il = 0; il < schematic.tileentities.tagCount(); ++il) {
+                                NBTTagCompound tag = schematic.tileentities.getCompoundTagAt(il);
+                                TileEntity tileEntity = TileEntity.createAndLoadEntity(tag);
+                                if (tileEntity != null) {
+                                    tileEntity.xCoord = x + sx;
+                                    tileEntity.yCoord = y + sy;
+                                    tileEntity.zCoord = z + sz;
+                                    world.setTileEntity(x + sx, y + sy, z + sz, tileEntity);
                                 }
-                                id = id + 1;
                             }
                         }
+                        id = id + 1;
                     }
                 }
             }
-
+            System.out.println("Placed " + placedBlocks + " blocks");
             this.stop();
         }
     }
+
+
+    public boolean canplaceBlock(boolean air, Block block)
+    {
+        if(block.getUnlocalizedName().contains("air")){
+            return air;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
 }
