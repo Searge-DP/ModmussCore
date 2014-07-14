@@ -44,11 +44,11 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         }
 
         if (tileentity instanceof IRGBColour) {
-            GL11.glColor3f(((IRGBColour) tileentity).Cred(), ((IRGBColour) tileentity).Cgreen(), ((IRGBColour) tileentity).Cblue());
+            GL11.glColor4f((float)((IRGBColour) tileentity).Cred() / 255, (float)((IRGBColour) tileentity).Cgreen() / 255, (float)((IRGBColour) tileentity).Cblue()/ 255, 1.0F);
         }
 
-        GL11.glTranslatef((float) x, (float) y + 0.51F, (float) z);
-        GL11.glScalef(1.001F, 0.9999F, 1.001F);
+        GL11.glTranslatef((float) x + 0.000001F, (float) y + 0.51F, (float) z + 0.000001F);
+        GL11.glScalef(0.999999F, 0.9F, 0.999999F);
         GL11.glTranslatef(0, -0.5F, 0);
 
         GL11.glCallList(displayList[(int) ((float) 100 / (float) (100) * (FluidRenderer.DISPLAY_STAGES - 1))]);
