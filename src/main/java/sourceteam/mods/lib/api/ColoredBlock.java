@@ -113,7 +113,7 @@ public class ColoredBlock extends Block {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float j, float k, float l) {
         ItemStack item = player.getHeldItem();
 
-        if (item.getItem() == Items.dye) {
+        if (item != null && item.getItem() != null && item.getItem() == Items.dye) {
             world.setBlockMetadataWithNotify(x, y, z, item.getItemDamage(), 2);
         }
 
