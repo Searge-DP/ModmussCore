@@ -30,7 +30,7 @@ public class MainMenuRenderer {
                     return;
                 }
             }
-            GuiButton button = new GuiButton(BUTTON_ID, 1, 1, 75, 20, "Source Mods");
+            GuiButton button = new GuiButton(BUTTON_ID, 1, 1, 45, 20, "S Mods");
             buttonList.add(button);
         }
     }
@@ -57,6 +57,8 @@ public class MainMenuRenderer {
                 event.gui.drawString(Minecraft.getMinecraft().fontRenderer, ModRegistry.mods.get(i).modName(), 11, 35 + (i * 10), 16777215);
             }
 
+            if(Minecraft.getMinecraft().getSession().getUsername().equals("mark123mark") || Minecraft.getMinecraft().getSession().getUsername().equals("tattyseal"))
+            event.gui.drawString(Minecraft.getMinecraft().fontRenderer, "Hello " + Minecraft.getMinecraft().getSession().getUsername() ,event.mouseX, event.mouseY - 7, 16777215);
         }
     }
 
