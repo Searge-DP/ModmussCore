@@ -46,6 +46,30 @@ public class invUtil {
 
     }
 
+
+    /**
+     * Tries to add the passed stack to a valid inventorie at the given
+     * coordinates.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @param stack
+     * @return amount used
+     */
+    public static int addToInventory(World world, int x, int y, int z, ItemStack stack) {
+            Position pos = new Position(x, y, z, ForgeDirection.DOWN);
+
+            TileEntity tileInventory = world.getTileEntity((int) pos.x, (int) pos.y, (int) pos.z);
+            ITransactor transactor = Transactor.getTransactorFor(tileInventory);
+            if (transactor != null && transactor.add(stack, ForgeDirection.DOWN, false).stackSize > 0) {
+                return transactor.add(stack, ForgeDirection.DOWN, true).stackSize;
+            }
+        return 0;
+
+    }
+
     /**
      * Ensures that the given inventory is the full inventory, i.e. takes double
      * chests into account.
