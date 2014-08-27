@@ -1,0 +1,51 @@
+****************************
+ Powered By MCP:            
+ http://mcp.ocean-labs.de/  
+ Searge, ProfMobius, Fesh0r,
+ R4wk, ZeuX, IngisKahn      
+ MCP Data version : unknown
+****************************
+:downloadClient SKIPPED
+:downloadServer SKIPPED
+:extractUserDev UP-TO-DATE
+:mergeJars SKIPPED
+:applyBinPatches SKIPPED
+:downloadMcpTools UP-TO-DATE
+:genSrgs SKIPPED
+:deobfBinJar SKIPPED
+:compileApiJava UP-TO-DATE
+:processApiResources UP-TO-DATE
+:apiClasses UP-TO-DATE
+:sourceMainJava
+:compileJavawarning: [options] bootstrap class path not set in conjunction with -source 1.6
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+1 warning
+
+:deleteOldArtifacts
+:processResources UP-TO-DATE
+:classes
+:deobfJar
+:jar
+:extractNatives
+:getAssetsIndex
+:getAssets
+Current status: 0/105   0%
+:makeStartwarning: [options] bootstrap class path not set in conjunction with -source 1.6
+1 warning
+
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test
+:reobf
+:sourceJar
+:assemble
+:check
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 43.013 secs
