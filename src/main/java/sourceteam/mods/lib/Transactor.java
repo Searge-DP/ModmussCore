@@ -3,7 +3,9 @@ package sourceteam.mods.lib;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import sourceteam.mods.lib.api.IinvUpgrade;
 
 public abstract class Transactor implements ITransactor {
 
@@ -16,13 +18,14 @@ public abstract class Transactor implements ITransactor {
 
     public abstract int inject(ItemStack stack, ForgeDirection orientation, boolean doAdd);
 
-    public static ITransactor getTransactorFor(Object object) {
+    public static ITransactor getTransactorFor(TileEntity object) {
 
         if (object instanceof ISidedInventory)
             return new TransactorSimple((ISidedInventory) object);
+        else if (object instanceof IInventory && object instanceof IinvUpgrade)
+            return new TransactorAdvanced(invUtil.getInventory((IInventory) object), (IinvUpgrade) object);
         else if (object instanceof IInventory)
             return new TransactorSimple(invUtil.getInventory((IInventory) object));
-
         return null;
     }
 }
