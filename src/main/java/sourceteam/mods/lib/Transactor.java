@@ -21,9 +21,6 @@ public abstract class Transactor implements ITransactor {
 
         if (object instanceof ISidedInventory)
             return new TransactorSimple((ISidedInventory) object);
-                //TODO fix this, i may code this in network not here
-//        else if (object instanceof IInventory && object instanceof IinvUpgrade)
-//            return new TransactorAdvanced(invUtil.getInventory((IInventory) object), (IinvUpgrade) object);
         else if (object instanceof IInventory)
             return new TransactorSimple(invUtil.getInventory((IInventory) object));
         return null;
