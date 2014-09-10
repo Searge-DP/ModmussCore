@@ -32,9 +32,6 @@ minecraft {
 
 group = 'ModmussCore'
 
-jar {
-    appendix = 'mod'
-}
 
 task deleteOldArtifacts(type: Delete) {
     delete 'build/libs'
@@ -63,10 +60,6 @@ processResources
             }
         }
 
-jar {
-    exclude "**/*.psd"
-}
-
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     appendix = 'src'
@@ -82,6 +75,8 @@ jar {
     manifest {
         attributes (['FMLCorePlugin': 'sourceteam.mods.core.FmlLoadingCore', 'FMLCorePluginContainsFMLMod': 'true'])
     }
+    exclude "**/*.psd"
+    appendix = 'mod'
 }
 
 artifacts {
