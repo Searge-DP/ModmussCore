@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.Objects;
+
 public abstract class Transactor implements ITransactor {
 
     @Override
@@ -17,7 +19,7 @@ public abstract class Transactor implements ITransactor {
 
     public abstract int inject(ItemStack stack, ForgeDirection orientation, boolean doAdd);
 
-    public static ITransactor getTransactorFor(TileEntity object) {
+    public static ITransactor getTransactorFor(Object object) {
 
         if (object instanceof ISidedInventory)
             return new TransactorSimple((ISidedInventory) object);

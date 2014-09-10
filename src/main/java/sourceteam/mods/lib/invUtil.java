@@ -63,7 +63,9 @@ public class invUtil {
 
             TileEntity tileInventory = world.getTileEntity((int) pos.x, (int) pos.y, (int) pos.z);
             ITransactor transactor = Transactor.getTransactorFor(tileInventory);
+        System.out.println("tarnsactor");
             if (transactor != null && transactor.add(stack, ForgeDirection.DOWN, false).stackSize > 0) {
+
                 return transactor.add(stack, ForgeDirection.DOWN, true).stackSize;
             }
         return 0;

@@ -20,7 +20,7 @@ public class ConfigurationHandler {
     }
 
     private static void loadConfiguration() {
-        mainMenuOvelay = configuration.getBoolean("Main Menu Overlay", Configuration.CATEGORY_GENERAL, true, "Should source core show the main menu overlay?");
+        mainMenuOvelay = configuration.getBoolean("Main Menu Overlay", Configuration.CATEGORY_GENERAL, false, "Should source core show the main menu overlay?");
 
         if (configuration.hasChanged()) {
             configuration.save();
