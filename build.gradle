@@ -17,17 +17,20 @@ buildscript {
 
 apply plugin: 'forge'
 
+def ENV = System.getenv()
+if (ENV.BUILD_NUMBER) {
+    version = "1.1." + "${System.getenv().BUILD_NUMBER}"
+} else {
+    version = "1.1.BUILD"
+}
+
 minecraft {
     version = "1.7.10-10.13.0.1208"
+    replace "@MODVERSION@", project.version
+    replaceIn "Core.java"
 }
 
 group = 'ModmussCore'
-def ENV = System.getenv()
-if (ENV.BUILD_NUMBER) {
-    version = "0.0." + "${System.getenv().BUILD_NUMBER}"
-} else {
-    version = "0.0.BUILD"
-}
 
 jar {
     appendix = 'mod'
@@ -40,6 +43,30 @@ task deleteOldArtifacts(type: Delete) {
 classes.dependsOn deleteOldArtifacts
 
 
+processResources
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
+
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include '*.info'
+
+                // replace version and mcversion
+                expand 'version':project.version, 'mcversion':project.minecraft.version
+            }
+
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude '**/*.info'
+            }
+        }
+
+jar {
+    exclude "**/*.psd"
+}
+
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     appendix = 'src'
@@ -48,6 +75,13 @@ task sourceJar(type: Jar) {
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
+    exclude "**/*.psd"
+}
+
+jar {
+    manifest {
+        attributes (['FMLCorePlugin': 'sourceteam.mods.core.FmlLoadingCore', 'FMLCorePluginContainsFMLMod': 'true'])
+    }
 }
 
 artifacts {
