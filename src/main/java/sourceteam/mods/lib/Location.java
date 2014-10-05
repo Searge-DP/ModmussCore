@@ -58,30 +58,24 @@ public class Location {
         this.z = z;
     }
 
-    public void setLocation(int[] coords) {
-        this.x = coords[0];
-        this.y = coords[1];
-        this.z = coords[2];
-    }
-
     public int getX() {
         return this.x;
-    }
-
-    public int getY() {
-        return this.y;
-    }
-
-    public int getZ() {
-        return this.z;
     }
 
     public void setX(int newX) {
         this.x = newX;
     }
 
+    public int getY() {
+        return this.y;
+    }
+
     public void setY(int newY) {
         this.y = newY;
+    }
+
+    public int getZ() {
+        return this.z;
     }
 
     public void setZ(int newZ) {
@@ -94,6 +88,12 @@ public class Location {
         ret[1] = this.y;
         ret[2] = this.z;
         return ret;
+    }
+
+    public void setLocation(int[] coords) {
+        this.x = coords[0];
+        this.y = coords[1];
+        this.z = coords[2];
     }
 
     public int getDifference(Location otherLoc) {

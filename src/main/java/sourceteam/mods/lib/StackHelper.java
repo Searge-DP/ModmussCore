@@ -7,6 +7,9 @@ public class StackHelper {
 
     private static StackHelper instance;
 
+    protected StackHelper() {
+    }
+
     public static StackHelper instance() {
         if (instance == null) {
             instance = new StackHelper();
@@ -16,9 +19,6 @@ public class StackHelper {
 
     public static void setInstance(StackHelper inst) {
         instance = inst;
-    }
-
-    protected StackHelper() {
     }
 
 	/* STACK MERGING */

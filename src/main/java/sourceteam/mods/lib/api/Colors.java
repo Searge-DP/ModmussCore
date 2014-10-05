@@ -6,9 +6,9 @@ package sourceteam.mods.lib.api;
  * *
  */
 public class Colors {
+    //                                          0           1       2           3           4       5       6           7       8           9       10          11          12          13      14          15
     public static int[] itemColors = new int[]{0x303030, 0xCC0000, 0x33CC00, 0x663300, 0x000066, 0x663399, 0x00FF66, 0x989898, 0x787878, 0x993366, 0x99FF00, 0xFFEA00, 0x66FF99, 0xCC0033, 0xCC6600, 0xFFFFFF};
-    public static String[] nameColors = new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light Grey", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White"};
-
+    //TODO check light blue
     public static int Black = itemColors[0];
     public static int Red = itemColors[1];
     public static int Green = itemColors[2];
@@ -25,5 +25,6 @@ public class Colors {
     public static int Magenta = itemColors[13];
     public static int Orange = itemColors[14];
     public static int White = itemColors[15];
+    public static String[] nameColors = new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light Grey", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White"};
 
 }

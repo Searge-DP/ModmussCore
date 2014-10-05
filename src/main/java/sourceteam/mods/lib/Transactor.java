@@ -3,21 +3,9 @@ package sourceteam.mods.lib;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Objects;
-
 public abstract class Transactor implements ITransactor {
-
-    @Override
-    public ItemStack add(ItemStack stack, ForgeDirection orientation, boolean doAdd) {
-        ItemStack added = stack.copy();
-        added.stackSize = inject(stack, orientation, doAdd);
-        return added;
-    }
-
-    public abstract int inject(ItemStack stack, ForgeDirection orientation, boolean doAdd);
 
     public static ITransactor getTransactorFor(Object object) {
 
@@ -27,4 +15,13 @@ public abstract class Transactor implements ITransactor {
             return new TransactorSimple(invUtil.getInventory((IInventory) object));
         return null;
     }
+
+    @Override
+    public ItemStack add(ItemStack stack, ForgeDirection orientation, boolean doAdd) {
+        ItemStack added = stack.copy();
+        added.stackSize = inject(stack, orientation, doAdd);
+        return added;
+    }
+
+    public abstract int inject(ItemStack stack, ForgeDirection orientation, boolean doAdd);
 }

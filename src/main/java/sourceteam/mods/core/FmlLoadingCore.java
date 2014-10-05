@@ -1,9 +1,7 @@
 package sourceteam.mods.core;
 
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.FMLInjectionData;
-import cpw.mods.fml.relauncher.IFMLCallHook;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 
@@ -12,10 +10,12 @@ import java.net.MalformedURLException;
 import java.util.Map;
 
 @IFMLLoadingPlugin.MCVersion("1.7.10")
-public class FmlLoadingCore implements IFMLLoadingPlugin{
+public class FmlLoadingCore implements IFMLLoadingPlugin {
+
+    private File patchesDir;
 
     public FmlLoadingCore() {
-       // loadPaches();
+        // loadPaches();
     }
 
     @Override
@@ -43,8 +43,6 @@ public class FmlLoadingCore implements IFMLLoadingPlugin{
         return null;
     }
 
-    private File patchesDir;
-
     public void loadPaches() {
 
         File mcDir = (File) FMLInjectionData.data()[6];
@@ -59,7 +57,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin{
 
             System.out.println(patchesDir.listFiles()[i].getName());
 
-            if(patchesDir.listFiles()[i].getName().endsWith(".jar")){
+            if (patchesDir.listFiles()[i].getName().endsWith(".jar")) {
                 try {
                     ((LaunchClassLoader) FmlLoadingCore.class.getClassLoader()).addURL(new File(patchesDir, patchesDir.listFiles()[i].getName()).toURI().toURL());
                     System.out.println("added" + patchesDir.listFiles()[i].getName() + " to class path");

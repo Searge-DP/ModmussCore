@@ -41,6 +41,13 @@ public class Schematic {
         return true;
     }
 
+    public boolean canplaceBlock(boolean air, Block block) {
+        if (block.getUnlocalizedName().contains("air")) {
+            return air;
+        } else {
+            return true;
+        }
+    }
 
     class SchematicThread extends Thread {
         public int x;
@@ -97,18 +104,6 @@ public class Schematic {
             }
             System.out.println("Placed " + placedBlocks + " blocks");
             this.stop();
-        }
-    }
-
-
-    public boolean canplaceBlock(boolean air, Block block)
-    {
-        if(block.getUnlocalizedName().contains("air")){
-            return air;
-        }
-        else
-        {
-            return true;
         }
     }
 

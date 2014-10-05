@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
 public class WorldRenderHelper {
 
 
-
     public static void renderStringInWorld(String string, int x, int y, int z, Float scale) {
 
         float f = 1.6F;

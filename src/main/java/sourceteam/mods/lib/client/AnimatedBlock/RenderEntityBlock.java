@@ -20,101 +20,13 @@ public class RenderEntityBlock extends Render {
     public static RenderEntityBlock INSTANCE = new RenderEntityBlock();
     protected RenderBlocks renderBlocks;
 
+    private RenderEntityBlock() {
+        renderBlocks = field_147909_c;
+    }
+
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public static class RenderInfo {
-
-        public double minX;
-        public double minY;
-        public double minZ;
-        public double maxX;
-        public double maxY;
-        public double maxZ;
-        public Block baseBlock = Blocks.sand;
-        public IIcon texture = null;
-        public IIcon[] textureArray = null;
-        public boolean[] renderSide = new boolean[6];
-        public float light = -1f;
-        public int brightness = -1;
-
-        public RenderInfo() {
-            setRenderAllSides();
-        }
-
-        public RenderInfo(Block template, IIcon[] texture) {
-            this();
-            this.baseBlock = template;
-            this.textureArray = texture;
-        }
-
-        public RenderInfo(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
-            this();
-            setBounds(minX, minY, minZ, maxX, maxY, maxZ);
-        }
-
-        public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j, int k) {
-            return baseBlock.getMixedBrightnessForBlock(iblockaccess, i, j, k);
-        }
-
-        public final void setBounds(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
-            this.minX = minX;
-            this.minY = minY;
-            this.minZ = minZ;
-            this.maxX = maxX;
-            this.maxY = maxY;
-            this.maxZ = maxZ;
-        }
-
-        public final void setRenderSingleSide(int side) {
-
-            Arrays.fill(renderSide, false);
-            renderSide[side] = true;
-        }
-
-        public final void setRenderAllSides() {
-            Arrays.fill(renderSide, true);
-        }
-
-        public void rotate() {
-            double temp = minX;
-            minX = minZ;
-            minZ = temp;
-
-            temp = maxX;
-            maxX = maxZ;
-            maxZ = temp;
-        }
-
-        public void reverseX() {
-            double temp = minX;
-            minX = 1 - maxX;
-            maxX = 1 - temp;
-        }
-
-        public void reverseZ() {
-            double temp = minZ;
-            minZ = 1 - maxZ;
-            maxZ = 1 - temp;
-        }
-
-        public IIcon getBlockTextureFromSide(int i) {
-            if (texture != null)
-                return texture;
-            if (textureArray == null || textureArray.length == 0)
-                return baseBlock.getBlockTextureFromSide(i);
-            else {
-                if (i >= textureArray.length)
-                    i = 0;
-                return textureArray[i];
-            }
-        }
-    }
-
-    private RenderEntityBlock() {
-        renderBlocks = field_147909_c;
     }
 
     @Override
@@ -252,5 +164,93 @@ public class RenderEntityBlock extends Render {
         // duplicate the tessellator code.
         // if (doTessellating && tessellator.isDrawing)
         tessellator.draw();
+    }
+
+    public static class RenderInfo {
+
+        public double minX;
+        public double minY;
+        public double minZ;
+        public double maxX;
+        public double maxY;
+        public double maxZ;
+        public Block baseBlock = Blocks.sand;
+        public IIcon texture = null;
+        public IIcon[] textureArray = null;
+        public boolean[] renderSide = new boolean[6];
+        public float light = -1f;
+        public int brightness = -1;
+
+        public RenderInfo() {
+            setRenderAllSides();
+        }
+
+        public RenderInfo(Block template, IIcon[] texture) {
+            this();
+            this.baseBlock = template;
+            this.textureArray = texture;
+        }
+
+        public RenderInfo(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+            this();
+            setBounds(minX, minY, minZ, maxX, maxY, maxZ);
+        }
+
+        public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j, int k) {
+            return baseBlock.getMixedBrightnessForBlock(iblockaccess, i, j, k);
+        }
+
+        public final void setBounds(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
+            this.minX = minX;
+            this.minY = minY;
+            this.minZ = minZ;
+            this.maxX = maxX;
+            this.maxY = maxY;
+            this.maxZ = maxZ;
+        }
+
+        public final void setRenderSingleSide(int side) {
+
+            Arrays.fill(renderSide, false);
+            renderSide[side] = true;
+        }
+
+        public final void setRenderAllSides() {
+            Arrays.fill(renderSide, true);
+        }
+
+        public void rotate() {
+            double temp = minX;
+            minX = minZ;
+            minZ = temp;
+
+            temp = maxX;
+            maxX = maxZ;
+            maxZ = temp;
+        }
+
+        public void reverseX() {
+            double temp = minX;
+            minX = 1 - maxX;
+            maxX = 1 - temp;
+        }
+
+        public void reverseZ() {
+            double temp = minZ;
+            minZ = 1 - maxZ;
+            maxZ = 1 - temp;
+        }
+
+        public IIcon getBlockTextureFromSide(int i) {
+            if (texture != null)
+                return texture;
+            if (textureArray == null || textureArray.length == 0)
+                return baseBlock.getBlockTextureFromSide(i);
+            else {
+                if (i >= textureArray.length)
+                    i = 0;
+                return textureArray[i];
+            }
+        }
     }
 }

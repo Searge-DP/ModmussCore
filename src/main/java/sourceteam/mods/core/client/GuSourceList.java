@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
@@ -32,6 +33,7 @@ public class GuSourceList extends GuiScreen {
     private GuiButton logModButton;
     private ArrayList<String> modToAdd;
     private boolean hasInted = false;
+    private GuiTextField textField;
 
     /**
      * @param mainMenu
@@ -84,6 +86,10 @@ public class GuSourceList extends GuiScreen {
         this.buttonList.add(configModButton);
         this.modList = new GuiSlotModListCore(this, mods, listWidth);
         this.modList.registerScrollButtons(this.buttonList, 7, 8);
+
+        textField = new GuiTextField(fontRendererObj, 10, 49, 38, 18);
+        textField.setFocused(false);
+        textField.setMaxStringLength(50);
     }
 
     public String getModCompiledVersion(String modid) {
@@ -163,7 +169,6 @@ public class GuSourceList extends GuiScreen {
             shifty = drawLine(String.format("Version: %s", selectedMod.getDisplayVersion(), selectedMod.getVersion()), offset, shifty);
             shifty = drawLine(String.format("Recomended Minecraft Version: %s", getModCompiledVersion(selectedMod.getModId()), selectedMod.getVersion()), offset, shifty, getModVersionColour(selectedMod.getModId()));
 
-            IModGuiFactory guiFactory = FMLClientHandler.instance().getGuiFactoryFor(selectedMod);
             configModButton.visible = false;
             for (int i = 0; i < ModRegistry.mods.size(); i++) {
                 if (ModRegistry.mods.get(i).modId().contains(selectedMod.getModId())) {

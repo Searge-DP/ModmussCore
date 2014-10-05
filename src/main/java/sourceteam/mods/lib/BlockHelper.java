@@ -20,36 +20,25 @@ import java.util.List;
 
 public class BlockHelper {
 
-    private BlockHelper() {
-
-    }
-
-    public static byte[] rotateType = new byte[4096];
     public static final int[][] SIDE_COORD_MOD = {{0, -1, 0}, {0, 1, 0}, {0, 0, -1}, {0, 0, 1}, {-1, 0, 0}, {1, 0, 0}};
-    public static float[][] SIDE_COORD_AABB = {{1, -2, 1}, {1, 2, 1}, {1, 1, 1}, {1, 1, 2}, {1, 1, 1}, {2, 1, 1}};
     public static final byte[] SIDE_LEFT = {4, 5, 5, 4, 2, 3};
     public static final byte[] SIDE_RIGHT = {5, 4, 4, 5, 3, 2};
     public static final byte[] SIDE_OPPOSITE = {1, 0, 3, 2, 5, 4};
     public static final byte[] SIDE_ABOVE = {3, 2, 1, 1, 1, 1};
     public static final byte[] SIDE_BELOW = {2, 3, 0, 0, 0, 0};
-
     // These assume facing is towards negative - looking AT side 1, 3, or 5.
     public static final byte[] ROTATE_CLOCK_Y = {0, 1, 4, 5, 3, 2};
     public static final byte[] ROTATE_CLOCK_Z = {5, 4, 2, 3, 0, 1};
     public static final byte[] ROTATE_CLOCK_X = {2, 3, 1, 0, 4, 5};
-
     public static final byte[] ROTATE_COUNTER_Y = {0, 1, 5, 4, 2, 3};
     public static final byte[] ROTATE_COUNTER_Z = {4, 5, 2, 3, 1, 0};
     public static final byte[] ROTATE_COUNTER_X = {3, 2, 0, 1, 4, 5};
-
     public static final byte[] INVERT_AROUND_Y = {0, 1, 3, 2, 5, 4};
     public static final byte[] INVERT_AROUND_Z = {1, 0, 2, 3, 5, 4};
     public static final byte[] INVERT_AROUND_X = {1, 0, 3, 2, 4, 5};
-
     // Map which gives relative Icon to use on a block which can be placed on
     // any side.
     public static final byte[][] ICON_ROTATION_MAP = new byte[6][];
-
     static {
         ICON_ROTATION_MAP[0] = new byte[]{0, 1, 2, 3, 4, 5};
         ICON_ROTATION_MAP[1] = new byte[]{1, 0, 2, 3, 4, 5};
@@ -58,70 +47,11 @@ public class BlockHelper {
         ICON_ROTATION_MAP[4] = new byte[]{3, 2, 5, 4, 0, 1};
         ICON_ROTATION_MAP[5] = new byte[]{3, 2, 4, 5, 1, 0};
     }
+    public static byte[] rotateType = new byte[4096];
+    public static float[][] SIDE_COORD_AABB = {{1, -2, 1}, {1, 2, 1}, {1, 1, 1}, {1, 1, 2}, {1, 1, 1}, {2, 1, 1}};
 
-    public static final class RotationType {
+    private BlockHelper() {
 
-        public static final int PREVENT = -1;
-        public static final int FOUR_WAY = 1;
-        public static final int SIX_WAY = 2;
-        public static final int RAIL = 3;
-        public static final int PUMPKIN = 4;
-        public static final int STAIRS = 5;
-        public static final int REDSTONE = 6;
-        public static final int LOG = 7;
-        public static final int SLAB = 8;
-        public static final int CHEST = 9;
-        public static final int LEVER = 10;
-        public static final int SIGN = 11;
-    }
-
-    static { // TODO: review which of these can be removed in favor of the
-        // vanilla handler
-        rotateType[Block.getIdFromBlock(Blocks.bed)] = RotationType.PREVENT;
-
-        rotateType[Block.getIdFromBlock(Blocks.stone_slab)] = RotationType.SLAB;
-        rotateType[Block.getIdFromBlock(Blocks.wooden_slab)] = RotationType.SLAB;
-
-        rotateType[Block.getIdFromBlock(Blocks.rail)] = RotationType.RAIL;
-        rotateType[Block.getIdFromBlock(Blocks.golden_rail)] = RotationType.RAIL;
-        rotateType[Block.getIdFromBlock(Blocks.detector_rail)] = RotationType.RAIL;
-        rotateType[Block.getIdFromBlock(Blocks.activator_rail)] = RotationType.RAIL;
-
-        rotateType[Block.getIdFromBlock(Blocks.pumpkin)] = RotationType.PUMPKIN;
-        rotateType[Block.getIdFromBlock(Blocks.lit_pumpkin)] = RotationType.PUMPKIN;
-
-        rotateType[Block.getIdFromBlock(Blocks.furnace)] = RotationType.FOUR_WAY;
-        rotateType[Block.getIdFromBlock(Blocks.lit_furnace)] = RotationType.FOUR_WAY;
-        rotateType[Block.getIdFromBlock(Blocks.ender_chest)] = RotationType.FOUR_WAY;
-
-        rotateType[Block.getIdFromBlock(Blocks.trapped_chest)] = RotationType.CHEST;
-        rotateType[Block.getIdFromBlock(Blocks.chest)] = RotationType.CHEST;
-
-        rotateType[Block.getIdFromBlock(Blocks.dispenser)] = RotationType.SIX_WAY;
-        rotateType[Block.getIdFromBlock(Blocks.sticky_piston)] = RotationType.SIX_WAY;
-        rotateType[Block.getIdFromBlock(Blocks.piston)] = RotationType.SIX_WAY;
-        rotateType[Block.getIdFromBlock(Blocks.hopper)] = RotationType.SIX_WAY;
-        rotateType[Block.getIdFromBlock(Blocks.dropper)] = RotationType.SIX_WAY;
-
-        rotateType[Block.getIdFromBlock(Blocks.unpowered_repeater)] = RotationType.REDSTONE;
-        rotateType[Block.getIdFromBlock(Blocks.unpowered_comparator)] = RotationType.REDSTONE;
-        rotateType[Block.getIdFromBlock(Blocks.powered_repeater)] = RotationType.REDSTONE;
-        rotateType[Block.getIdFromBlock(Blocks.powered_comparator)] = RotationType.REDSTONE;
-
-        rotateType[Block.getIdFromBlock(Blocks.lever)] = RotationType.LEVER;
-
-        rotateType[Block.getIdFromBlock(Blocks.standing_sign)] = RotationType.SIGN;
-
-        rotateType[Block.getIdFromBlock(Blocks.oak_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.stone_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.brick_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.stone_brick_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.nether_brick_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.sandstone_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.spruce_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.birch_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.jungle_stairs)] = RotationType.STAIRS;
-        rotateType[Block.getIdFromBlock(Blocks.quartz_stairs)] = RotationType.STAIRS;
     }
 
     public static MovingObjectPosition getCurrentMovingObjectPosition(EntityPlayer player) {
@@ -168,6 +98,17 @@ public class BlockHelper {
         return blockA.equals(blockB) || blockA.isAssociatedBlock(blockB);
     }
 
+    /* Safe Tile Entity Retrieval */
+    public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, ForgeDirection dir) {
+
+        return world == null ? null : world.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+    }
+
+    public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, int side) {
+
+        return world == null ? null : getAdjacentTileEntity(world, x, y, z, ForgeDirection.values()[side]);
+    }
+
 	/* UNSAFE Tile Entity Retrieval */
     // public static TileEntity getAdjacentTileEntityUnsafe(World world, int x,
     // int y, int z, ForgeDirection dir) {
@@ -204,17 +145,6 @@ public class BlockHelper {
     // refTile.yCoord, refTile.zCoord,
     // ForgeDirection.values()[side]);
     // }
-
-    /* Safe Tile Entity Retrieval */
-    public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, ForgeDirection dir) {
-
-        return world == null ? null : world.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
-    }
-
-    public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, int side) {
-
-        return world == null ? null : getAdjacentTileEntity(world, x, y, z, ForgeDirection.values()[side]);
-    }
 
     public static TileEntity getAdjacentTileEntity(TileEntity refTile, ForgeDirection dir) {
 
@@ -266,8 +196,6 @@ public class BlockHelper {
 
         return SIDE_BELOW[side];
     }
-
-	/* BLOCK ROTATION */
 
     public static boolean canRotate(Block block) {
 
@@ -335,6 +263,8 @@ public class BlockHelper {
                 return bMeta;
         }
     }
+
+	/* BLOCK ROTATION */
 
     public static int rotateVanillaBlockAlt(World world, Block block, int x, int y, int z) {
 
@@ -442,5 +372,69 @@ public class BlockHelper {
             return new ItemStack(item, 1, bMeta);
         }
         return new ItemStack(item, 1, 0);
+    }
+
+    public static final class RotationType {
+
+        public static final int PREVENT = -1;
+        public static final int FOUR_WAY = 1;
+        public static final int SIX_WAY = 2;
+        public static final int RAIL = 3;
+        public static final int PUMPKIN = 4;
+        public static final int STAIRS = 5;
+        public static final int REDSTONE = 6;
+        public static final int LOG = 7;
+        public static final int SLAB = 8;
+        public static final int CHEST = 9;
+        public static final int LEVER = 10;
+        public static final int SIGN = 11;
+    }
+    static { // TODO: review which of these can be removed in favor of the
+        // vanilla handler
+        rotateType[Block.getIdFromBlock(Blocks.bed)] = RotationType.PREVENT;
+
+        rotateType[Block.getIdFromBlock(Blocks.stone_slab)] = RotationType.SLAB;
+        rotateType[Block.getIdFromBlock(Blocks.wooden_slab)] = RotationType.SLAB;
+
+        rotateType[Block.getIdFromBlock(Blocks.rail)] = RotationType.RAIL;
+        rotateType[Block.getIdFromBlock(Blocks.golden_rail)] = RotationType.RAIL;
+        rotateType[Block.getIdFromBlock(Blocks.detector_rail)] = RotationType.RAIL;
+        rotateType[Block.getIdFromBlock(Blocks.activator_rail)] = RotationType.RAIL;
+
+        rotateType[Block.getIdFromBlock(Blocks.pumpkin)] = RotationType.PUMPKIN;
+        rotateType[Block.getIdFromBlock(Blocks.lit_pumpkin)] = RotationType.PUMPKIN;
+
+        rotateType[Block.getIdFromBlock(Blocks.furnace)] = RotationType.FOUR_WAY;
+        rotateType[Block.getIdFromBlock(Blocks.lit_furnace)] = RotationType.FOUR_WAY;
+        rotateType[Block.getIdFromBlock(Blocks.ender_chest)] = RotationType.FOUR_WAY;
+
+        rotateType[Block.getIdFromBlock(Blocks.trapped_chest)] = RotationType.CHEST;
+        rotateType[Block.getIdFromBlock(Blocks.chest)] = RotationType.CHEST;
+
+        rotateType[Block.getIdFromBlock(Blocks.dispenser)] = RotationType.SIX_WAY;
+        rotateType[Block.getIdFromBlock(Blocks.sticky_piston)] = RotationType.SIX_WAY;
+        rotateType[Block.getIdFromBlock(Blocks.piston)] = RotationType.SIX_WAY;
+        rotateType[Block.getIdFromBlock(Blocks.hopper)] = RotationType.SIX_WAY;
+        rotateType[Block.getIdFromBlock(Blocks.dropper)] = RotationType.SIX_WAY;
+
+        rotateType[Block.getIdFromBlock(Blocks.unpowered_repeater)] = RotationType.REDSTONE;
+        rotateType[Block.getIdFromBlock(Blocks.unpowered_comparator)] = RotationType.REDSTONE;
+        rotateType[Block.getIdFromBlock(Blocks.powered_repeater)] = RotationType.REDSTONE;
+        rotateType[Block.getIdFromBlock(Blocks.powered_comparator)] = RotationType.REDSTONE;
+
+        rotateType[Block.getIdFromBlock(Blocks.lever)] = RotationType.LEVER;
+
+        rotateType[Block.getIdFromBlock(Blocks.standing_sign)] = RotationType.SIGN;
+
+        rotateType[Block.getIdFromBlock(Blocks.oak_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.stone_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.brick_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.stone_brick_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.nether_brick_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.sandstone_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.spruce_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.birch_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.jungle_stairs)] = RotationType.STAIRS;
+        rotateType[Block.getIdFromBlock(Blocks.quartz_stairs)] = RotationType.STAIRS;
     }
 }

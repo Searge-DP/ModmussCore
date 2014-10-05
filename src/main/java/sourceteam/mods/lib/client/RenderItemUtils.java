@@ -17,6 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderItemUtils {
 
+    static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
     public static RenderItem itemRenderer = new RenderItem();
     protected static RenderBlocks renderBlocks = new RenderBlocks();
 
@@ -269,8 +270,6 @@ public class RenderItemUtils {
 
         GL11.glEnable(GL11.GL_CULL_FACE);
     }
-
-    static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
     private static void renderEffect(TextureManager manager, float x, float y) {
 

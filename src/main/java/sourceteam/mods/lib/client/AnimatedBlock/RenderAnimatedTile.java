@@ -11,6 +11,13 @@ import sourceteam.mods.lib.client.IRGBColour;
 
 public class RenderAnimatedTile extends TileEntitySpecialRenderer {
 
+    public static void setGLColorFromInt(int color) {
+        float red = (float) (color >> 16 & 255) / 255.0F;
+        float green = (float) (color >> 8 & 255) / 255.0F;
+        float blue = (float) (color & 255) / 255.0F;
+        GL11.glColor4f(red, green, blue, 1.0F);
+    }
+
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
         FluidStack liquid = new FluidStack(Core.blankFluid, 100);
@@ -44,7 +51,7 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         }
 
         if (tileentity instanceof IRGBColour) {
-            GL11.glColor4f((float)((IRGBColour) tileentity).Cred() / 255, (float)((IRGBColour) tileentity).Cgreen() / 255, (float)((IRGBColour) tileentity).Cblue()/ 255, 1.0F);
+            GL11.glColor4f((float) ((IRGBColour) tileentity).Cred() / 255, (float) ((IRGBColour) tileentity).Cgreen() / 255, (float) ((IRGBColour) tileentity).Cblue() / 255, 1.0F);
         }
 
         GL11.glTranslatef((float) x + 0.000001F, (float) y + 0.51F, (float) z + 0.000001F);
@@ -54,13 +61,6 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
         GL11.glCallList(displayList[(int) ((float) 100 / (float) (100) * (FluidRenderer.DISPLAY_STAGES - 1))]);
         GL11.glPopAttrib();
         GL11.glPopMatrix();
-    }
-
-    public static void setGLColorFromInt(int color) {
-        float red = (float) (color >> 16 & 255) / 255.0F;
-        float green = (float) (color >> 8 & 255) / 255.0F;
-        float blue = (float) (color & 255) / 255.0F;
-        GL11.glColor4f(red, green, blue, 1.0F);
     }
 
 }

@@ -20,7 +20,7 @@ public class ReflectUtilities {
             Field f = object.getClass().getDeclaredField(name);
 
             boolean accessible = f.isAccessible();
-            if(!accessible)
+            if (!accessible)
                 f.setAccessible(true);
 
             T val = (T) f.get(object);
@@ -44,6 +44,7 @@ public class ReflectUtilities {
         if (object == null) return null;
         return getMethod(object, object.getClass(), name, params);
     }
+
     private static Method getMethod(Object object, Class<?> c, String name, Class<?>[] params) {
 
         try {
@@ -56,10 +57,12 @@ public class ReflectUtilities {
         }
         return null;
     }
+
     public static Field getField(Object object, String name) {
         if (object == null) return null;
         return getField(object, object.getClass(), name);
     }
+
     private static Field getField(Object object, Class<?> c, String name) {
         try {
             return object.getClass().getDeclaredField(name);

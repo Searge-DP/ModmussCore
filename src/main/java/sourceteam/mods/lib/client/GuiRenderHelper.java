@@ -17,13 +17,13 @@ import sourceteam.mods.lib.util.Math;
 
 public class GuiRenderHelper {
 
+    public static final ResourceLocation GuiTextures = new ResourceLocation("network", "textures/gui/BasePoweredGui.png");
+
     public static void drawItemContainer(int x, int y, Gui gui) {
         int texlocx = 100;
         int texlocy = 166;
         gui.drawTexturedModalRect(x, y, texlocx, texlocy, 18, 18);
     }
-
-    public static final ResourceLocation GuiTextures = new ResourceLocation("network", "textures/gui/BasePoweredGui.png");
 
     public static void drawTankGui(int x, int y, IFluidHandler tile, GuiContainer gui) {
         gui.drawTexturedModalRect(x, y, 176, 0, 16, 60);

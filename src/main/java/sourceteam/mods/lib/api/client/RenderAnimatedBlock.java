@@ -23,6 +23,14 @@ import sourceteam.mods.lib.api.*;
  */
 public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler {
 
+    public static float[] getRGBFromHex(int color) {
+        float red = (float) (color >> 16 & 255) / 255.0F;
+        float green = (float) (color >> 8 & 255) / 255.0F;
+        float blue = (float) (color & 255) / 255.0F;
+
+        return new float[]{red, green, blue};
+    }
+
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
         ColoredBlock zb = (ColoredBlock) block;
@@ -143,14 +151,6 @@ public class RenderAnimatedBlock implements ISimpleBlockRenderingHandler {
     @Override
     public int getRenderId() {
         return ClientInit.render;
-    }
-
-    public static float[] getRGBFromHex(int color) {
-        float red = (float) (color >> 16 & 255) / 255.0F;
-        float green = (float) (color >> 8 & 255) / 255.0F;
-        float blue = (float) (color & 255) / 255.0F;
-
-        return new float[]{red, green, blue};
     }
 
     /**

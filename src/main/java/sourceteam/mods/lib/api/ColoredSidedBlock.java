@@ -63,8 +63,7 @@ public class ColoredSidedBlock extends ColoredBlock {
     }
 
     @Override
-    public boolean isHD()
-    {
+    public boolean isHD() {
         return super.isHD();
     }
 }

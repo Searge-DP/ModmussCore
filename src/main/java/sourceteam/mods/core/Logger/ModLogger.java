@@ -16,12 +16,12 @@ public class ModLogger {
         this.modName = modName;
     }
 
-    public void log(String message) {
-        System.out.println(prefix + message);
-    }
-
     public static ModLogger getLogger(String modName) {
         return new ModLogger(modName);
+    }
+
+    public void log(String message) {
+        System.out.println(prefix + message);
     }
 
     public String getSide() {
