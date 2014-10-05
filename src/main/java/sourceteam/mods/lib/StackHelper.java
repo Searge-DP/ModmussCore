@@ -65,44 +65,6 @@ public class StackHelper {
 	/* ITEM COMPARISONS */
 
     /**
-     * Determines whether the given ItemStack should be considered equivalent
-     * for crafting purposes.
-     *
-     * @param base          The stack to compare to.
-     * @param comparison    The stack to compare.
-     * @param oreDictionary true to take the Forge OreDictionary into account.
-     * @return true if comparison should be considered a crafting equivalent for
-     * base.
-     */
-    public boolean isCraftingEquivalent(ItemStack base, ItemStack comparison, boolean oreDictionary) {
-        if (isMatchingItem(base, comparison, true, false))
-            return true;
-
-        if (oreDictionary) {
-            int idBase = OreDictionary.getOreID(base);
-            if (idBase >= 0) {
-                for (ItemStack itemstack : OreDictionary.getOres(idBase)) {
-                    if (comparison.getItem() == itemstack.getItem() && (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || comparison.getItemDamage() == itemstack.getItemDamage()))
-                        return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public boolean isCraftingEquivalent(int oreID, ItemStack comparison) {
-        if (oreID >= 0) {
-            for (ItemStack itemstack : OreDictionary.getOres(oreID)) {
-                if (comparison.getItem() == itemstack.getItem() && (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || comparison.getItemDamage() == itemstack.getItemDamage()))
-                    return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Compares item id, damage and NBT. Accepts wildcard damage. Ignores damage
      * entirely if the item doesn't have subtypes.
      *
