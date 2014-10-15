@@ -1,8 +1,8 @@
 [
 {
-  "modid": "sourcecore",
-  "name": "Source Core",
-  "description": "A mod",
+  "modid": "modmusscore",
+  "name": "Modmuss core",
+  "description": "A mod that adds base code for modmuss50's",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "logoFile": "",
