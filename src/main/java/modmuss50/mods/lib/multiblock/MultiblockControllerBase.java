@@ -4,13 +4,13 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import modmuss50.mods.lib.BeefCoreLog;
+import modmuss50.mods.lib.CoordTriplet;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import erogenousbeef.core.common.BeefCoreLog;
-import erogenousbeef.core.common.CoordTriplet;
 
 /**
  * This class contains the base logic for "multiblock controllers". Conceptually, they are
@@ -221,7 +221,7 @@ public abstract class MultiblockControllerBase {
 		// Strip out this part
 		onDetachBlock(part);
 		if(!connectedParts.remove(part)) {
-			BeefCoreLog.warning("[%s] Double-removing part (%d) @ %d, %d, %d, this is unexpected and may cause problems. If you encounter anomalies, please tear down the reactor and rebuild it.", worldObj.isRemote?"CLIENT":"SERVER", part.hashCode(), part.xCoord, part.yCoord, part.zCoord);
+			BeefCoreLog.warning("[%s] Double-removing part (%d) @ %d, %d, %d, this is unexpected and may cause problems. If you encounter anomalies, please tear down the reactor and rebuild it.", worldObj.isRemote ? "CLIENT" : "SERVER", part.hashCode(), part.xCoord, part.yCoord, part.zCoord);
 		}
 
 		if(connectedParts.isEmpty()) {
@@ -431,7 +431,7 @@ public abstract class MultiblockControllerBase {
 	/**
 	 * Driver for the update loop. If the machine is assembled, runs
 	 * the game logic update method.
-	 * @see modmuss50.mods.lib.multiblock.MultiblockControllerBase#update() //TODO Fix this Javadoc
+	 * @see modmuss50.mods.lib.multiblock.MultiblockControllerBase() //TODO Fix this Javadoc
 	 */
 	public final void updateMultiblockEntity() {
 		if(connectedParts.isEmpty()) {

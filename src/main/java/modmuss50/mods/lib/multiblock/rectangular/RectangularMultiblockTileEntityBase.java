@@ -1,7 +1,7 @@
 package modmuss50.mods.lib.multiblock.rectangular;
 
+import modmuss50.mods.lib.CoordTriplet;
 import net.minecraftforge.common.util.ForgeDirection;
-import erogenousbeef.core.common.CoordTriplet;
 import modmuss50.mods.lib.multiblock.MultiblockControllerBase;
 import modmuss50.mods.lib.multiblock.MultiblockTileEntityBase;
 import modmuss50.mods.lib.multiblock.MultiblockValidationException;

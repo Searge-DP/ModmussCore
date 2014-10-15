@@ -1,8 +1,8 @@
 package modmuss50.mods.lib.multiblock.rectangular;
 
+import modmuss50.mods.lib.CoordTriplet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import erogenousbeef.core.common.CoordTriplet;
 import modmuss50.mods.lib.multiblock.MultiblockControllerBase;
 import modmuss50.mods.lib.multiblock.MultiblockValidationException;
 

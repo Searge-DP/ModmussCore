@@ -2,9 +2,9 @@ package modmuss50.mods.lib.multiblock;
 
 import java.util.Set;
 
+import modmuss50.mods.lib.CoordTriplet;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import erogenousbeef.core.common.CoordTriplet;
 
 /**
  * Basic interface for a multiblock machine part. This is defined as an abstract class

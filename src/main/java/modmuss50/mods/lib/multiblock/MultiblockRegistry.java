@@ -3,8 +3,8 @@ package modmuss50.mods.lib.multiblock;
 import java.util.HashMap;
 import java.util.Set;
 
+import modmuss50.mods.lib.BeefCoreLog;
 import net.minecraft.world.World;
-import erogenousbeef.core.common.BeefCoreLog;
 
 /**
  * This is a very static singleton registry class which directs incoming events to sub-objects, which
