@@ -8,11 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import modmuss50.mods.lib.BeefCoreLog;
+import modmuss50.mods.lib.CoordTriplet;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import erogenousbeef.core.common.BeefCoreLog;
-import erogenousbeef.core.common.CoordTriplet;
+
 
 /**
  * This class manages all the multiblock controllers that exist in a given world,
