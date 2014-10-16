@@ -22,13 +22,13 @@ public abstract class MultiblockControllerBase {
 	public static final short DIMENSION_UNBOUNDED = -1;
 
 	// Multiblock stuff - do not mess with
-	protected World worldObj;
+	public World worldObj;
 	
 	// Disassembled -> Assembled; Assembled -> Disassembled OR Paused; Paused -> Assembled
 	protected enum AssemblyState { Disassembled, Assembled, Paused };
 	protected AssemblyState assemblyState;
 
-	protected HashSet<IMultiblockPart> connectedParts;
+	public HashSet<IMultiblockPart> connectedParts;
 	
 	/** This is a deterministically-picked coordinate that identifies this
 	 * multiblock uniquely in its dimension.
