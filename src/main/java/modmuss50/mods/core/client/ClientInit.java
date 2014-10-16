@@ -1,6 +1,8 @@
 package modmuss50.mods.core.client;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import modmuss50.mods.lib.multiblock.MultiblockClientTickHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -13,6 +15,7 @@ public class ClientInit {
 	public static void load() {
 		render = RenderingRegistry.getNextAvailableRenderId();
 		MinecraftForge.EVENT_BUS.register(new MainMenuRenderer());
+		FMLCommonHandler.instance().bus().register(new MultiblockClientTickHandler());
 	}
 
 	public static void preInt() {

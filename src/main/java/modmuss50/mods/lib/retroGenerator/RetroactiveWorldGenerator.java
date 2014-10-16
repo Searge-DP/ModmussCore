@@ -55,7 +55,6 @@ public class RetroactiveWorldGenerator {
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event)
 	{
-		System.out.println(genQueue.size());
 		if (genQueue.isEmpty())
 			return;
 

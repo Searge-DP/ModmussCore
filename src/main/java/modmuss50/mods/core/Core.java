@@ -20,6 +20,9 @@ import modmuss50.mods.core.fluid.BlockFluid;
 import modmuss50.mods.core.fluid.BlockFluidH;
 import modmuss50.mods.core.mod.ModRegistry;
 import modmuss50.mods.lib.mod.ISourceMod;
+import modmuss50.mods.lib.multiblock.MultiblockClientTickHandler;
+import modmuss50.mods.lib.multiblock.MultiblockEventHandler;
+import modmuss50.mods.lib.multiblock.MultiblockServerTickHandler;
 import modmuss50.mods.lib.retroGenerator.RetroactiveWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
@@ -59,8 +62,13 @@ public class Core implements ISourceMod {
 		blockFluidH = new BlockFluidH("modmusscore:fluidH").setBlockName("modmusscore:BlankFluidH");
 		GameRegistry.registerBlock(blockFluidH, "BlankFluidH");
 
+		//register the reto gen here
 		FMLCommonHandler.instance().bus().register(new RetroactiveWorldGenerator());
 		MinecraftForge.EVENT_BUS.register(new RetroactiveWorldGenerator());
+
+		//Register all of the multiblock things here
+		MinecraftForge.EVENT_BUS.register(new MultiblockEventHandler());
+		FMLCommonHandler.instance().bus().register(new MultiblockServerTickHandler());
 	}
 
 	@Mod.EventHandler
