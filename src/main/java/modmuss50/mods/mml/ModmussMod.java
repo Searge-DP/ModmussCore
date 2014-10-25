@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ModmussMod {
@@ -19,5 +18,15 @@ public @interface ModmussMod {
 	 String modVersion() default "0";
 
 	 String recomenedMinecraftVeriosion() default Loader.MC_VERSION;
+
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface enable{}
+
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface disable{}
 
 }

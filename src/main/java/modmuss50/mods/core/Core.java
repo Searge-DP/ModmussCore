@@ -24,6 +24,7 @@ import modmuss50.mods.lib.mod.ISourceMod;
 import modmuss50.mods.lib.multiblock.MultiblockEventHandler;
 import modmuss50.mods.lib.multiblock.MultiblockServerTickHandler;
 import modmuss50.mods.lib.retroGenerator.RetroactiveWorldGenerator;
+import modmuss50.mods.mml.ModScanner;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -76,6 +77,8 @@ public class Core implements ISourceMod {
 		blankFluid.setIcons(BlockFluid.StillIcon);
 		//Inject the brandings here
 		BrandingsAPI.injectBrandings();
+
+        ModScanner.enableMods();
 	}
 
 	@Mod.EventHandler
