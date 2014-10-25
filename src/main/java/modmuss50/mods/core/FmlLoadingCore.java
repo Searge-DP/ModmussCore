@@ -3,6 +3,7 @@ package modmuss50.mods.core;
 
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+import modmuss50.mods.mml.ModScanner;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 
 import java.io.File;
@@ -13,9 +14,19 @@ import java.util.Map;
 public class FmlLoadingCore implements IFMLLoadingPlugin {
 
 	private File patchesDir;
+	public static File mcDir;
 
+	//This is the earliest place I can get code to run without jar patching.
 	public FmlLoadingCore() {
-		// loadPaches();
+		if(mcDir != null)
+			return;
+
+		mcDir = (File) FMLInjectionData.data()[6];
+
+		//mml = Modmuss Mod Loader :)
+		System.out.println("Starting to mml");
+		//Look for jars in a folder and load them :)
+		ModScanner.loadMods(new File(mcDir, ModScanner.modsFolderName));
 	}
 
 	@Override
@@ -43,6 +54,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 		return null;
 	}
 
+	//This here loads jar files from the patches folder. This was a test and wont be used
 	public void loadPaches() {
 
 		File mcDir = (File) FMLInjectionData.data()[6];

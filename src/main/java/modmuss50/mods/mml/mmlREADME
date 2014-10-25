@@ -1,0 +1,13 @@
+MMl = Modmuss Mod Loader
+
+The point of using mml is to make mods that are minecraft version independent. MML will require an update to the newest version of minecraft.
+MML will be running of forge for the moment so I will have to wait for forge to update till I can update MML.
+
+Goals:
+    Version independent mods.
+    Mods can be loaded and unloaded without a game restart(Might be limited to commands and stuff)
+        Mods can be downloaded from a server(Security is the big thing that needs work)
+        Mods can be disabled/enabled on a per world basis
+        Mods cannot reference minecraft or FML/Forge classes only mml ones.
+        Mods can be server/client/universal.
+    Easy central location to download mods from(MML website?) could be done in-game?
