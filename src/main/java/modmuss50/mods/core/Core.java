@@ -78,7 +78,11 @@ public class Core implements ISourceMod {
 		//Inject the brandings here
 		BrandingsAPI.injectBrandings();
 
-        ModScanner.enableMods();
+		try {
+			ModScanner.enableMods();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Mod.EventHandler

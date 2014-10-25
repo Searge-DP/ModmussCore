@@ -1,9 +1,6 @@
 package modmuss50.mods.mml;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import modmuss50.mods.core.FmlLoadingCore;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -35,14 +32,18 @@ public class ModScanner {
         }
 
         loadjars();
+
 		if(modsDir.exists()){
 			for(File mod : modsDir.listFiles()){
 				scanMod(mod);
 			}
 		}
 
-
-        enableMods();
+		try {
+			enableMods();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
     //This here loads jar files from the patches folder. This was a test and wont be used
@@ -58,7 +59,7 @@ public class ModScanner {
             if (patchesDir.listFiles()[i].getName().endsWith(".jar")) {
                 try {
                     ((LaunchClassLoader) FmlLoadingCore.class.getClassLoader()).addURL(new File(patchesDir, patchesDir.listFiles()[i].getName()).toURI().toURL());
-                    System.out.println("added" + patchesDir.listFiles()[i].getName() + " to class path");
+                    System.out.println("added " + patchesDir.listFiles()[i].getName() + " to class path");
 
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
@@ -78,37 +79,31 @@ public class ModScanner {
 				if(!fileName.endsWith(".class"))
 					continue;
 				String classname = fileName.replace('/', '.').substring(0, fileName.length() - 6);
-				Class<?> clazz = Class.forName(classname);
+
+				Class clazz = Class.forName(classname);
+
 				//This checks to see if it is imported(needs testing :( )
-				if(!clazz.isAnnotationPresent(ModmussMod.class))
+				if(clazz.isInstance(ModmussMod.class))
 					continue;
+
 				//Oh look we found a mml mod!
-                ModmussMod modmussMod = clazz.getAnnotation(ModmussMod.class);
+                ModmussMod modmussMod = (ModmussMod) clazz.newInstance();
+
+				System.out.println(classname);
+				modmussMod.enable();
 
                 mods.add(clazz);
 			}
 		} catch (Exception e){
-
+			System.out.println(e);
 		}
 	}
 
-    public static void enableMods() throws IllegalAccessException, InstantiationException {
+    public static void enableMods() throws Exception {
         for (int i = 0; i < mods.size(); i++) {
 
         }
-        for (Class<?> clazz : modListeners)
-        {
-            try
-            {
-                IModListener mod = (IModListener) clazz.newInstance();
 
-                mod.handle(mods.get(mod.getModID()));
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
     }
 
 }

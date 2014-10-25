@@ -2,31 +2,29 @@ package modmuss50.mods.mml;
 
 import cpw.mods.fml.common.Loader;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface ModmussMod {
+public class ModmussMod {
 
-	 String modId();
+	public String modId(){
+		return "DEFAULT";
+	};
 
-	 String modName();
+	public String modName(){
+		return "DEFAULT";
+	};
 
-	 String modVersion() default "0";
+	 public String modVersion(){
+		 return "DEFAULT";
+	 };
 
-	 String recomenedMinecraftVeriosion() default Loader.MC_VERSION;
+	 public String recomenedMinecraftVeriosion(){
+		 return Loader.MC_VERSION;
+	 }
+
+	public void enable(){
+
+	}
 
 
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.METHOD)
-    public @interface enable{}
-
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.METHOD)
-    public @interface disable{}
 
 }
