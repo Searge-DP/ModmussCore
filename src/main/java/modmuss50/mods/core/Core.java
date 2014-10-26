@@ -24,6 +24,7 @@ import modmuss50.mods.lib.mod.ISourceMod;
 import modmuss50.mods.lib.multiblock.MultiblockEventHandler;
 import modmuss50.mods.lib.multiblock.MultiblockServerTickHandler;
 import modmuss50.mods.lib.retroGenerator.RetroactiveWorldGenerator;
+import modmuss50.mods.mml.EventHandler;
 import modmuss50.mods.mml.ModScanner;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
@@ -94,6 +95,8 @@ public class Core implements ISourceMod {
 	public void load(FMLInitializationEvent event) {
 		if (FMLCommonHandler.instance().getSide().isClient())
 			ClientInit.load();
+
+		MinecraftForge.EVENT_BUS.register(new EventHandler());
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -3,11 +3,8 @@ package modmuss50.mods.core;
 
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
-import modmuss50.mods.mml.ModScanner;
-import net.minecraft.launchwrapper.LaunchClassLoader;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.util.Map;
 
 @IFMLLoadingPlugin.MCVersion("1.7.10")
@@ -26,7 +23,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 		//mml = Modmuss Mod Loader :)
 		System.out.println("Starting to mml");
 		//Look for jars in a folder and load them :)
-		ModScanner.loadMods(new File(mcDir, ModScanner.modsFolderName));
+		//ModScanner.loadMods(new File(mcDir, ModScanner.modsFolderName));
 	}
 
 	@Override

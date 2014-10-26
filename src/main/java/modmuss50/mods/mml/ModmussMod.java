@@ -5,26 +5,35 @@ import cpw.mods.fml.common.Loader;
 
 public class ModmussMod {
 
-	public String modId(){
+	public String modId() {
 		return "DEFAULT";
-	};
+	}
 
-	public String modName(){
+	;
+
+	public String modName() {
 		return "DEFAULT";
-	};
+	}
 
-	 public String modVersion(){
-		 return "DEFAULT";
-	 };
+	;
 
-	 public String recomenedMinecraftVeriosion(){
-		 return Loader.MC_VERSION;
-	 }
+	public String modVersion() {
+		return "DEFAULT";
+	}
 
-	public void enable(){
+	;
+
+	public String recomenedMinecraftVeriosion() {
+		return Loader.MC_VERSION;
+	}
+
+	public void enable() {
 
 	}
 
+	public void disable() {
+
+	}
 
 
 }

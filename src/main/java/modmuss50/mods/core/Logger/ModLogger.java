@@ -26,7 +26,7 @@ public class ModLogger {
 
 	public String getSide() {
 		if (FMLCommonHandler.instance().getSide().isClient()) {
-			return "Client";
+			return "client";
 		}
 
 		if (FMLCommonHandler.instance().getSide().isServer()) {

@@ -481,7 +481,7 @@ public abstract class MultiblockControllerBase {
 	protected abstract boolean updateServer();
 	
 	/**
-	 * Client-side update loop. Generally, this shouldn't do anything, but if you want
+	 * client-side update loop. Generally, this shouldn't do anything, but if you want
 	 * to do some interpolation or something, do it here.
 	 */
 	protected abstract void updateClient();
