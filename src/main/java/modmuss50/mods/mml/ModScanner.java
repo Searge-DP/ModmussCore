@@ -1,5 +1,6 @@
 package modmuss50.mods.mml;
 
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import modmuss50.mods.core.FmlLoadingCore;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -36,11 +37,10 @@ public class ModScanner {
 		}
 
 		try {
-			enableMods();
+			startMods();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	//This here loads jar files from the patches folder. This was a test and wont be used
@@ -79,12 +79,10 @@ public class ModScanner {
 				//This checks to see if it is imported(needs testing :( )
 				if (clazz.isInstance(ModmussMod.class))
 					continue;
-				//Oh look we found a mml mod!
-				ModmussMod modmussMod = (ModmussMod) clazz.newInstance();
 				mods.add(clazz);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -102,4 +100,13 @@ public class ModScanner {
 		}
 		mods.clear();
 	}
+
+    public static void startMods() throws Exception {
+        for (Class<?> mod : mods) {
+            Class cls = Class.forName(mod.getName());
+            Object clsInstance = (Object) cls.newInstance();
+            ModmussMod modmussMod = (ModmussMod) clsInstance;
+            modmussMod.load();
+        }
+    }
 }

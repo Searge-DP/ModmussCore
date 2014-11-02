@@ -37,4 +37,9 @@ public class TestMod extends ModmussMod {
 	public void disable(){
 		System.out.println("Good bye o/");
 	}
+
+    @Override
+    public void load(){
+        System.out.printf("This is were the game get loaded!");
+    }
 }

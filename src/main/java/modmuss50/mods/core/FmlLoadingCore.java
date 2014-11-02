@@ -3,6 +3,7 @@ package modmuss50.mods.core;
 
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+import modmuss50.mods.mml.ModScanner;
 
 import java.io.File;
 import java.util.Map;
@@ -21,9 +22,9 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 		mcDir = (File) FMLInjectionData.data()[6];
 
 		//mml = Modmuss Mod Loader :)
-		System.out.println("Starting to mml");
+		System.out.println("Starting to mml mods");
 		//Look for jars in a folder and load them :)
-		//ModScanner.loadMods(new File(mcDir, ModScanner.modsFolderName));
+		ModScanner.loadMods();
 	}
 
 	@Override
