@@ -11,9 +11,9 @@ public enum PartPosition {
 	SouthFace,
 	EastFace,
 	WestFace;
-	
+
 	public boolean isFace(PartPosition position) {
-		switch(position) {
+		switch (position) {
 			case TopFace:
 			case BottomFace:
 			case NorthFace:

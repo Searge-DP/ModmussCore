@@ -1,6 +1,5 @@
 package modmuss50.mods.mml;
 
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import modmuss50.mods.core.FmlLoadingCore;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -101,12 +100,12 @@ public class ModScanner {
 		mods.clear();
 	}
 
-    public static void startMods() throws Exception {
-        for (Class<?> mod : mods) {
-            Class cls = Class.forName(mod.getName());
-            Object clsInstance = (Object) cls.newInstance();
-            ModmussMod modmussMod = (ModmussMod) clsInstance;
-            modmussMod.load();
-        }
-    }
+	public static void startMods() throws Exception {
+		for (Class<?> mod : mods) {
+			Class cls = Class.forName(mod.getName());
+			Object clsInstance = (Object) cls.newInstance();
+			ModmussMod modmussMod = (ModmussMod) clsInstance;
+			modmussMod.load();
+		}
+	}
 }

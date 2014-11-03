@@ -14,12 +14,12 @@ import cpw.mods.fml.common.gameevent.TickEvent;
  */
 public class MultiblockServerTickHandler {
 
-    @SubscribeEvent
-    public void onWorldTick(TickEvent.WorldTickEvent event) {
-        if(event.phase == TickEvent.Phase.START) {
-            MultiblockRegistry.tickStart(event.world);
-        } else if(event.phase == TickEvent.Phase.END) {
-            MultiblockRegistry.tickEnd(event.world);
-        }
-    }
+	@SubscribeEvent
+	public void onWorldTick(TickEvent.WorldTickEvent event) {
+		if (event.phase == TickEvent.Phase.START) {
+			MultiblockRegistry.tickStart(event.world);
+		} else if (event.phase == TickEvent.Phase.END) {
+			MultiblockRegistry.tickEnd(event.world);
+		}
+	}
 }

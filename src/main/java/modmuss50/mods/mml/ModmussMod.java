@@ -35,9 +35,9 @@ public class ModmussMod {
 
 	}
 
-    public void load(){
+	public void load() {
 
-    }
+	}
 
 
 }

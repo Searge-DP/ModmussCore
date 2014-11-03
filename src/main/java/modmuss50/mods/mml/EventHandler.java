@@ -12,6 +12,6 @@ public class EventHandler {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onWorldUnload(WorldEvent.Load evt) {
-    }
+	}
 
 }

@@ -8,12 +8,11 @@ import net.minecraft.world.WorldSavedData;
 import java.util.Map;
 
 public class RetroGenSaveData extends WorldSavedData {
-	private Map<ChunkCoord, NBTTagCompound> chunks = Maps.newHashMap();
-
 	private final String NBT_SIZE = "size";
 	private final String NBT_LOC_X = "CoordLocX";
 	private final String NBT_LOC_Z = "CoordLocZ";
 	private final String NBT_TAG = "tag";
+	private Map<ChunkCoord, NBTTagCompound> chunks = Maps.newHashMap();
 
 	public RetroGenSaveData(String name) {
 		super(name);

@@ -16,7 +16,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 
 	//This is the earliest place I can get code to run without jar patching.
 	public FmlLoadingCore() {
-		if(mcDir != null)
+		if (mcDir != null)
 			return;
 
 		mcDir = (File) FMLInjectionData.data()[6];
@@ -51,7 +51,6 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 	public String getAccessTransformerClass() {
 		return null;
 	}
-
 
 
 }

@@ -5,8 +5,7 @@ import net.minecraft.world.chunk.Chunk;
 
 import java.util.Random;
 
-public interface IRetroGenerator
-{
+public interface IRetroGenerator {
 	public String getUniqueGenerationID();
 
 	public boolean canGenerateIn(World world, Chunk chunk, Random random);

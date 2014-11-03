@@ -13,22 +13,18 @@ import java.util.Random;
 
 
 public class RetroactiveWorldGenerator {
+	public static final String retroGenSaveDataName = "mc_retroDATA";
 	private static ArrayList<IRetroGenerator> generators = Lists.newArrayList();
 	private static ArrayList<RetroGenEntry> genQueue = Lists.newArrayList();
 
-	public static final String retroGenSaveDataName = "mc_retroDATA";
-
-	public static void registerRetroGenerator(IRetroGenerator generator)
-	{
+	public static void registerRetroGenerator(IRetroGenerator generator) {
 		generators.add(generator);
 	}
 
-	private RetroGenSaveData getRetroGenSaveData(World world)
-	{
+	private RetroGenSaveData getRetroGenSaveData(World world) {
 		RetroGenSaveData data = (RetroGenSaveData) world.perWorldStorage.loadData(RetroGenSaveData.class, retroGenSaveDataName);
 
-		if (data == null)
-		{
+		if (data == null) {
 			data = new RetroGenSaveData(retroGenSaveDataName);
 			world.perWorldStorage.setData(retroGenSaveDataName, data);
 		}
@@ -37,24 +33,21 @@ public class RetroactiveWorldGenerator {
 	}
 
 	@SubscribeEvent
-	public void onChunkLoad(ChunkEvent.Load event)
-	{
+	public void onChunkLoad(ChunkEvent.Load event) {
 		RetroGenSaveData data = getRetroGenSaveData(event.world);
 		ChunkCoord coord = new ChunkCoord(event.getChunk());
 		World world = event.world;
 		Chunk chunk = event.getChunk();
 
 		for (IRetroGenerator gen : generators)
-			if (gen.canGenerateIn(world, chunk, new Random()) && data.isGenerationNeeded(coord, gen.getUniqueGenerationID()))
-			{
+			if (gen.canGenerateIn(world, chunk, new Random()) && data.isGenerationNeeded(coord, gen.getUniqueGenerationID())) {
 				genQueue.add(new RetroGenEntry(world, coord, gen));
 				data.markChunkRetroGenerated(coord, gen.getUniqueGenerationID());
 			}
 	}
 
 	@SubscribeEvent
-	public void onWorldTick(TickEvent.WorldTickEvent event)
-	{
+	public void onWorldTick(TickEvent.WorldTickEvent event) {
 		if (genQueue.isEmpty())
 			return;
 
@@ -65,8 +58,7 @@ public class RetroactiveWorldGenerator {
 		ArrayList<RetroGenEntry> removeQueue = Lists.newArrayList();
 		ArrayList<RetroGenEntry> iterationQueue = (ArrayList<RetroGenEntry>) genQueue.clone();
 
-		for (RetroGenEntry entry : iterationQueue)
-		{
+		for (RetroGenEntry entry : iterationQueue) {
 			entry.gen.generate(entry.world.rand, entry.world, entry.coord.chunkX, entry.coord.chunkZ);
 			removeQueue.add(entry);
 			count++;
@@ -78,14 +70,12 @@ public class RetroactiveWorldGenerator {
 		genQueue.removeAll(removeQueue);
 	}
 
-	public class RetroGenEntry
-	{
+	public class RetroGenEntry {
 		World world;
 		ChunkCoord coord;
 		IRetroGenerator gen;
 
-		public RetroGenEntry(World world, ChunkCoord coord, IRetroGenerator gen)
-		{
+		public RetroGenEntry(World world, ChunkCoord coord, IRetroGenerator gen) {
 			this.world = world;
 			this.coord = coord;
 			this.gen = gen;

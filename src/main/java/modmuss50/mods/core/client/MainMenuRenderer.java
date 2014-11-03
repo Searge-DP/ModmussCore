@@ -19,8 +19,8 @@ public class MainMenuRenderer {
 
 	@SubscribeEvent()
 	public void onGuiInit(GuiScreenEvent.InitGuiEvent.Post evt) {
-	//	if (!ConfigurationHandler.mainMenuOvelay)
-	//		return;
+		//	if (!ConfigurationHandler.mainMenuOvelay)
+		//		return;
 		if (evt.gui instanceof GuiMainMenu) {
 			List<GuiButton> buttonList = evt.buttonList;
 
@@ -47,8 +47,8 @@ public class MainMenuRenderer {
 
 	@SubscribeEvent
 	public void drawScreen(GuiScreenEvent.DrawScreenEvent.Post event) {
-	//	if (!ConfigurationHandler.mainMenuOvelay)
-	//		return;
+		//	if (!ConfigurationHandler.mainMenuOvelay)
+		//		return;
 		if (event.gui instanceof GuiMainMenu) {
 			event.gui.drawString(Minecraft.getMinecraft().fontRenderer, "Loaded mods: " + ModRegistry.mods.size(), 1, 25, 16777215);
 
