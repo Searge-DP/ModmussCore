@@ -32,6 +32,10 @@ minecraft {
 
 group = 'ModmussCore'
 
+dependencies {
+    runtime files("jarlibs/json-simple-1.1.1.jar")
+}
+
 
 task deleteOldArtifacts(type: Delete) {
     delete 'build/libs'

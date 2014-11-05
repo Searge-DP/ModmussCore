@@ -3,24 +3,41 @@ package modmuss50.mods.core.client;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.github.asyncronous.toast.Toaster;
 import modmuss50.mods.core.Core;
 import modmuss50.mods.core.mod.ModRegistry;
+import modmuss50.mods.lib.config.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.IOException;
 import java.util.List;
 
 public class MainMenuRenderer {
 
 	public static final int BUTTON_ID = 405;
 
+	public static boolean hasLoaded = false;
+
 	@SubscribeEvent()
 	public void onGuiInit(GuiScreenEvent.InitGuiEvent.Post evt) {
-		//	if (!ConfigurationHandler.mainMenuOvelay)
-		//		return;
+
+		if (!hasLoaded && ConfigHandler.getBoolean("showLoadedMessage")) {
+			try {
+				Toaster.instance().pop("Minecraft has now loaded", new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/assets/modmusscore/toast/icons/error.png"))));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			hasLoaded = true;
+		}
+
+		if (!ConfigHandler.getBoolean("mainMenuTweaks"))
+			return;
 		if (evt.gui instanceof GuiMainMenu) {
 			List<GuiButton> buttonList = evt.buttonList;
 
@@ -32,12 +49,14 @@ public class MainMenuRenderer {
 			GuiButton button = new GuiButton(BUTTON_ID, 1, 1, 45, 20, "Mods");
 			buttonList.add(button);
 		}
+
+
 	}
 
 	@SubscribeEvent
 	public void onActionPerformed(GuiScreenEvent.ActionPerformedEvent evt) {
-		//if (!ConfigurationHandler.mainMenuOvelay)
-		//	return;
+		if (!ConfigHandler.getBoolean("mainMenuTweaks"))
+			return;
 		if (evt.gui instanceof GuiMainMenu) {
 			if (evt.button.id == BUTTON_ID) {
 				Minecraft.getMinecraft().displayGuiScreen(new GuSourceList(new GuiMainMenu()));
@@ -47,8 +66,8 @@ public class MainMenuRenderer {
 
 	@SubscribeEvent
 	public void drawScreen(GuiScreenEvent.DrawScreenEvent.Post event) {
-		//	if (!ConfigurationHandler.mainMenuOvelay)
-		//		return;
+		if (!ConfigHandler.getBoolean("mainMenuTweaks"))
+			return;
 		if (event.gui instanceof GuiMainMenu) {
 			event.gui.drawString(Minecraft.getMinecraft().fontRenderer, "Loaded mods: " + ModRegistry.mods.size(), 1, 25, 16777215);
 

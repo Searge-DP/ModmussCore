@@ -79,7 +79,7 @@ public class GuSourceList extends GuiScreen {
 		}
 		listWidth = Math.min(listWidth, 150);
 		this.buttonList.add(new GuiButton(6, this.width / 2 - 75, this.height - 38, I18n.format("gui.done")));
-		configModButton = new GuiButton(20, 10, this.height - 60, this.listWidth, 20, "Config");
+		configModButton = new GuiButton(20, 10, this.height - 60, this.listWidth, 20, "config");
 
 		this.buttonList.add(configModButton);
 		this.modList = new GuiSlotModListCore(this, mods, listWidth);

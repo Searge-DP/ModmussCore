@@ -20,6 +20,7 @@ import modmuss50.mods.core.fluid.BlankFluidH;
 import modmuss50.mods.core.fluid.BlockFluid;
 import modmuss50.mods.core.fluid.BlockFluidH;
 import modmuss50.mods.core.mod.ModRegistry;
+import modmuss50.mods.lib.config.ConfigHandler;
 import modmuss50.mods.lib.mod.ISourceMod;
 import modmuss50.mods.lib.multiblock.MultiblockEventHandler;
 import modmuss50.mods.lib.multiblock.MultiblockServerTickHandler;
@@ -36,8 +37,8 @@ public class Core implements ISourceMod {
 
 	public static final String MODID = "modmussCore";
 	public static final String NAME = "Modmuss50 Core";
-	public static ModLogger logger = ModLogger.getLogger(NAME);
 	public static final String VERSION = "@MODVERSION@"; //This gets changed with the build script
+	public static ModLogger logger = ModLogger.getLogger(NAME);
 	public static Fluid blankFluid;
 	public static Block blockFluid;
 	public static Fluid blankFluidH;
@@ -46,6 +47,8 @@ public class Core implements ISourceMod {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModRegistry.registerMod(this);
+		//Set to false for a public build
+		ConfigHandler.loadConfig(false);
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 	}

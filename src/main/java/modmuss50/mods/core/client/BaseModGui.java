@@ -28,7 +28,7 @@ public class BaseModGui extends GuiScreen {
 	@Override
 	public void drawScreen(int x, int y, float f) {
 		this.drawDefaultBackground();
-		this.drawCenteredString(this.fontRendererObj, "Config screen", this.width / 2, 40, 0xFFFFFF);
+		this.drawCenteredString(this.fontRendererObj, "config screen", this.width / 2, 40, 0xFFFFFF);
 		drawScreen2(x, y, f);
 		super.drawScreen(x, y, f);
 	}
