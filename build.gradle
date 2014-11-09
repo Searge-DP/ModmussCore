@@ -9,10 +9,6 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-		maven { 
-		    name = "spring"
-		    url "http://repo.springsource.org/plugins-release" 
-		}
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
@@ -36,8 +32,16 @@ minecraft {
 
 group = 'ModmussCore'
 
+
+repositories {
+    maven { 
+        name = "spring"
+        url "http://repo.springsource.org/plugins-release" 
+	}
+}
+
 dependencies {
-    runtime "com.googlecode.json-simple:json-simple:1.1.1"
+    runtime "com.googlecode.json-simple:json-simple:1.1"
 }
 
 
