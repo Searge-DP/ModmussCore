@@ -111,4 +111,8 @@ public class Location {
 	public boolean compare(int x, int y, int z) {
 		return (this.x == x && this.y == y && this.z == z);
 	}
+
+	public Location getLocation(ForgeDirection dir) {
+		return new Location(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+	}
 }

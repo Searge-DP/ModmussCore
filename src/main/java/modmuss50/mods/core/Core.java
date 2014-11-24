@@ -32,7 +32,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-@Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION, guiFactory = "modmuss50.mods.core.client.config.ConfigGuiFactory")
+@Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION)
 public class Core implements ISourceMod {
 
 	public static final String MODID = "modmussCore";
