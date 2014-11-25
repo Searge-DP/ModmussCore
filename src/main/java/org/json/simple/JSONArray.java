@@ -1,4 +1,8 @@
 /*
+ * This file was made by modmuss50. View the licence file to see what licence this is is on. You can always ask me if you would like to use part or all of this file in your project.
+ */
+
+/*
  * $Id: JSONArray.java,v 1.1 2006/04/15 14:10:48 platform Exp $
  * Created on 2006-4-10
  */
