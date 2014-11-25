@@ -1,7 +1,7 @@
 package modmuss50.mmlTests;
 
 
-import modmuss50.mods.mml.ModmussMod;
+import me.modmuss50.mods.mml.ModmussMod;
 
 
 public class TestMod extends ModmussMod {

@@ -2,7 +2,7 @@ package io.github.asyncronous.toast.ui;
 
 import io.github.asyncronous.toast.ToasterConstants;
 import io.github.asyncronous.toast.thread.ToastAnimator;
-import modmuss50.mods.lib.util.JavaUtil;
+import me.modmuss50.mods.lib.util.JavaUtil;
 
 import javax.swing.*;
 import java.awt.*;
