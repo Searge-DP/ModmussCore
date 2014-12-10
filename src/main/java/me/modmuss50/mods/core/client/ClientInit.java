@@ -20,6 +20,7 @@ public class ClientInit {
 		render = RenderingRegistry.getNextAvailableRenderId();
 		MinecraftForge.EVENT_BUS.register(new MainMenuRenderer());
 		FMLCommonHandler.instance().bus().register(new MultiblockClientTickHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockHighlightHandler());
 	}
 
 	public static void preInt() {
