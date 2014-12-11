@@ -34,7 +34,7 @@ public class MainMenuRenderer {
 		if (!hasLoaded && ConfigHandler.getBoolean("showLoadedMessage")) {
 			try {
 				Toaster.instance().pop("Minecraft has now loaded", new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/assets/modmusscore/toast/icons/error.png"))));
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			hasLoaded = true;
