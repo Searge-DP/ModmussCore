@@ -117,7 +117,7 @@ public final class Toaster {
 
 	private Image createImage(String name) {
 		try {
-			InputStream stream = Toaster.class.getResourceAsStream("/assets/toast/icons/" + name + ".png");
+			InputStream stream = Toaster.class.getResourceAsStream("/assets/modmusscore/toast/icons/" + name + ".png");
 
 			if (stream == null) {
 				throw new NullPointerException("Stream == null");
