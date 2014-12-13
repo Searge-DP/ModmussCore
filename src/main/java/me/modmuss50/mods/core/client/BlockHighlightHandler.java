@@ -18,6 +18,8 @@ import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+
 public class BlockHighlightHandler {
 
 	@SideOnly(Side.CLIENT)
@@ -29,7 +31,7 @@ public class BlockHighlightHandler {
 			int z = e.target.blockZ;
 			Block block = e.player.worldObj.getBlock(x, y, z);
 			if (block instanceof ICustomHighlight) {
-				AxisAlignedBB[] aabbs = ((ICustomHighlight) block).getBoxes(e.player.worldObj, x, y, z, e.player);
+				ArrayList<AxisAlignedBB> aabbs = ((ICustomHighlight) block).getBoxes(e.player.worldObj, x, y, z, e.player);
 				if(aabbs == null)
 					return;
 				Vec3 pos = e.player.getPosition(e.partialTicks);
