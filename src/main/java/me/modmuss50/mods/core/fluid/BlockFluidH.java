@@ -21,7 +21,7 @@ public class BlockFluidH extends BlockFluidClassic {
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		StillIcon = iconRegister.registerIcon("sourcecore:fluidh");
+		StillIcon = iconRegister.registerIcon("modmusscore:fluidh");
 	}
 
 	@Override
