@@ -14,9 +14,8 @@ import java.util.Map;
 
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class FmlLoadingCore implements IFMLLoadingPlugin {
-
-
 	public static File mcDir;
+	public static boolean runtimeDeobfEnabled = false;
 
 	//This is the earliest place I can get code to run without jar patching.
 	public FmlLoadingCore() {
@@ -33,7 +32,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[]{"Transformer"};
+		return new String[]{"me.modmuss50.mods.core.Transformer"};
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 
 	@Override
 	public void injectData(Map<String, Object> data) {
-
+		runtimeDeobfEnabled = (Boolean) data.get("runtimeDeobfuscationEnabled");
 	}
 
 	@Override
