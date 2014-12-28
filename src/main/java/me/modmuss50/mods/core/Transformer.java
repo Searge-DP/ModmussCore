@@ -5,15 +5,43 @@
 package me.modmuss50.mods.core;
 
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.launchwrapper.IClassTransformer;
+import org.apache.logging.log4j.Level;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Transformer implements IClassTransformer {
 
-	@Override
-	public byte[] transform(String name, String decodedName, byte[] code) {
-		return code;
+	private static Map<String, byte[]> classBytes = new HashMap<String, byte[]>();
+	private static Map<String, String> classSources = new HashMap<String, String>();
+
+	/**
+	 * Add a new jarmod class, overwriting any previous class of the same name
+	 * @param className Name of class (Java source name, .-separated)
+	 * @param bytes Raw class bytes
+	 * @param source Informative description of where this class came from (filename)
+	 */
+	public static void put(String className, byte[] bytes, String source) {
+		classBytes.put(className, bytes);
+		classSources.put(className, source);
 	}
 
+	public static int size() {
+		return classBytes.size();
+	}
+
+	public byte[] transform(String name, String transformedName, byte[] bytes) {
+
+		if (classBytes.containsKey(name)) {
+			FMLLog.log(Level.INFO, "[ModmussCore] Patching " + name + " from " + classSources.get(name));
+
+			return classBytes.get(name);
+		}
+
+		return bytes;
+	}
 
 }
