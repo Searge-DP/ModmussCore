@@ -4,8 +4,11 @@
 
 package me.modmuss50.mods.lib;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class Location {
@@ -47,6 +50,13 @@ public class Location {
 			this.y = blockLookedAt.blockY;
 			this.z = blockLookedAt.blockZ;
 		}
+	}
+
+	public Location(TileEntity par1)
+	{
+		this.x = par1.xCoord;
+		this.y = par1.yCoord;
+		this.z = par1.zCoord;
 	}
 
 	public boolean equals(Location toTest) {
@@ -119,4 +129,131 @@ public class Location {
 	public Location getLocation(ForgeDirection dir) {
 		return new Location(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
 	}
+
+	public Location modifyPositionFromSide(ForgeDirection side, int amount)
+	{
+		switch (side.ordinal())
+		{
+			case 0:
+				this.y -= amount;
+				break;
+			case 1:
+				this.y += amount;
+				break;
+			case 2:
+				this.z -= amount;
+				break;
+			case 3:
+				this.z += amount;
+				break;
+			case 4:
+				this.x -= amount;
+				break;
+			case 5:
+				this.x += amount;
+				break;
+		}
+		return this;
+	}
+
+	public Location modifyPositionFromSide(ForgeDirection side)
+	{
+		return this.modifyPositionFromSide(side, 1);
+	}
+
+	/**
+	 * This will load the chunk.
+	 */
+	public TileEntity getTileEntity(IBlockAccess world)
+	{
+		return world.getTileEntity(this.x, this.y, this.z);
+	}
+
+	public final Location clone()
+	{
+		return new Location(this.x, this.y, this.z);
+	}
+
+	/**
+	 * No chunk load: returns null if chunk to side is unloaded
+	 */
+	public TileEntity getTileEntityOnSide(World world, ForgeDirection side)
+	{
+		int x = this.x;
+		int y = this.y;
+		int z = this.z;
+		switch (side.ordinal())
+		{
+			case 0:
+				y--;
+				break;
+			case 1:
+				y++;
+				break;
+			case 2:
+				z--;
+				break;
+			case 3:
+				z++;
+				break;
+			case 4:
+				x--;
+				break;
+			case 5:
+				x++;
+				break;
+			default:
+				return null;
+		}
+		if (world.blockExists(x, y, z))
+		{
+			return world.getTileEntity(x, y, z);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * No chunk load: returns null if chunk to side is unloaded
+	 */
+	public TileEntity getTileEntityOnSide(World world, int side)
+	{
+		int x = this.x;
+		int y = this.y;
+		int z = this.z;
+		switch (side)
+		{
+			case 0:
+				y--;
+				break;
+			case 1:
+				y++;
+				break;
+			case 2:
+				z--;
+				break;
+			case 3:
+				z++;
+				break;
+			case 4:
+				x--;
+				break;
+			case 5:
+				x++;
+				break;
+			default:
+				return null;
+		}
+		if (world.blockExists(x, y, z))
+		{
+			return world.getTileEntity(x, y, z);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 }
