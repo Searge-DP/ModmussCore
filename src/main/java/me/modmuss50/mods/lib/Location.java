@@ -11,12 +11,19 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class Location {
+public class Location implements Comparable<Location> {
 	public int x;
 	public int y;
 	public int z;
+	public int depth;
 
 	public Location(int x, int y, int z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	public Location(int x, int y, int z, int depth) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -52,8 +59,7 @@ public class Location {
 		}
 	}
 
-	public Location(TileEntity par1)
-	{
+	public Location(TileEntity par1) {
 		this.x = par1.xCoord;
 		this.y = par1.yCoord;
 		this.z = par1.zCoord;
@@ -130,10 +136,8 @@ public class Location {
 		return new Location(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
 	}
 
-	public Location modifyPositionFromSide(ForgeDirection side, int amount)
-	{
-		switch (side.ordinal())
-		{
+	public Location modifyPositionFromSide(ForgeDirection side, int amount) {
+		switch (side.ordinal()) {
 			case 0:
 				this.y -= amount;
 				break;
@@ -156,34 +160,29 @@ public class Location {
 		return this;
 	}
 
-	public Location modifyPositionFromSide(ForgeDirection side)
-	{
+	public Location modifyPositionFromSide(ForgeDirection side) {
 		return this.modifyPositionFromSide(side, 1);
 	}
 
 	/**
 	 * This will load the chunk.
 	 */
-	public TileEntity getTileEntity(IBlockAccess world)
-	{
+	public TileEntity getTileEntity(IBlockAccess world) {
 		return world.getTileEntity(this.x, this.y, this.z);
 	}
 
-	public final Location clone()
-	{
+	public final Location clone() {
 		return new Location(this.x, this.y, this.z);
 	}
 
 	/**
 	 * No chunk load: returns null if chunk to side is unloaded
 	 */
-	public TileEntity getTileEntityOnSide(World world, ForgeDirection side)
-	{
+	public TileEntity getTileEntityOnSide(World world, ForgeDirection side) {
 		int x = this.x;
 		int y = this.y;
 		int z = this.z;
-		switch (side.ordinal())
-		{
+		switch (side.ordinal()) {
 			case 0:
 				y--;
 				break;
@@ -205,12 +204,9 @@ public class Location {
 			default:
 				return null;
 		}
-		if (world.blockExists(x, y, z))
-		{
+		if (world.blockExists(x, y, z)) {
 			return world.getTileEntity(x, y, z);
-		}
-		else
-		{
+		} else {
 			return null;
 		}
 	}
@@ -218,13 +214,11 @@ public class Location {
 	/**
 	 * No chunk load: returns null if chunk to side is unloaded
 	 */
-	public TileEntity getTileEntityOnSide(World world, int side)
-	{
+	public TileEntity getTileEntityOnSide(World world, int side) {
 		int x = this.x;
 		int y = this.y;
 		int z = this.z;
-		switch (side)
-		{
+		switch (side) {
 			case 0:
 				y--;
 				break;
@@ -246,14 +240,19 @@ public class Location {
 			default:
 				return null;
 		}
-		if (world.blockExists(x, y, z))
-		{
+		if (world.blockExists(x, y, z)) {
 			return world.getTileEntity(x, y, z);
-		}
-		else
-		{
+		} else {
 			return null;
 		}
 	}
 
+	public int getDepth() {
+		return depth;
+	}
+
+	@Override
+	public int compareTo(Location o) {
+		return ((Integer) depth).compareTo(o.depth);
+	}
 }
