@@ -72,7 +72,7 @@ task deobfJar(type: Jar) {
 
 jar {
     manifest {
-        attributes (['FMLCorePlugin': 'me.modmuss50.network.FmlLoadingCore', 'FMLCorePluginContainsFMLMod': 'true'])
+        attributes (['FMLCorePlugin': 'me.modmuss50.mods.core.FmlLoadingCore', 'FMLCorePluginContainsFMLMod': 'true'])
     }
     exclude "**/*.psd"
     appendix = 'mod'
