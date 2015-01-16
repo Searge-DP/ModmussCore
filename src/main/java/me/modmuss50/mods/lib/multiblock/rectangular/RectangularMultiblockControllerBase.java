@@ -8,6 +8,7 @@ import me.modmuss50.mods.lib.CoordTriplet;
 import me.modmuss50.mods.lib.multiblock.MultiblockControllerBase;
 import me.modmuss50.mods.lib.multiblock.MultiblockValidationException;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class RectangularMultiblockControllerBase extends
@@ -70,7 +71,7 @@ public abstract class RectangularMultiblockControllerBase extends
 				for (int z = minimumCoord.z; z <= maximumCoord.z; z++) {
 					// Okay, figure out what sort of block this should be.
 
-					te = this.worldObj.getTileEntity(x, y, z);
+					te = this.worldObj.getTileEntity(new BlockPos(x, y, z));
 					if (te instanceof RectangularMultiblockTileEntityBase) {
 						part = (RectangularMultiblockTileEntityBase) te;
 

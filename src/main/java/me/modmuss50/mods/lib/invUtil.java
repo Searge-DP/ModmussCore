@@ -5,12 +5,12 @@
 package me.modmuss50.mods.lib;
 
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class invUtil {
 
-	private static final List<ForgeDirection> directions = new ArrayList<ForgeDirection>(Arrays.asList(ForgeDirection.VALID_DIRECTIONS));
+	private static final List<EnumFacing> directions = new ArrayList<EnumFacing>(Arrays.asList(EnumFacing.values()));
 
 	/* IINVENTORY HELPERS */
 
@@ -36,11 +36,11 @@ public class invUtil {
 	 */
 	public static int addToRandomInventoryAround(World world, int x, int y, int z, ItemStack stack) {
 		Collections.shuffle(directions);
-		for (ForgeDirection orientation : directions) {
+		for (EnumFacing orientation : directions) {
 			Position pos = new Position(x, y, z, orientation);
 			pos.moveForwards(1.0);
 
-			TileEntity tileInventory = world.getTileEntity((int) pos.x, (int) pos.y, (int) pos.z);
+			TileEntity tileInventory = world.getTileEntity(new BlockPos((int) pos.x, (int) pos.y, (int) pos.z));
 			ITransactor transactor = Transactor.getTransactorFor(tileInventory);
 			if (transactor != null && transactor.add(stack, orientation.getOpposite(), false).stackSize > 0) {
 				return transactor.add(stack, orientation.getOpposite(), true).stackSize;
@@ -63,13 +63,13 @@ public class invUtil {
 	 * @return amount used
 	 */
 	public static int addToInventory(World world, int x, int y, int z, ItemStack stack) {
-		Position pos = new Position(x, y, z, ForgeDirection.DOWN);
+		Position pos = new Position(x, y, z, EnumFacing.DOWN);
 
-		TileEntity tileInventory = world.getTileEntity((int) pos.x, (int) pos.y, (int) pos.z);
+		TileEntity tileInventory = world.getTileEntity(new BlockPos((int) pos.x, (int) pos.y, (int) pos.z));
 		ITransactor transactor = Transactor.getTransactorFor(tileInventory);
-		if (transactor != null && transactor.add(stack, ForgeDirection.DOWN, false).stackSize > 0) {
+		if (transactor != null && transactor.add(stack, EnumFacing.DOWN, false).stackSize > 0) {
 
-			return transactor.add(stack, ForgeDirection.DOWN, true).stackSize;
+			return transactor.add(stack, EnumFacing.DOWN, true).stackSize;
 		}
 		return 0;
 
@@ -104,9 +104,7 @@ public class invUtil {
 				adjacent = chest.adjacentChestZPos;
 			}
 
-			if (adjacent != null) {
-				return new InventoryLargeChest("", inv, adjacent);
-			}
+
 			return inv;
 		}
 		return inv;

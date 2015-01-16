@@ -5,9 +5,6 @@
 package me.modmuss50.mods.core.client;
 
 import com.google.common.base.Strings;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
 import me.modmuss50.mods.core.mod.ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -16,9 +13,13 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -89,7 +90,7 @@ public class GuSourceList extends GuiScreen {
 		this.modList = new GuiSlotModListCore(this, mods, listWidth);
 		this.modList.registerScrollButtons(this.buttonList, 7, 8);
 
-		textField = new GuiTextField(fontRendererObj, 10, 49, 38, 18);
+		textField = new GuiTextField(0 ,fontRendererObj, 10, 49, 38, 18);
 		textField.setFocused(false);
 		textField.setMaxStringLength(50);
 	}
@@ -104,7 +105,7 @@ public class GuSourceList extends GuiScreen {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(GuiButton button) throws IOException {
 		if (button.enabled) {
 			switch (button.id) {
 				case 6:

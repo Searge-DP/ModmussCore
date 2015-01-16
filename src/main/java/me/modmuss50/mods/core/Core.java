@@ -4,15 +4,7 @@
 
 package me.modmuss50.mods.core;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import me.modmuss50.mods.api.BrandingsAPI;
 import me.modmuss50.mods.core.Command.ModmussCommand;
 import me.modmuss50.mods.core.Logger.ModLogger;
@@ -35,6 +27,15 @@ import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION)
 public class Core implements ISourceMod {
@@ -62,13 +63,13 @@ public class Core implements ISourceMod {
 		blankFluid = new BlankFluid("modmusscore:fluid");
 		FluidRegistry.registerFluid(blankFluid);
 		FluidRegistry.registerFluid(new BlankFluid("BlankFluid"));
-		blockFluid = new BlockFluid("modmusscore:fluid").setBlockName("modmusscore:BlankFluid");
+		blockFluid = new BlockFluid("modmusscore:fluid").setUnlocalizedName("modmusscore:BlankFluid");
 		GameRegistry.registerBlock(blockFluid, "BlankFluid");
 
 		blankFluidH = new BlankFluidH("modmusscore:fluidH");
 		FluidRegistry.registerFluid(blankFluidH);
 		FluidRegistry.registerFluid(new BlankFluidH("BlankFluidH"));
-		blockFluidH = new BlockFluidH("modmusscore:fluidH").setBlockName("modmusscore:BlankFluidH");
+		blockFluidH = new BlockFluidH("modmusscore:fluidH").setUnlocalizedName("modmusscore:BlankFluidH");
 		GameRegistry.registerBlock(blockFluidH, "BlankFluidH");
 
 		//register the reto gen here
@@ -82,7 +83,7 @@ public class Core implements ISourceMod {
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		blankFluid.setIcons(BlockFluid.StillIcon);
+		//blankFluid.setIcons(BlockFluid.StillIcon);
 		//Inject the brandings here
 		BrandingsAPI.injectBrandings();
 

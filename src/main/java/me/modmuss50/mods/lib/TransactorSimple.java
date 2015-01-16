@@ -6,7 +6,7 @@ package me.modmuss50.mods.lib;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class TransactorSimple extends Transactor {
 	}
 
 	@Override
-	public int inject(ItemStack stack, ForgeDirection orientation, boolean doAdd) {
+	public int inject(ItemStack stack, EnumFacing orientation, boolean doAdd) {
 		List<InventoryIterator.IInvSlot> filledSlots = new ArrayList<InventoryIterator.IInvSlot>(inventory.getSizeInventory());
 		List<InventoryIterator.IInvSlot> emptySlots = new ArrayList<InventoryIterator.IInvSlot>(inventory.getSizeInventory());
 		for (InventoryIterator.IInvSlot slot : InventoryIterator.getIterable(inventory, orientation)) {
@@ -103,7 +103,7 @@ public class TransactorSimple extends Transactor {
 	}
 
 	@Override
-	public ItemStack remove(IStackFilter filter, ForgeDirection orientation, boolean doRemove) {
+	public ItemStack remove(IStackFilter filter, EnumFacing orientation, boolean doRemove) {
 		for (InventoryIterator.IInvSlot slot : InventoryIterator.getIterable(inventory, orientation)) {
 			ItemStack stack = slot.getStackInSlot();
 			if (stack != null && slot.canTakeStackFromSlot(stack) && filter.matches(stack)) {

@@ -4,10 +4,11 @@
 
 package me.modmuss50.mods.core.client;
 
-import cpw.mods.fml.client.FMLClientHandler;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class BaseModGui extends GuiScreen {
 	public GuiScreen parent;

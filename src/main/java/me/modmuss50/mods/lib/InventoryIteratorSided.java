@@ -6,24 +6,24 @@ package me.modmuss50.mods.lib;
 
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 import java.util.Iterator;
 
 public class InventoryIteratorSided implements Iterable<InventoryIterator.IInvSlot> {
 
 	private final ISidedInventory inv;
-	private final int side;
+	private final EnumFacing side;
 
-	InventoryIteratorSided(ISidedInventory inv, ForgeDirection side) {
+	InventoryIteratorSided(ISidedInventory inv, EnumFacing side) {
 		this.inv = inv;
-		this.side = side.ordinal();
+		this.side = side;
 	}
 
 	@Override
 	public Iterator<InventoryIterator.IInvSlot> iterator() {
 		return new Iterator<InventoryIterator.IInvSlot>() {
-			int[] slots = inv.getAccessibleSlotsFromSide(side);
+			int[] slots = inv.getSlotsForFace(side);
 			int index = 0;
 
 			@Override

@@ -4,11 +4,12 @@
 
 package me.modmuss50.mods.api;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+
 import me.modmuss50.mods.core.ConfigurationHandler;
 import me.modmuss50.mods.core.Core;
 import me.modmuss50.mods.core.mod.ModRegistry;
 import me.modmuss50.mods.lib.ReflectUtilities;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

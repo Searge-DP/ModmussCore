@@ -105,7 +105,7 @@ public class StackHelper {
 			}
 		}
 		if (matchNBT) {
-			if (a.stackTagCompound != null && !a.stackTagCompound.equals(b.stackTagCompound)) {
+			if (a.hasTagCompound() && !a.getTagCompound().equals(b.getTagCompound())) {
 				return false;
 			}
 		}
