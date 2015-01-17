@@ -19,16 +19,16 @@ import java.util.Map;
 
 public class FluidRenderer {
 
-		public static final int DISPLAY_STAGES = 100;
-		private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
-		private static Map<Fluid, int[]> flowingRenderCache = new HashMap<Fluid, int[]>();
-		private static Map<Fluid, int[]> stillRenderCache = new HashMap<Fluid, int[]>();
-		private static final RenderEntityBlock.RenderInfo liquidBlock = new RenderEntityBlock.RenderInfo();
+	public static final int DISPLAY_STAGES = 100;
+	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
+	private static Map<Fluid, int[]> flowingRenderCache = new HashMap<Fluid, int[]>();
+	private static Map<Fluid, int[]> stillRenderCache = new HashMap<Fluid, int[]>();
+	private static final RenderEntityBlock.RenderInfo liquidBlock = new RenderEntityBlock.RenderInfo();
 
-		/**
-		 * Deactivate default constructor
-		 */
-		private FluidRenderer() {
+	/**
+	 * Deactivate default constructor
+	 */
+	private FluidRenderer() {
 
 	}
 

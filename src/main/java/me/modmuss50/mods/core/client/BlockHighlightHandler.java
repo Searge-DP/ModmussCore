@@ -32,7 +32,7 @@ public class BlockHighlightHandler {
 			Block block = e.player.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock();
 			if (block instanceof ICustomHighlight) {
 				ArrayList<AxisAlignedBB> aabbs = ((ICustomHighlight) block).getBoxes(e.player.worldObj, x, y, z, e.player);
-				if(aabbs == null)
+				if (aabbs == null)
 					return;
 				BlockPos pos = e.player.getPosition();
 				GL11.glEnable(GL11.GL_BLEND);

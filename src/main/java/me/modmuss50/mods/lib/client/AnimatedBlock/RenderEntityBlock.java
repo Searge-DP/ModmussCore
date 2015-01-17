@@ -141,7 +141,7 @@ public class RenderEntityBlock extends Render {
 		shadowSize = entity.shadowSize;
 		World world = entity.worldObj;
 		RenderInfo util = new RenderInfo();
-		if(entity.blockState != null)
+		if (entity.blockState != null)
 			util.blockState = entity.blockState;
 		util.resource = entity.resource;
 
@@ -199,7 +199,7 @@ public class RenderEntityBlock extends Render {
 		BlockPos pos = new BlockPos(x, y, z);
 		renderer.startDrawingQuads();
 		renderer.setVertexFormat(DefaultVertexFormats.BLOCK);
-		renderer.setTranslation((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()));
+		renderer.setTranslation((double) (-pos.getX()), (double) (-pos.getY()), (double) (-pos.getZ()));
 
 		GlStateManager.scale(info.maxX - info.minX, info.maxY - info.minY, info.maxZ - info.minZ);
 		renderBlocks.renderBlock(info.blockState, pos, blockAccess, renderer);

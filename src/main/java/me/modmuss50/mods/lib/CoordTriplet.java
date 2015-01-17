@@ -170,7 +170,7 @@ public class CoordTriplet implements Comparable {
 		}
 	}
 
-	public BlockPos getPos(){
+	public BlockPos getPos() {
 		return new BlockPos(x, y, z);
 	}
 }

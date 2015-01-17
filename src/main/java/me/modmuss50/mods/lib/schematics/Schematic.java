@@ -99,7 +99,7 @@ public class Schematic {
 //									tileEntity.getPos() = x + sx;
 //									tileEntity.yCoord = y + sy;
 //									tileEntity.zCoord = z + sz;
-									world.setTileEntity(new BlockPos(x + sx, y + sy, z + sz) , tileEntity);
+									world.setTileEntity(new BlockPos(x + sx, y + sy, z + sz), tileEntity);
 								}
 							}
 						}

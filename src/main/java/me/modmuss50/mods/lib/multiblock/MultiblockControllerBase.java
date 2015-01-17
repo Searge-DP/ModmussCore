@@ -146,7 +146,7 @@ public abstract class MultiblockControllerBase {
 			if (part.getPos().getX() < minimumCoord.x) {
 				minimumCoord.x = part.getPos().getX();
 			}
-			if (part.getPos().getY()  < minimumCoord.y) {
+			if (part.getPos().getY() < minimumCoord.y) {
 				minimumCoord.y = part.getPos().getY();
 			}
 			if (part.getPos().getZ() < minimumCoord.z) {
@@ -490,9 +490,9 @@ public abstract class MultiblockControllerBase {
 		} else if (updateServer()) {
 			// If this returns true, the server has changed its internal data.
 			// If our chunks are loaded (they should be), we must mark our chunks as dirty.
-			if (minimumCoord != null && maximumCoord != null ){//&&
-					//this.worldObj.checkChunksExist(minimumCoord.x, minimumCoord.y, minimumCoord.z,
-					//		maximumCoord.x, maximumCoord.y, maximumCoord.z)) {
+			if (minimumCoord != null && maximumCoord != null) {//&&
+				//this.worldObj.checkChunksExist(minimumCoord.x, minimumCoord.y, minimumCoord.z,
+				//		maximumCoord.x, maximumCoord.y, maximumCoord.z)) {
 				int minChunkX = minimumCoord.x >> 4;
 				int minChunkZ = minimumCoord.z >> 4;
 				int maxChunkX = maximumCoord.x >> 4;
@@ -623,13 +623,13 @@ public abstract class MultiblockControllerBase {
 		maximumCoord = new CoordTriplet(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
 
 		for (IMultiblockPart part : connectedParts) {
-			if (part.getPos().getX()  < minimumCoord.x) {
+			if (part.getPos().getX() < minimumCoord.x) {
 				minimumCoord.x = part.getPos().getX();
 			}
-			if (part.getPos().getX()  > maximumCoord.x) {
+			if (part.getPos().getX() > maximumCoord.x) {
 				maximumCoord.x = part.getPos().getX();
 			}
-			if (part.getPos().getY()  < minimumCoord.y) {
+			if (part.getPos().getY() < minimumCoord.y) {
 				minimumCoord.y = part.getPos().getY();
 			}
 			if (part.getPos().getY() > maximumCoord.y) {

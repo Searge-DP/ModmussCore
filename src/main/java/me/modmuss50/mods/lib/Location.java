@@ -168,7 +168,7 @@ public class Location implements Comparable<Location> {
 	 * This will load the chunk.
 	 */
 	public TileEntity getTileEntity(IBlockAccess world) {
-		return world.getTileEntity(new BlockPos( this.x, this.y, this.z));
+		return world.getTileEntity(new BlockPos(this.x, this.y, this.z));
 	}
 
 	public final Location clone() {

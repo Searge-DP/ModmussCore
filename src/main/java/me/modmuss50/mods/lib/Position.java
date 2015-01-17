@@ -134,7 +134,7 @@ public class Position {
 		return new Position(p.x < x ? x : p.x, p.y < y ? y : p.y, p.z < z ? z : p.z);
 	}
 
-	public EnumFacing getFace(){
+	public EnumFacing getFace() {
 		return Functions.getDirectionFromInt(orientation.ordinal());
 	}
 

@@ -90,7 +90,7 @@ public class GuSourceList extends GuiScreen {
 		this.modList = new GuiSlotModListCore(this, mods, listWidth);
 		this.modList.registerScrollButtons(this.buttonList, 7, 8);
 
-		textField = new GuiTextField(0 ,fontRendererObj, 10, 49, 38, 18);
+		textField = new GuiTextField(0, fontRendererObj, 10, 49, 38, 18);
 		textField.setFocused(false);
 		textField.setMaxStringLength(50);
 	}
