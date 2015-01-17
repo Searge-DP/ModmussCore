@@ -4,9 +4,10 @@
 
 package me.modmuss50.mods.lib.mod;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import me.modmuss50.mods.core.client.BaseModGui;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface ISourceMod {
 

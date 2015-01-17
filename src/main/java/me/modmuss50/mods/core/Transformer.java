@@ -5,8 +5,8 @@
 package me.modmuss50.mods.core;
 
 
-import cpw.mods.fml.common.FMLLog;
 import net.minecraft.launchwrapper.IClassTransformer;
+import net.minecraftforge.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
 import java.util.HashMap;
@@ -20,9 +20,10 @@ public class Transformer implements IClassTransformer {
 
 	/**
 	 * Add a new jarmod class, overwriting any previous class of the same name
+	 *
 	 * @param className Name of class (Java source name, .-separated)
-	 * @param bytes Raw class bytes
-	 * @param source Informative description of where this class came from (filename)
+	 * @param bytes     Raw class bytes
+	 * @param source    Informative description of where this class came from (filename)
 	 */
 	public static void put(String className, byte[] bytes, String source) {
 		classBytes.put(className, bytes);

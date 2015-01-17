@@ -120,7 +120,7 @@ public class MultiblockWorldRegistry {
 						continue;
 					}
 
-					if (worldObj.getTileEntity(coord.x, coord.y, coord.z) != orphan) {
+					if (worldObj.getTileEntity(coord.getPos()) != orphan) {
 						// This block has been replaced by another.
 						continue;
 					}

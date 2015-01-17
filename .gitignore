@@ -1,4 +1,8 @@
 /bin
+/out
+/run
 /schematic
 /.gradle
 *.iml
+
+ModmussCore.iws

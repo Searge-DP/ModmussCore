@@ -5,14 +5,14 @@
 package me.modmuss50.mods.core;
 
 
-import cpw.mods.fml.relauncher.FMLInjectionData;
-import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import me.modmuss50.mods.mml.ModScanner;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
+import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 import java.io.File;
 import java.util.Map;
 
-@IFMLLoadingPlugin.MCVersion("1.7.10")
+@IFMLLoadingPlugin.MCVersion("1.8")
 public class FmlLoadingCore implements IFMLLoadingPlugin {
 	public static File mcDir;
 	public static boolean runtimeDeobfEnabled = false;

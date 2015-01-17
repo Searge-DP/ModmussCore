@@ -9,10 +9,8 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -34,7 +32,7 @@ public class GuiRenderHelper {
 		int _tankSizeMax = 60;
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		FluidTankInfo[] tanks = tile.getTankInfo(ForgeDirection.UNKNOWN);
+		FluidTankInfo[] tanks = tile.getTankInfo(EnumFacing.EAST);
 		int n = tanks.length > 3 ? 3 : tanks.length;
 		if (n > 0) {
 			for (int i = 0; i < n; ++i) {
@@ -56,9 +54,9 @@ public class GuiRenderHelper {
 		if (fluid == null)
 			return;
 
-		IIcon icon = fluid.getIcon(stack);
-		if (icon == null)
-			icon = Blocks.flowing_lava.getIcon(0, 0);
+//		IIcon icon = fluid.getIcon(stack);
+//		if (icon == null)
+//			icon = Blocks.flowing_lava.getIcon(0, 0);
 
 		int vertOffset = 0;
 
@@ -75,7 +73,7 @@ public class GuiRenderHelper {
 
 			bindTexture(fluid, gui);
 
-			gui.drawTexturedModelRectFromIcon(xOffset, yOffset - texHeight - vertOffset, icon, 16, texHeight);
+			//	gui.drawTexturedModelRectFromIcon(xOffset, yOffset - texHeight - vertOffset, icon, 16, texHeight);
 			vertOffset = vertOffset + 16;
 		}
 
