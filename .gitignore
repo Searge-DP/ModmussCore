@@ -1,4 +1,12 @@
 /bin
+/out
+/run
 /schematic
 /.gradle
 *.iml
+/.metadata
+/.settings
+./classpath
+
+ModmussCore.iws
+ModmussCore.ipr
