@@ -23,7 +23,7 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f, int a) {
 		FluidStack liquid = new FluidStack(Core.blankFluid, 100);
 		if (tileentity instanceof IHighRes && ((IHighRes) tileentity).useHighRes()) {
 			liquid = new FluidStack(Core.blankFluidH, 100);
@@ -32,7 +32,7 @@ public class RenderAnimatedTile extends TileEntitySpecialRenderer {
 		if (liquid == null || liquid.amount <= 0) {
 			return;
 		}
-		int[] displayList = FluidRenderer.getFluidDisplayLists(liquid, tileentity.getWorldObj(), false);
+		int[] displayList = FluidRenderer.getFluidDisplayLists(liquid, tileentity.getWorld(), false);
 		if (displayList == null) {
 			return;
 		}

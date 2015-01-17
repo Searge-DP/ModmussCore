@@ -5,12 +5,12 @@
 package me.modmuss50.mods.lib.retroGenerator;
 
 import com.google.common.collect.Lists;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import me.modmuss50.mods.lib.ChunkCoord;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.world.ChunkEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,11 +26,11 @@ public class RetroactiveWorldGenerator {
 	}
 
 	private RetroGenSaveData getRetroGenSaveData(World world) {
-		RetroGenSaveData data = (RetroGenSaveData) world.perWorldStorage.loadData(RetroGenSaveData.class, retroGenSaveDataName);
+		RetroGenSaveData data = (RetroGenSaveData) world.getPerWorldStorage().loadData(RetroGenSaveData.class, retroGenSaveDataName);
 
 		if (data == null) {
 			data = new RetroGenSaveData(retroGenSaveDataName);
-			world.perWorldStorage.setData(retroGenSaveDataName, data);
+			world.getPerWorldStorage().setData(retroGenSaveDataName, data);
 		}
 
 		return data;

@@ -4,9 +4,10 @@
 
 package me.modmuss50.mods.mml;
 
-import cpw.mods.fml.relauncher.FMLInjectionData;
+
 import me.modmuss50.mods.core.FmlLoadingCore;
 import net.minecraft.launchwrapper.LaunchClassLoader;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import java.io.File;
 import java.net.MalformedURLException;

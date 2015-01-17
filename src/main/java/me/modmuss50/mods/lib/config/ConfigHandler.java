@@ -4,8 +4,8 @@
 
 package me.modmuss50.mods.lib.config;
 
-import cpw.mods.fml.relauncher.FMLInjectionData;
 import me.modmuss50.mods.core.Core;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

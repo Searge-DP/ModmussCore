@@ -4,11 +4,8 @@
 
 package me.modmuss50.mods.core.client;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import io.github.asyncronous.toast.Toaster;
-import me.modmuss50.mods.core.Core;
 import me.modmuss50.mods.core.mod.ModRegistry;
 import me.modmuss50.mods.lib.config.ConfigHandler;
 import net.minecraft.client.Minecraft;
@@ -16,10 +13,12 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.IOException;
 import java.util.List;
 
 public class MainMenuRenderer {
@@ -73,10 +72,10 @@ public class MainMenuRenderer {
 		if (!ConfigHandler.getBoolean("mainMenuTweaks"))
 			return;
 		if (event.gui instanceof GuiMainMenu) {
-			event.gui.drawString(Minecraft.getMinecraft().fontRenderer, "Loaded mods: " + ModRegistry.mods.size(), 1, 25, 16777215);
+			event.gui.drawString(Minecraft.getMinecraft().fontRendererObj, "Loaded mods: " + ModRegistry.mods.size(), 1, 25, 16777215);
 
 			for (int i = 0; i < ModRegistry.mods.size(); i++) {
-				event.gui.drawString(Minecraft.getMinecraft().fontRenderer, ModRegistry.mods.get(i).modName(), 11, 35 + (i * 10), 16777215);
+				event.gui.drawString(Minecraft.getMinecraft().fontRendererObj, ModRegistry.mods.get(i).modName(), 11, 35 + (i * 10), 16777215);
 			}
 		}
 	}
@@ -86,10 +85,10 @@ public class MainMenuRenderer {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void textureHook(TextureStitchEvent.Post event) {
-		if (event.map.getTextureType() == 0) {
-			Core.blankFluid.setIcons(Core.blockFluid.getBlockTextureFromSide(1));
-			Core.blankFluidH.setIcons(Core.blockFluidH.getBlockTextureFromSide(1));
-		}
+//		if (event.map.getTextureType() == 0) {
+//			Core.blankFluid.setIcons(Core.blockFluid.getBlockTextureFromSide(1));
+//			Core.blankFluidH.setIcons(Core.blockFluidH.getBlockTextureFromSide(1));
+//		}
 	}
 
 

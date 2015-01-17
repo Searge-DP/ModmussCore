@@ -10,6 +10,7 @@ public class Quat4d {
 	public double y;
 	public double z;
 	public double w;
+
 	public Quat4d() {
 	}
 

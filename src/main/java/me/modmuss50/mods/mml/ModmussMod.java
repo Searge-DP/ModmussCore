@@ -4,8 +4,8 @@
 
 package me.modmuss50.mods.mml;
 
-import cpw.mods.fml.common.Loader;
 
+import net.minecraftforge.fml.common.Loader;
 
 public class ModmussMod {
 

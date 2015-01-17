@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import java.io.InputStream;
@@ -87,7 +88,7 @@ public class Schematic {
 					for (int sx = 0; sx < schematic.width; sx++) {
 						Block block = Block.getBlockById(schematic.blocks[id]);
 						if (canplaceBlock(placeair, block)) {
-							world.setBlock(x + sx, y + sy, z + sz, block, schematic.data[id], 2);
+							world.setBlockState(new BlockPos(x + sx, y + sy, z + sz), block.getDefaultState());
 							placedBlocks += 1;
 						}
 						if (schematic.tileentities != null) {
@@ -95,10 +96,10 @@ public class Schematic {
 								NBTTagCompound tag = schematic.tileentities.getCompoundTagAt(il);
 								TileEntity tileEntity = TileEntity.createAndLoadEntity(tag);
 								if (tileEntity != null) {
-									tileEntity.xCoord = x + sx;
-									tileEntity.yCoord = y + sy;
-									tileEntity.zCoord = z + sz;
-									world.setTileEntity(x + sx, y + sy, z + sz, tileEntity);
+//									tileEntity.getPos() = x + sx;
+//									tileEntity.yCoord = y + sy;
+//									tileEntity.zCoord = z + sz;
+									world.setTileEntity(new BlockPos(x + sx, y + sy, z + sz), tileEntity);
 								}
 							}
 						}

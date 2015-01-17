@@ -4,7 +4,8 @@
 
 package me.modmuss50.mods.core.Logger;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,7 +31,7 @@ public class ModLogger {
 
 	public String getSide() {
 		if (FMLCommonHandler.instance().getSide().isClient()) {
-			return "client";
+			return "CLient";
 		}
 
 		if (FMLCommonHandler.instance().getSide().isServer()) {

@@ -4,7 +4,8 @@
 
 package me.modmuss50.mods.lib.util;
 
-import cpw.mods.fml.common.Loader;
+
+import net.minecraftforge.fml.common.Loader;
 
 public class ModUtil {
 
