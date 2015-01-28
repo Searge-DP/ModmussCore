@@ -52,7 +52,7 @@ public class StackHelper {
 	 *                    modified
 	 * @param mergeTarget - The target merge, this stack is modified if doMerge is set
 	 * @param doMerge     - To actually do the merge
-	 * @return The number of items that was successfully merged.
+	 * @return The number of item that was successfully merged.
 	 */
 	public int mergeStacks(ItemStack mergeSource, ItemStack mergeTarget, boolean doMerge) {
 		if (!canStacksMerge(mergeSource, mergeTarget))

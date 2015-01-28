@@ -65,7 +65,7 @@ public class TransactorSimple extends Transactor {
 	 * @param stack
 	 * @param injected Amount not to move?
 	 * @param doAdd
-	 * @return Return the number of items moved.
+	 * @return Return the number of item moved.
 	 */
 	protected int addToSlot(InventoryIterator.IInvSlot slot, ItemStack stack, int injected, boolean doAdd) {
 		int available = stack.stackSize - injected;

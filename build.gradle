@@ -90,4 +90,46 @@ artifacts {
     archives deobfJar
 }
 
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:///var/www/maven/")
+            pom {
+                groupId = "ModmussCore"
+                version = project.version
+                artifactId = project.archivesBaseName
+                project {
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description 'ModmussCore'
+                    url 'https://github.com/modmuss50/ModmussCore'
+                    scm {
+                        url 'https://github.com/modmuss50/ModmussCore'
+                        connection 'scm:git:git@github.com:modmuss50/ModmussCore.git'
+                        developerConnection 'scm:git:git@github.com:modmuss50/ModmussCore.git'
+                    }
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/modmuss50/ModmussCore/issues'
+                    }
+                    licenses {
+                        license {
+                            name 'License'
+                            url 'https://github.com/modmuss50/ModmussCore/blob/master/LICENSE'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'modmuss50'
+                            name 'modmuss50'
+                            roles { role 'developer' }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 sourceSets { main { output.resourcesDir = output.classesDir } }
