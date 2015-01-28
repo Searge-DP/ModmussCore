@@ -16,6 +16,8 @@ buildscript {
 }
 
 apply plugin: 'forge'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
