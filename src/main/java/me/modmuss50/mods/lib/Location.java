@@ -15,12 +15,21 @@ public class Location {
 	public int x;
 	public int y;
 	public int z;
+	public int depth;
 
 	public Location(int x, int y, int z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
+
+	public Location(int x, int y, int z, int depth) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.depth = depth;
+	}
+
 
 	public Location(int xCoord, int yCoord, int zCoord, ForgeDirection dir) {
 		this.x = xCoord + dir.offsetX;
@@ -254,6 +263,14 @@ public class Location {
 		{
 			return null;
 		}
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public int compareTo(Location o) {
+		return ((Integer)depth).compareTo(o.depth);
 	}
 
 }
