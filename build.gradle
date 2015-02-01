@@ -93,13 +93,13 @@ uploadArchives {
         mavenDeployer {
             repository(url: "file:///var/www/maven/")
             pom {
-                groupId = "ModmussCore-1.7"
+                groupId = "ModmussCore-17"
                 version = project.version
                 artifactId = project.archivesBaseName
                 project {
                     name project.archivesBaseName
                     packaging 'jar'
-                    description 'ModmussCore-1.7'
+                    description 'ModmussCore-17'
                     url 'https://github.com/modmuss50/ModmussCore'
                     scm {
                         url 'https://github.com/modmuss50/ModmussCore'
