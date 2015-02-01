@@ -16,6 +16,8 @@ buildscript {
 }
 
 apply plugin: 'forge'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
@@ -62,12 +64,14 @@ processResources
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     appendix = 'src'
+    classifier = 'src'
 }
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
     exclude "**/*.psd"
+    classifier = 'dev'
 }
 
 jar {
@@ -75,10 +79,53 @@ jar {
         attributes (['FMLCorePlugin': 'me.modmuss50.network.FmlLoadingCore', 'FMLCorePluginContainsFMLMod': 'true'])
     }
     exclude "**/*.psd"
-    appendix = 'mod'
+    appendix = 'universal'
+    classifier = 'universal'
 }
 
 artifacts {
     archives sourceJar
     archives deobfJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:///var/www/maven/")
+            pom {
+                groupId = "ModmussCore-1.7"
+                version = project.version
+                artifactId = project.archivesBaseName
+                project {
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description 'ModmussCore-1.7'
+                    url 'https://github.com/modmuss50/ModmussCore'
+                    scm {
+                        url 'https://github.com/modmuss50/ModmussCore'
+                        connection 'scm:git:git@github.com:modmuss50/ModmussCore.git'
+                        developerConnection 'scm:git:git@github.com:modmuss50/ModmussCore.git'
+                    }
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/modmuss50/ModmussCore/issues'
+                    }
+                    licenses {
+                        license {
+                            name 'License'
+                            url 'https://github.com/modmuss50/ModmussCore/blob/master/LICENSE'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'modmuss50'
+                            name 'modmuss50'
+                            roles { role 'developer' }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
