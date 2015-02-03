@@ -44,7 +44,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 
 	@Override
 	public String getSetupClass() {
-		return "me.modmuss50.mods.mml.JarPatcher";
+		return "me.modmuss50.mods.mml.ClassReplacer";
 	}
 
 	@Override
