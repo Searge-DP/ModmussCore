@@ -1,0 +1,6 @@
+#Use a hash tag to comment every line that should be ignored
+#
+#This is an example of using the mmc class replacement system
+#
+#This is a list of all class files to replace. This has not been tested with vanilla!
+me.modmuss50.network.init.initConfig
