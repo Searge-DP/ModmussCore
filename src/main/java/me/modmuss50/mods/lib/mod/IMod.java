@@ -9,7 +9,7 @@ import me.modmuss50.mods.core.client.BaseModGui;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface ISourceMod {
+public interface IMod {
 
 	@SideOnly(Side.CLIENT)
 	public BaseModGui settingsScreen();

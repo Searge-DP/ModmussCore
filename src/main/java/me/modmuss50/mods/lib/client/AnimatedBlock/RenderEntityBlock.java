@@ -27,6 +27,7 @@ public class RenderEntityBlock extends Render {
 	public static RenderEntityBlock INSTANCE = new RenderEntityBlock();
 	//protected RenderBlocks renderBlocks;
 
+
 	private RenderEntityBlock() {
 		super(Minecraft.getMinecraft().getRenderManager());
 		//renderBlocks = field_147909_c;

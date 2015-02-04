@@ -25,7 +25,9 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 		mcDir = (File) FMLInjectionData.data()[6];
 
 		//mml = Modmuss Mod Loader :)
-		System.out.println("Starting to mml mods");
+		System.out.println("Starting to load modmuss core");
+
+		//TODO fix all of this
 		//Look for jars in a folder and load them :)
 		ModScanner.loadMods();
 	}
@@ -42,7 +44,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 
 	@Override
 	public String getSetupClass() {
-		return "me.modmuss50.mods.mml.JarPatcher";
+		return "me.modmuss50.mods.mml.ClassReplacer";
 	}
 
 	@Override

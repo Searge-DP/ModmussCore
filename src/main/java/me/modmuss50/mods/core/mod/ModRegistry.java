@@ -4,40 +4,53 @@
 
 package me.modmuss50.mods.core.mod;
 
-import me.modmuss50.mods.lib.mod.ISourceMod;
+import me.modmuss50.mods.lib.mod.IMod;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ModRegistry {
 
-	public static ArrayList<ISourceMod> mods;
+	public static ArrayList<IMod> mods;
 	public static boolean hasInted = false;
 
-	public static void registerMod(ISourceMod classFile) {
+	public static void registerMod(IMod classFile) {
 		if (!hasInted) {
-			mods = new ArrayList<ISourceMod>();
+			mods = new ArrayList<IMod>();
 			hasInted = true;
 		}
 		mods.add(classFile);
+
+		//This sorts all the mods
+		Collections.sort(mods, new Comparator<IMod>() {
+			public int compare(IMod mod1, IMod mod2) {
+				return mod1.modName().compareTo(mod2.modName());
+			}
+		});
 	}
 
-	public static void removeMod(String modid) {
+
+	//Not sure why you want to do this?
+	public static boolean removeMod(String modid) {
 		if (!hasInted) {
-			mods = new ArrayList<ISourceMod>();
+			mods = new ArrayList<IMod>();
 			hasInted = true;
 		}
 		for (int i = 0; i < mods.size(); i++) {
 			if (mods.get(i).modId().equals(modid)) {
 				mods.remove(i);
+				return true;
 			}
 		}
+		return false;
 	}
 
 
 	//If you use this MAKE SURE you have a null check!
-	public ISourceMod getMod(String modid) {
+	public IMod getMod(String modid) {
 		if (!hasInted) {
-			mods = new ArrayList<ISourceMod>();
+			mods = new ArrayList<IMod>();
 			hasInted = true;
 		}
 		for (int i = 0; i < mods.size(); i++) {
