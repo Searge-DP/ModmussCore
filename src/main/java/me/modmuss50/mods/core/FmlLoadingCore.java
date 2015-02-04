@@ -29,7 +29,7 @@ public class FmlLoadingCore implements IFMLLoadingPlugin {
 
 		//TODO fix all of this
 		//Look for jars in a folder and load them :)
-//		ModScanner.loadMods();
+		ModScanner.loadMods();
 	}
 
 	@Override

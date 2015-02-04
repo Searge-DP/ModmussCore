@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import me.modmuss50.mods.core.client.BaseModGui;
 
-public interface ISourceMod {
+public interface IMod {
 
 	@SideOnly(Side.CLIENT)
 	public BaseModGui settingsScreen();

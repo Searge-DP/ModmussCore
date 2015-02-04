@@ -1,7 +1,11 @@
 package modmuss50.mmlTests;
 
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import me.modmuss50.mods.mml.ModmussMod;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 
 public class TestMod extends ModmussMod {
@@ -30,6 +34,8 @@ public class TestMod extends ModmussMod {
     @Override
     public void enable(){
         System.out.println("OMG! Im a mod loaded from a folder :)");
+		Item item = new Item().setUnlocalizedName("test").setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(item, "Test");
     }
 
 
@@ -40,6 +46,6 @@ public class TestMod extends ModmussMod {
 
     @Override
     public void load(){
-        System.out.printf("This is were the game get loaded!");
+        System.out.printf("This is were the game gets loaded!");
     }
 }

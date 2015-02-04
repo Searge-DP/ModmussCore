@@ -72,7 +72,7 @@ public class ConfigHandler {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 	public static int getInt(String value) {

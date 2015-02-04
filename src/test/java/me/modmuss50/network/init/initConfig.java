@@ -5,7 +5,7 @@ package me.modmuss50.network.init;
 
 import me.modmuss50.mods.core.client.BaseModGui;
 import me.modmuss50.mods.core.mod.ModRegistry;
-import me.modmuss50.mods.lib.mod.ISourceMod;
+import me.modmuss50.mods.lib.mod.IMod;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
@@ -14,7 +14,7 @@ public class initConfig {
     private static Configuration config;
 
     private static void initBlocks() {
-        ModRegistry.registerMod(new ISourceMod() {
+        ModRegistry.registerMod(new IMod() {
             @Override
             public BaseModGui settingsScreen() {
                 return null;

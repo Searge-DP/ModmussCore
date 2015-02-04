@@ -11,6 +11,8 @@ import io.github.asyncronous.toast.Toaster;
 import me.modmuss50.mods.core.Core;
 import me.modmuss50.mods.core.mod.ModRegistry;
 import me.modmuss50.mods.lib.config.ConfigHandler;
+import me.modmuss50.mods.lib.mod.IMod;
+import me.modmuss50.mods.mml.ModScanner;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -19,7 +21,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.IOException;
+import java.awt.*;
 import java.util.List;
 
 public class MainMenuRenderer {
@@ -75,12 +77,20 @@ public class MainMenuRenderer {
 		if (event.gui instanceof GuiMainMenu) {
 			event.gui.drawString(Minecraft.getMinecraft().fontRenderer, "Loaded mods: " + ModRegistry.mods.size(), 1, 25, 16777215);
 
-			for (int i = 0; i < ModRegistry.mods.size(); i++) {
-				event.gui.drawString(Minecraft.getMinecraft().fontRenderer, ModRegistry.mods.get(i).modName(), 11, 35 + (i * 10), 16777215);
+			int h = 0;
+			for(IMod iMod : ModRegistry.mods){
+				if(ModScanner.modNames.contains(iMod.modName())){
+					event.gui.drawString(Minecraft.getMinecraft().fontRenderer, iMod.modName(), 11, 35 + (h * 10), Color.green.getRGB());
+					h++;
+				}else{
+					if(ModRegistry.mods.size() <= 5){
+						event.gui.drawString(Minecraft.getMinecraft().fontRenderer, iMod.modName(), 11, 35 + (h * 10), 16777215);
+						h++;
+					}
+				}
 			}
 		}
 	}
-
 
 	//This fixes some weird issues with the animated texture api
 	@SubscribeEvent

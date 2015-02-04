@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 public class RenderEntityBlock extends Render {
 
-	public static RenderEntityBlock INSTANCE = new RenderEntityBlock();
+	public static final RenderEntityBlock INSTANCE = new RenderEntityBlock();
 	protected RenderBlocks renderBlocks;
 
 	private RenderEntityBlock() {

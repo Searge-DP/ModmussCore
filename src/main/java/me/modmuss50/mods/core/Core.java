@@ -25,7 +25,7 @@ import me.modmuss50.mods.core.fluid.BlockFluid;
 import me.modmuss50.mods.core.fluid.BlockFluidH;
 import me.modmuss50.mods.core.mod.ModRegistry;
 import me.modmuss50.mods.lib.config.ConfigHandler;
-import me.modmuss50.mods.lib.mod.ISourceMod;
+import me.modmuss50.mods.lib.mod.IMod;
 import me.modmuss50.mods.lib.multiblock.MultiblockEventHandler;
 import me.modmuss50.mods.lib.multiblock.MultiblockServerTickHandler;
 import me.modmuss50.mods.lib.retroGenerator.RetroactiveWorldGenerator;
@@ -37,12 +37,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 @Mod(modid = Core.MODID, name = Core.NAME, version = Core.VERSION)
-public class Core implements ISourceMod {
+public class Core implements IMod {
 
 	public static final String MODID = "modmussCore";
 	public static final String NAME = "Modmuss50 Core";
 	public static final String VERSION = "@MODVERSION@"; //This gets changed with the build script
-	public static ModLogger logger = ModLogger.getLogger(NAME);
+	public static final ModLogger logger = ModLogger.getLogger(NAME);
 	public static Fluid blankFluid;
 	public static Block blockFluid;
 	public static Fluid blankFluidH;

@@ -67,7 +67,7 @@ public class ClassReplacer implements IFMLCallHook {
 	}
 
 	private void log(String msg) {
-		FMLLog.log(Level.INFO, "[ModmussCore] " + msg);
+		FMLLog.log(Level.DEBUG, "[ModmussCore] " + msg);
 	}
 
 	private void loadJarmod(File file) throws IOException {
@@ -84,21 +84,24 @@ public class ClassReplacer implements IFMLCallHook {
 				if(!line.startsWith("#"))
 					filesToLoad.add(line);
 			}
+			br.close();
 		}
 		for (Enumeration<? extends ZipEntry> entr = zipFile.entries(); entr.hasMoreElements(); ) {
 			ZipEntry entry = entr.nextElement();
 			String className = entry.getName().replace(".class", "").replace('/', '.');
 			for (String name : filesToLoad) {
 				if (name.equals(className)) {
-					System.out.println("Patching : " + className);
+					log("Patching : " + className);
 					byte[] bytes = new byte[(int) entry.getSize()];
 					DataInputStream dataInputStream = new DataInputStream(zipFile.getInputStream(entry));
 					dataInputStream.readFully(bytes);
 
 					Transformer.put(className, bytes, file.getName());
+					dataInputStream.close();
 				}
 			}
 
 		}
+		zipFile.close();
 	}
 }
