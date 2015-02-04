@@ -16,6 +16,8 @@ buildscript {
 }
 
 apply plugin: 'forge'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
@@ -69,12 +71,14 @@ processResources
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     appendix = 'src'
+    classifier = 'src'
 }
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'dev'
     exclude "**/*.psd"
+    classifier = 'dev'
 }
 
 jar {
@@ -82,7 +86,8 @@ jar {
         attributes (['FMLCorePlugin': 'me.modmuss50.network.FmlLoadingCore', 'FMLCorePluginContainsFMLMod': 'true'])
     }
     exclude "**/*.psd"
-    appendix = 'mod'
+    appendix = 'universal'
+    classifier = 'universal'
 }
 
 artifacts {

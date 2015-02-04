@@ -27,6 +27,7 @@ public class Location implements Comparable<Location> {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		this.depth = depth;
 	}
 
 	public Location(int xCoord, int yCoord, int zCoord, EnumFacing dir) {
@@ -34,6 +35,7 @@ public class Location implements Comparable<Location> {
 		this.y = yCoord + dir.getFrontOffsetY();
 		this.z = zCoord + dir.getFrontOffsetZ();
 	}
+
 
 	public Location(int[] coords) {
 		if (coords.length >= 2) {
@@ -256,3 +258,4 @@ public class Location implements Comparable<Location> {
 		return ((Integer) depth).compareTo(o.depth);
 	}
 }
+
