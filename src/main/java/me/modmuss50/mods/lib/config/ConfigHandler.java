@@ -5,18 +5,28 @@
 package me.modmuss50.mods.lib.config;
 
 import cpw.mods.fml.relauncher.FMLInjectionData;
+import me.modmuss50.mods.api.ConfigElement;
 import me.modmuss50.mods.core.Core;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class ConfigHandler {
 
-	public static void loadConfig(boolean reload) {
+	public String name;
+
+	public ArrayList<ConfigElement> elements = new ArrayList<>();
+
+	public ConfigHandler(String name) {
+		this.name = name;
+	}
+
+	public void loadConfig(boolean reload) {
 		File mcDir = (File) FMLInjectionData.data()[6];
-		File configFile = new File(mcDir, "/config/modmussCore.json");
+		File configFile = new File(mcDir, "/config/" + name + ".json");
 		if (!configFile.exists() || reload) {
 			JSONObject obj = new JSONObject();
 			obj.put("configVersion", Core.VERSION);
@@ -37,9 +47,9 @@ public class ConfigHandler {
 		}
 	}
 
-	public static String getString(String value) {
+	public String getString(String value) {
 		File mcDir = (File) FMLInjectionData.data()[6];
-		File configFile = new File(mcDir, "/config/modmussCore.json");
+		File configFile = new File(mcDir, "/config/" + name + ".json");
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(new FileReader(configFile));
@@ -56,9 +66,9 @@ public class ConfigHandler {
 		return null;
 	}
 
-	public static Boolean getBoolean(String value) {
+	public Boolean getBoolean(String value) {
 		File mcDir = (File) FMLInjectionData.data()[6];
-		File configFile = new File(mcDir, "/config/modmussCore.json");
+		File configFile = new File(mcDir, "/config/" + name + ".json");
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(new FileReader(configFile));
@@ -75,9 +85,9 @@ public class ConfigHandler {
 		return false;
 	}
 
-	public static int getInt(String value) {
+	public int getInt(String value) {
 		File mcDir = (File) FMLInjectionData.data()[6];
-		File configFile = new File(mcDir, "/config/modmussCore.json");
+		File configFile = new File(mcDir, "/config/" + name + ".json");
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(new FileReader(configFile));
@@ -94,9 +104,9 @@ public class ConfigHandler {
 		return 0;
 	}
 
-	public static void updateConfig() {
+	public void updateConfig() {
 		File mcDir = (File) FMLInjectionData.data()[6];
-		File configFile = new File(mcDir, "/config/modmussCore.json");
+		File configFile = new File(mcDir, "/config/" + name + ".json");
 		JSONObject obj = new JSONObject();
 		obj.put("configVersion", Core.VERSION);
 		if (getString("showLoadedMessage") == null) {

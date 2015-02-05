@@ -47,12 +47,13 @@ public class Core implements IMod {
 	public static Block blockFluid;
 	public static Fluid blankFluidH;
 	public static Block blockFluidH;
+	public static ConfigHandler config = new ConfigHandler("modmusscore");
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModRegistry.registerMod(this);
 		//Set to false for a public build
-		ConfigHandler.loadConfig(false);
+		config.loadConfig(false);
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 	}

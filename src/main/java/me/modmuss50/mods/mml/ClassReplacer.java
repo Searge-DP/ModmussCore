@@ -31,7 +31,7 @@ public class ClassReplacer implements IFMLCallHook {
 
 	@Override
 	public Void call() throws Exception {
-		log("ModmussCore looking for patches to load...");
+		log("looking for patches to load...");
 		File root, jarDir;
 		if (coremodLocation != null) {
 			root = coremodLocation.getParentFile();
@@ -57,7 +57,7 @@ public class ClassReplacer implements IFMLCallHook {
 					loadJarmod(file);
 				}
 			} catch (Exception ex) {
-				FMLLog.log(Level.FATAL, "[ModmussCore] Failed to load Patch: " + file + ": " + ex.getLocalizedMessage());
+				log( "Failed to load Patch: " + file + ": " + ex.getLocalizedMessage());
 				ex.printStackTrace();
 			}
 		}
@@ -81,8 +81,9 @@ public class ClassReplacer implements IFMLCallHook {
 			BufferedReader br = new BufferedReader(new InputStreamReader(input, "UTF-8"));
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				if(!line.startsWith("#"))
+				if(!line.startsWith("#")) {
 					filesToLoad.add(line);
+				}
 			}
 			br.close();
 		}
