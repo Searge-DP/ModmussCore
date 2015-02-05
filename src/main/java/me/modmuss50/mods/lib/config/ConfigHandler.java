@@ -18,7 +18,7 @@ public class ConfigHandler {
 
 	public String name;
 
-	public ArrayList<ConfigElement> elements = new ArrayList<>();
+	public ArrayList<ConfigElement> elements = new ArrayList<ConfigElement>();
 
 	public ConfigHandler(String name) {
 		this.name = name;
