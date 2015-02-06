@@ -1,8 +1,9 @@
 package me.modmuss50.mods.mml;
 
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.relauncher.IFMLCallHook;
+
 import me.modmuss50.mods.core.Transformer;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.relauncher.IFMLCallHook;
 import org.apache.logging.log4j.Level;
 
 import java.io.BufferedReader;
