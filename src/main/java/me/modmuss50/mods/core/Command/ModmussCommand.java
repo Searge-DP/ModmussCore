@@ -9,10 +9,11 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 
+
 public class ModmussCommand extends CommandBase {
 
 	@Override
-	public String getName() {
+	public String getCommandName() {
 		return "mmc";
 	}
 
@@ -22,8 +23,9 @@ public class ModmussCommand extends CommandBase {
 		return "Use /mmc <subcommand>";
 	}
 
+
 	@Override
-	public void execute(ICommandSender player, String[] args) {
+	public void processCommand(ICommandSender player, String[] args) {
 		if (args.length == 0) {
 			player.addChatMessage(new ChatComponentText("No args provided"));
 		} else if (args[0].equals("help")) {
