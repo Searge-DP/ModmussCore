@@ -27,10 +27,10 @@ if (ENV.BUILD_NUMBER) {
 }
 
 minecraft {
-    version = "1.8-11.14.1.1310"
+    version = "1.8-11.14.1.1313"
     replace "@MODVERSION@", project.version
     replaceIn "Core.java"
-    
+
     mappings = "stable_16"
 }
 
