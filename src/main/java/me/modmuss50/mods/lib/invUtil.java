@@ -50,6 +50,32 @@ public class invUtil {
 
 	}
 
+	/**
+	 * Tries to add the passed stack to any valid inventories around the given
+	 * coordinates.
+	 *
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param stack
+	 * @return amount used
+	 */
+	public static int addToInventoryAround(World world, int x, int y, int z, ItemStack stack) {
+		for (ForgeDirection orientation : directions) {
+			Position pos = new Position(x, y, z, orientation);
+			pos.moveForwards(1.0);
+
+			TileEntity tileInventory = world.getTileEntity((int) pos.x, (int) pos.y, (int) pos.z);
+			ITransactor transactor = Transactor.getTransactorFor(tileInventory);
+			if (transactor != null && transactor.add(stack, orientation.getOpposite(), false).stackSize > 0) {
+				return transactor.add(stack, orientation.getOpposite(), true).stackSize;
+			}
+		}
+		return 0;
+
+	}
+
 
 	/**
 	 * Tries to add the passed stack to a valid inventorie at the given
