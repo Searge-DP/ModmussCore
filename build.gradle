@@ -12,12 +12,22 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.10.195'
     }
+}
+
+repositories {
+    maven {
+        name = "Modmuss50"
+        url = "http://modmuss50.me/maven/"
+    }
+    mavenCentral()
 }
 
 apply plugin: 'forge'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: "kotlin"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
@@ -32,6 +42,12 @@ minecraft {
     replaceIn "Core.java"
 
     mappings = "stable_16"
+}
+
+configurations {
+    shade
+    //include it in compile
+    compile.extendsFrom shade
 }
 
 group = 'ModmussCore'
@@ -62,6 +78,10 @@ processResources
                 exclude '**/*.info'
             }
         }
+        
+dependencies {
+    shade 'org.jetbrains.kotlin:kotlin-stdlib:0.10.195'
+}        
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
@@ -83,6 +103,11 @@ jar {
     exclude "**/*.psd"
     appendix = 'universal'
     classifier = 'universal'
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)) {
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
 }
 
 artifacts {

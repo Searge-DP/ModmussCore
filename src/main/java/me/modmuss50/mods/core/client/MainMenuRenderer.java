@@ -6,6 +6,7 @@ package me.modmuss50.mods.core.client;
 
 
 import io.github.asyncronous.toast.Toaster;
+import me.modmuss50.mods.core.Core;
 import me.modmuss50.mods.core.mod.ModRegistry;
 import me.modmuss50.mods.lib.config.ConfigHandler;
 import me.modmuss50.mods.lib.mod.IMod;
@@ -33,7 +34,7 @@ public class MainMenuRenderer {
 	@SubscribeEvent()
 	public void onGuiInit(GuiScreenEvent.InitGuiEvent.Post evt) {
 
-		if (!hasLoaded && ConfigHandler.getBoolean("showLoadedMessage")) {
+		if (!hasLoaded && Core.config.getBoolean("showLoadedMessage")) {
 			try {
 				Toaster.instance().pop("Minecraft has now loaded", new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/assets/modmusscore/toast/icons/error.png"))));
 			} catch (Exception e) {
@@ -42,7 +43,7 @@ public class MainMenuRenderer {
 			hasLoaded = true;
 		}
 
-		if (!ConfigHandler.getBoolean("mainMenuTweaks"))
+		if (!Core.config.getBoolean("mainMenuTweaks"))
 			return;
 		if (evt.gui instanceof GuiMainMenu) {
 			List<GuiButton> buttonList = evt.buttonList;
@@ -61,7 +62,7 @@ public class MainMenuRenderer {
 
 	@SubscribeEvent
 	public void onActionPerformed(GuiScreenEvent.ActionPerformedEvent evt) {
-		if (!ConfigHandler.getBoolean("mainMenuTweaks"))
+		if (!Core.config.getBoolean("mainMenuTweaks"))
 			return;
 		if (evt.gui instanceof GuiMainMenu) {
 			if (evt.button.id == BUTTON_ID) {
@@ -72,7 +73,7 @@ public class MainMenuRenderer {
 
 	@SubscribeEvent
 	public void drawScreen(GuiScreenEvent.DrawScreenEvent.Post event) {
-		if (!ConfigHandler.getBoolean("mainMenuTweaks"))
+		if (!Core.config.getBoolean("mainMenuTweaks"))
 			return;
 		if (event.gui instanceof GuiMainMenu) {
 			event.gui.drawString(Minecraft.getMinecraft().fontRendererObj, "Loaded mods: " + ModRegistry.mods.size(), 1, 25, 16777215);
