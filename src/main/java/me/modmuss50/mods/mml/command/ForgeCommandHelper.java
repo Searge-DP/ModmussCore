@@ -49,8 +49,8 @@ public class ForgeCommandHelper {
 		//ch.com.add(command);
 		for(Object obj : commandMap.values()){
 			ICommand cmd = (ICommand) obj;
-			System.out.println(cmd.getName());
-			if(cmd.getName().equals(command.getName())){
+			System.out.println(cmd.getCommandName());
+			if(cmd.getCommandName().equals(command.getCommandName())){
 				ch.getCommands().remove(command);
 
 			}
